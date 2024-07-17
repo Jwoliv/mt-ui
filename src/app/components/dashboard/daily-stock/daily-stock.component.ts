@@ -1,4 +1,4 @@
-import {Component, computed, inject, Input, signal} from '@angular/core';
+import {Component, inject, Input, signal} from '@angular/core';
 import {Stock} from "../../../model/stock.model";
 import {DatePipe} from "@angular/common";
 import {StockService} from "../../../services/stock.service";
