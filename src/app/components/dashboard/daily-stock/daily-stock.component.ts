@@ -1,6 +1,6 @@
-import {Component, EventEmitter, inject, Input, Output, signal} from '@angular/core';
+import {Component, computed, inject, Input, signal} from '@angular/core';
 import {Stock} from "../../../model/stock.model";
-import {DatePipe, NgStyle} from "@angular/common";
+import {DatePipe} from "@angular/common";
 import {StockService} from "../../../services/stock.service";
 
 @Component({
@@ -28,16 +28,15 @@ export class DailyStockComponent {
     return this._stock().isActive ?? false;
   }
 
-  public onClickStockItem = () => {
-    this._stock.set({
-      earning: this._stock().earning,
-      spending: this._stock().spending,
-      date: this._stock().date,
-      isActive: !this._stock().isActive ?? true
-    });
+  public onClickStockItem() {
+    this._stock.set({ ...this._stock(), isActive: !this._stock().isActive ?? true });
   }
 
+  public getEarningHeight(): string {
+    return this.stockService.calculateHeight(this.total, this._stock().earning);
+  }
 
-  public getEarningHeight = (): string => this.stockService.calculateHeight(this.total, this._stock().earning);
-  public getSpendingHeight = (): string => this.stockService.calculateHeight(this.total, this._stock().spending);
+  public getSpendingHeight(): string {
+    return this.stockService.calculateHeight(this.total, this._stock().spending);
+  }
 }
