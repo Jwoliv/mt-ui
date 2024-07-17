@@ -1,6 +1,7 @@
-import {Component, Input, signal} from '@angular/core';
+import {Component, inject, Input, signal} from '@angular/core';
 import {Stock} from "../../../model/stock.model";
 import {DatePipe, NgStyle} from "@angular/common";
+import {StockService} from "../../../services/stock.service";
 
 @Component({
   selector: 'app-daily-stock',
@@ -13,7 +14,7 @@ import {DatePipe, NgStyle} from "@angular/common";
   styleUrl: './daily-stock.component.scss'
 })
 export class DailyStockComponent {
-  private readonly MAX_HEIGHT_STOCK = 220;
+  private stockService: StockService = inject(StockService);
 
   public _stock = signal<Stock>({ earning: 0, spending: 0, date: new Date() });
   public isActiveStock = signal<boolean>(false);
@@ -26,24 +27,9 @@ export class DailyStockComponent {
     return this._stock().earning + this._stock().spending;
   }
 
-  public getEarningHeight(): string {
-    return this.calculateHeight(this._stock().earning);
-  }
-
-  public getSpendingHeight(): string {
-    return this.calculateHeight(this._stock().spending);
-  }
-
   public onClickStockItem = () => this.isActiveStock.set(!this.isActiveStock());
 
-  private calculateHeight(value: number) {
-    let percentage = this.calculatePercentage(value)
-    return `${(this.MAX_HEIGHT_STOCK * percentage) / 100}px`
-  }
 
-  private calculatePercentage(value: number) {
-    let percentage: number = this.total > 0 ? (value / this.total) * 100 : 0;
-    return percentage < 20 ? 20 : percentage;
-  }
-
+  public getEarningHeight = (): string => this.stockService.calculateHeight(this.total, this._stock().earning);
+  public getSpendingHeight = (): string => this.stockService.calculateHeight(this.total, this._stock().spending);
 }
