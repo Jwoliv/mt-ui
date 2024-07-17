@@ -22,7 +22,7 @@ export class DashboardComponent {
     { earning: 70, spending: 40, date: new Date()},
     { earning: 1000,  spending: 20,  date: new Date() },
     { earning: 90,  spending: 20, date: new Date() },
-    { earning: 80,  spending: 30, date: new Date()},
+    { earning: 80,  spending: 30000, date: new Date()},
     { earning: 70, spending: 405, date: new Date()},
     { earning: 1000,  spending: 20,  date: new Date() },
     { earning: 90,  spending: 20, date: new Date() },
