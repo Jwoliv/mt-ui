@@ -1,14 +1,14 @@
 <div class="stock-item-wrapper">
     <div class="stock-item" (click)="onClickStockItem()">
         <div class="spending"
-             [class.active]="isActiveStock()"
+             [class.active]="isActive"
              [style.height]="getSpendingHeight()">
             <div class="value">
                 {{ _stock().spending }}
             </div>
         </div>
         <div class="earning"
-             [class.active]="isActiveStock()"
+             [class.active]="isActive"
              [style.height]="getEarningHeight()">
             <div class="value">
                 {{ _stock().earning }}

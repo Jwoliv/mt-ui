@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, signal} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {DailyStockComponent} from "./daily-stock/daily-stock.component";
 import {Stock} from "../../model/stock.model";
@@ -15,7 +15,7 @@ import {Stock} from "../../model/stock.model";
 })
 export class DashboardComponent {
 
-  public data: Stock[] = [
+  public _data= signal<Stock[]>([
     { earning: 1000,  spending: 20,  date: new Date() },
     { earning: 90,  spending: 20, date: new Date() },
     { earning: 80,  spending: 30, date: new Date()},
@@ -40,5 +40,10 @@ export class DashboardComponent {
     { earning: 90,  spending: 20, date: new Date() },
     { earning: 80,  spending: 305, date: new Date()},
     { earning: 70, spending: 460, date: new Date()},
-  ]
+  ])
+
+  get data() {
+    return this._data().slice(0, 20)
+  }
+
 }
