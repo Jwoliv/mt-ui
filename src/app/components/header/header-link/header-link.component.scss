@@ -1,0 +1,42 @@
+.link-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 25px;
+  font-size: 13px;
+  color: inherit;
+  text-decoration: none;
+  transition-duration: 0.3s;
+}
+
+.link-item::before,
+.link-item::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.link-item::before {
+  top: 0;
+  left: 0;
+  border-top-color: #000000;
+}
+
+.link-item::after {
+  bottom: 0;
+  right: 0;
+  border-bottom-color: #000000;
+}
+
+.link-item:hover::before,
+.link-item:hover::after {
+  border-color: #000000;
+}
+
+.link-item:hover {
+  border-color: #000000;
+}

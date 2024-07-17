@@ -1,0 +1,10 @@
+<header>
+    <img src="logo.svg" alt="error load logo"/>
+    <nav>
+        <div class="links">
+            <div *ngFor="let link of links">
+                <app-header-link [link]="link"/>
+            </div>
+        </div>
+    </nav>
+</header>
