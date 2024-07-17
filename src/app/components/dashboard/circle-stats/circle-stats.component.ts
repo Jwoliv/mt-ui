@@ -1,12 +1,19 @@
 import { Component } from '@angular/core';
-import {NgForOf, NgIf} from "@angular/common";
+import {NgForOf, NgIf, NgStyle} from "@angular/common";
+
+export interface CircleSegmentsData {
+  start: number,
+  end: number,
+  color: string
+}
 
 @Component({
   selector: 'app-circle-stats',
   standalone: true,
   imports: [
     NgForOf,
-    NgIf
+    NgIf,
+    NgStyle
   ],
   templateUrl: './circle-stats.component.html',
   styleUrl: './circle-stats.component.scss'
