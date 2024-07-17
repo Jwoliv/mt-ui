@@ -33,7 +33,9 @@
 }
 
 .link-item:hover::before,
-.link-item:hover::after {
+.link-item:hover::after,
+.link-item.active::before,
+.link-item.active::after,{
   border-color: #000000;
 }
 

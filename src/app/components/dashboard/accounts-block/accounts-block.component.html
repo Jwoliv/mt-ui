@@ -1,0 +1,8 @@
+<div class="accounts-block">
+    <p class="accounts-block-header">accounts</p>
+
+    <div class="accounts-block_items">
+        <a *ngFor="let account of accounts" class="accounts-block_item" [routerLink]="['accounts', account.id]">{{account.name}}</a>
+    </div>
+    <a class="add-account-btn" routerLink="/accounts/new">add account</a>
+</div>

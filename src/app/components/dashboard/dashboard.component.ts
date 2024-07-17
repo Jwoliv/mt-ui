@@ -2,13 +2,19 @@ import {Component, signal} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {DailyStockComponent} from "./daily-stock/daily-stock.component";
 import {Stock} from "../../model/stock.model";
+import {CircleStatsComponent} from "./circle-stats/circle-stats.component";
+import {TransactionsBlockComponent} from "./transactions-block/transactions-block.component";
+import {AccountsBlockComponent} from "./accounts-block/accounts-block.component";
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
     NgForOf,
-    DailyStockComponent
+    DailyStockComponent,
+    CircleStatsComponent,
+    TransactionsBlockComponent,
+    AccountsBlockComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'

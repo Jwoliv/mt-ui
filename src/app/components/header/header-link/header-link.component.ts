@@ -1,15 +1,16 @@
 import {Component, Input, signal} from '@angular/core';
-import {RouterLink} from "@angular/router";
+import {RouterLink, RouterLinkActive} from "@angular/router";
 import {Link} from "../../../model/link.model";
 import {UpperCasePipe} from "@angular/common";
 
 @Component({
   selector: 'app-header-link',
   standalone: true,
-  imports: [
-    RouterLink,
-    UpperCasePipe
-  ],
+    imports: [
+        RouterLink,
+        UpperCasePipe,
+        RouterLinkActive
+    ],
   templateUrl: './header-link.component.html',
   styleUrl: './header-link.component.scss'
 })
