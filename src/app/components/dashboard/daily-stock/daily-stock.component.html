@@ -1,0 +1,19 @@
+<div class="stock-item-wrapper">
+    <div class="stock-item" (click)="onClickStockItem()">
+        <div class="spending"
+             [class.active]="isActiveStock()"
+             [style.height]="getSpendingHeight()">
+            <div class="value">
+                {{ _stock().spending }}
+            </div>
+        </div>
+        <div class="earning"
+             [class.active]="isActiveStock()"
+             [style.height]="getEarningHeight()">
+            <div class="value">
+                {{ _stock().earning }}
+            </div>
+        </div>
+    </div>
+    <p>{{ _stock().date | date:'MM/dd' }}</p>
+</div>
