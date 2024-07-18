@@ -5,46 +5,6 @@
 }
 
 .transactions-block_items {
+  min-height: 170px;
   margin: 15px 0 10px;
-}
-
-.transactions-block_item {
-  min-height: 40px;
-  min-width: 520px;
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #000000;
-}
-
-.transactions-main-info {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-}
-
-.transactions-amount {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 80px;
-}
-
-.transactions-amount.earning {
-  background-color: #76FF94;
-}
-
-.transactions-amount.spending {
-  background-color: #FF7676;
-}
-.transactions-titles {
-  padding: 5px 0;
-}
-
-.transactions-date {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #E3E3E3;
-  padding: 5px;
 }

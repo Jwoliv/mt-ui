@@ -7,7 +7,6 @@
 
 .dashboard-row {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  align-items: center;
+  grid-template-columns: 2fr 1fr;
   height: 228px;
 }

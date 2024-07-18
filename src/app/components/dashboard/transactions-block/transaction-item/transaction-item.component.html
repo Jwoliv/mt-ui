@@ -1,0 +1,18 @@
+<a class="transactions-block_item" [routerLink]="['transactions', transaction.id]">
+    <div class="transactions-amount" [class]="{
+                    'earning': transaction.type === 'EARNING',
+                    'spending': transaction.type === 'SPENDING'
+                }">
+        {{ transaction.amount }}
+    </div>
+
+    <div class="transactions-main-info">
+        <div class="transactions-titles">
+            <div>{{transaction.category}}</div>
+            <div>{{transaction.account.name}}</div>
+        </div>
+        <div class="transactions-date">
+            {{transaction.date | date: 'MM/dd/yyyy'}}
+        </div>
+    </div>
+</a>

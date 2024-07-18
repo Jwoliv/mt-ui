@@ -15,8 +15,6 @@ import {RouterLink} from "@angular/router";
 })
 export class AccountsBlockComponent {
   public accounts: Account[] = [
-    { id: 1, name: 'cash' },
-    { id: 2, name: 'universal card' },
-    { id: 3, name: 'another card' },
+    { id: 1, name: 'cash' }
   ]
 }

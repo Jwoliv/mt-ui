@@ -2,7 +2,6 @@ import {Component, signal} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {DailyStockComponent} from "./daily-stock/daily-stock.component";
 import {Stock} from "../../model/stock.model";
-import {CircleStatsComponent} from "./circle-stats/circle-stats.component";
 import {TransactionsBlockComponent} from "./transactions-block/transactions-block.component";
 import {AccountsBlockComponent} from "./accounts-block/accounts-block.component";
 
@@ -12,7 +11,6 @@ import {AccountsBlockComponent} from "./accounts-block/accounts-block.component"
   imports: [
     NgForOf,
     DailyStockComponent,
-    CircleStatsComponent,
     TransactionsBlockComponent,
     AccountsBlockComponent
   ],
