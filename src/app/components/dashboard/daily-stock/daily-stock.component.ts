@@ -28,10 +28,6 @@ export class DailyStockComponent {
     return this._stock().isActive ?? false;
   }
 
-  public onClickStockItem() {
-    this._stock.set({ ...this._stock(), isActive: !this._stock().isActive });
-  }
-
   public getEarningHeight(): string {
     return this.stockService.calculateHeight(this.total, this._stock().earning);
   }
