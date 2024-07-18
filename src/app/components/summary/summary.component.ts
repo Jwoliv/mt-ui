@@ -8,6 +8,7 @@ export interface SummaryData {
 }
 
 export interface SummaryDailyStock {
+  index: number,
   dailyAmount: number
   date: Date,
   color?: string
@@ -75,13 +76,25 @@ export class SummaryComponent implements OnInit {
     const values: SummaryDailyStock[] = [];
     for (let i = 0; i < 60; i++) {
       values.push({
-        dailyAmount: Math.floor((Math.random() * 10000) + 1000), date: new Date()
+        index: i, dailyAmount: Math.floor((Math.random() * 10000) + 1000), date: new Date()
       })
     }
     return values;
   }
 
-  public changeSelectedData(sds: SummaryDailyStock) {
-    this.selectedStock =  sds;
+  changeSelectedData(sds: SummaryDailyStock) {
+    this.resetSelectedStock();
+    this.selectedStock = sds;
+    if (this.selectedStock.color === '#76FF94') {
+      this.selectedStock.color = '#00861c';
+    }
+    if (this.selectedStock.color === '#FF7676') {
+      this.selectedStock.color = '#9A0000'
+    }
+  }
+
+  resetSelectedStock() {
+    if (this.selectedStock.color === '#00861c') this.selectedStock.color = '#76FF94';
+    if (this.selectedStock.color === '#9A0000') this.selectedStock.color = '#FF7676';
   }
 }
