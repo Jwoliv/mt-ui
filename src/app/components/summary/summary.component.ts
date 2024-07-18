@@ -84,12 +84,14 @@ export class SummaryComponent implements OnInit {
 
   changeSelectedData(sds: SummaryDailyStock) {
     this.resetSelectedStock();
-    this.selectedStock = sds;
-    if (this.selectedStock.color === '#76FF94') {
-      this.selectedStock.color = '#00861c';
-    }
-    if (this.selectedStock.color === '#FF7676') {
-      this.selectedStock.color = '#9A0000'
+    if (sds.index !== this.selectedStock.index) {
+      this.selectedStock = sds;
+      if (this.selectedStock.color === '#76FF94') {
+        this.selectedStock.color = '#00861c';
+      }
+      if (this.selectedStock.color === '#FF7676') {
+        this.selectedStock.color = '#9A0000'
+      }
     }
   }
 
