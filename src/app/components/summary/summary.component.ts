@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CurrencyPipe, DatePipe, NgForOf} from "@angular/common";
+import {CurrencyPipe, DatePipe, NgForOf, NgIf} from "@angular/common";
 import {PeriodReportComponent} from "./period-report/period-report.component";
 import {SummaryDailyStock, SummaryData} from "../../model/summary.model";
 
@@ -10,7 +10,8 @@ import {SummaryDailyStock, SummaryData} from "../../model/summary.model";
     NgForOf,
     PeriodReportComponent,
     DatePipe,
-    CurrencyPipe
+    CurrencyPipe,
+    NgIf
   ],
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.scss'
@@ -26,11 +27,7 @@ export class SummaryComponent implements OnInit {
       {amount: 2000, percentage: 1, type: 'YEAR', isProfit: true}
     ]
   };
-  public selectedStock: SummaryDailyStock = this.summaryData.summaryDailyStocks[this.summaryData.summaryDailyStocks.length - 1];
-
-  get selectedDate(): Date {
-    return this.selectedStock.date ?? new Date();
-  }
+  public selectedStock!: SummaryDailyStock | null
 
   get maxDailyAmount(): number {
     return Math.max(...this.summaryData.summaryDailyStocks.map(stock => stock.dailyAmount));
@@ -67,7 +64,11 @@ export class SummaryComponent implements OnInit {
 
   changeSelectedData(sds: SummaryDailyStock) {
     this.resetSelectedStock();
-    if (sds.index !== this.selectedStock.index) {
+    if (sds.index === this.selectedStock?.index) {
+      this.selectedStock = null;
+      return;
+    }
+    if (!this.selectedStock || sds.index !== this.selectedStock.index) {
       this.selectedStock = sds;
       if (this.selectedStock.color === '#76FF94') {
         this.selectedStock.color = '#00861c';
@@ -79,7 +80,9 @@ export class SummaryComponent implements OnInit {
   }
 
   resetSelectedStock() {
-    if (this.selectedStock.color === '#00861c') this.selectedStock.color = '#76FF94';
-    if (this.selectedStock.color === '#9A0000') this.selectedStock.color = '#FF7676';
+    if (this.selectedStock) {
+      if (this.selectedStock.color === '#00861c') this.selectedStock.color = '#76FF94';
+      if (this.selectedStock.color === '#9A0000') this.selectedStock.color = '#FF7676';
+    }
   }
 }

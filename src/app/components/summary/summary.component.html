@@ -1,5 +1,5 @@
-<div class="summary-selected-stock">
-    {{selectedStock.dailyAmount | currency }} at {{ selectedDate | date: 'MM/dd' }}
+<div *ngIf="selectedStock" class="summary-selected-stock">
+    {{selectedStock.dailyAmount | currency }} at {{ selectedStock.date | date: 'MM/dd' }}
 </div>
 <div class="summary-daily-stocks">
     <div *ngFor="let sds of summaryData.summaryDailyStocks"
