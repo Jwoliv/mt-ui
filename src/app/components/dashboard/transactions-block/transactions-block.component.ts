@@ -3,7 +3,7 @@ import {DatePipe, NgForOf, NgStyle} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {TransactionButtonsComponent} from "./transcation-buttons/transaction-buttons.component";
 import {Transaction} from "../../../model/transaction.model";
-import {TransactionItemComponent} from "./transaction-item/transaction-item.component";
+import {TransactionItemComponent} from "../../../shared/components/transaction-item/transaction-item.component";
 
 @Component({
   selector: 'app-transactions-block',

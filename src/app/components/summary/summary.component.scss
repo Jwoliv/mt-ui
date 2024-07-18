@@ -1,0 +1,16 @@
+.summary-daily-stocks {
+  display: grid;
+  grid-template-columns: repeat(60, 1fr);
+  gap: 5px;
+  margin: 15px 0 10px;
+  align-items: end;
+}
+
+.summary-daily-stocks div {
+  width: 100%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #000000;
+}
