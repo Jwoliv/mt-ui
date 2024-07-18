@@ -1,7 +1,7 @@
-import {Component, inject} from '@angular/core';
+import {Component} from '@angular/core';
 import {CurrencyPipe, NgForOf} from "@angular/common";
 import {AccountFullInfo} from "../../model/account.model";
-import {Router, RouterLink} from "@angular/router";
+import {RouterLink} from "@angular/router";
 import {NavigationComponent} from "../../shared/components/navigation/navigation.component";
 
 @Component({
