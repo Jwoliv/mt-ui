@@ -29,4 +29,9 @@
   font-size: 20px;
   margin: 10px;
   cursor: pointer;
+  opacity: 0;
+
+  &.show {
+    opacity: 1;
+  }
 }
