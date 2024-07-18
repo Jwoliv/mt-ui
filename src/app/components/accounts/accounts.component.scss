@@ -1,0 +1,62 @@
+.accounts-items {
+  margin: 10px 0;
+}
+
+.accounts-item-wrapper {
+  margin-bottom: 10px;
+}
+
+.accounts-item {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  height: 50px;
+  border: 1px solid #000000;
+  margin-bottom: 10px;
+  transition-duration: .3s;
+
+  &:hover {
+    grid-template-columns: 1fr 1.5fr 1fr;
+    transition-duration: .3s;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+#earning {
+  background-color: #76FF94;
+}
+
+#spending {
+  background-color: #FF7676;
+}
+
+.accounts-navigation {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 10px;
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 100%;
+    transition-duration: .3s;
+    background-color: #b9b9b9;
+    cursor: pointer;
+
+    &:hover {
+      transition-duration: .3s;
+      background-color: #838383;
+    }
+  }
+}
