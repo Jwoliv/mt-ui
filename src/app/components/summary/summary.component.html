@@ -1,12 +1,17 @@
+<div class="summary-selected-stock">
+    {{selectedStock.dailyAmount }} at {{ selectedDate | date: 'MM/dd' }}
+</div>
 <div class="summary-daily-stocks">
-    <div *ngFor="let sds of summaryData.summaryDailyStocks" [style]="{
-        height: getHeight(sds.dailyAmount),
-        backgroundColor: sds.color
-    }">
+    <div *ngFor="let sds of summaryData.summaryDailyStocks">
+        <div (mouseenter)="changeSelectedData(sds)"
+             class="summary-daily-stock"
+             [style.height]="getHeight(sds.dailyAmount)"
+             [style.background-color]="sds.color">
+        </div>
     </div>
 </div>
 <div class="summary-reports">
     <div *ngFor="let report of summaryData.reports">
-        <app-period-report [report]="report" />
+        <app-period-report [report]="report"></app-period-report>
     </div>
 </div>

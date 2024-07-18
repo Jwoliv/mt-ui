@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NgForOf} from "@angular/common";
+import {DatePipe, NgForOf} from "@angular/common";
 import {PeriodReportComponent} from "./period-report/period-report.component";
 
 export interface SummaryData {
@@ -9,7 +9,8 @@ export interface SummaryData {
 
 export interface SummaryDailyStock {
   dailyAmount: number
-  color?: '#FF7676' | '#76FF94'
+  date: Date,
+  color?: string
 }
 
 export interface Report {
@@ -24,7 +25,8 @@ export interface Report {
   standalone: true,
   imports: [
     NgForOf,
-    PeriodReportComponent
+    PeriodReportComponent,
+    DatePipe
   ],
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.scss'
@@ -32,22 +34,7 @@ export interface Report {
 export class SummaryComponent implements OnInit {
 
   public summaryData: SummaryData = {
-    summaryDailyStocks: [
-      { dailyAmount: 100 }, { dailyAmount: 200 },
-      { dailyAmount: 150 }, { dailyAmount: 300 },
-      { dailyAmount: 6000 }, { dailyAmount: 5000 },
-      { dailyAmount: 3000 }, { dailyAmount: 2000 },
-      { dailyAmount: 2100 }, { dailyAmount: 6000 },
-      { dailyAmount: 9000 }, { dailyAmount: 12000 },
-      { dailyAmount: 15600 }, { dailyAmount: 22600 },
-      { dailyAmount: 1000 }, { dailyAmount: 2000 },
-      { dailyAmount: 1500 }, { dailyAmount: 4500 },
-      { dailyAmount: 6000 }, { dailyAmount: 5000 },
-      { dailyAmount: 3000 }, { dailyAmount: 2000 },
-      { dailyAmount: 2100 }, { dailyAmount: 6000 },
-      { dailyAmount: 9000 }, { dailyAmount: 10000 },
-      { dailyAmount: 7000 }, { dailyAmount: 7500 },
-    ],
+    summaryDailyStocks: this.generateSummaryDailyStocks(),
     reports: [
       {amount: 2000, percentage: 1, type: 'DAY', isProfit: true},
       {amount: 2000, percentage: 0.5, type: 'WEEK', isProfit: false},
@@ -55,6 +42,11 @@ export class SummaryComponent implements OnInit {
       {amount: 2000, percentage: 1, type: 'YEAR', isProfit: true}
     ]
   };
+  public selectedStock: SummaryDailyStock = this.summaryData.summaryDailyStocks[this.summaryData.summaryDailyStocks.length - 1];
+
+  get selectedDate(): Date {
+    return this.selectedStock.date ?? new Date();
+  }
 
   get maxDailyAmount(): number {
     return Math.max(...this.summaryData.summaryDailyStocks.map(stock => stock.dailyAmount));
@@ -77,5 +69,19 @@ export class SummaryComponent implements OnInit {
       }
     }
     this.summaryData.summaryDailyStocks = summaryDailyStocks;
+  }
+
+  private generateSummaryDailyStocks() { // todo: remove when connect backend
+    const values: SummaryDailyStock[] = [];
+    for (let i = 0; i < 60; i++) {
+      values.push({
+        dailyAmount: Math.floor((Math.random() * 10000) + 1000), date: new Date()
+      })
+    }
+    return values;
+  }
+
+  public changeSelectedData(sds: SummaryDailyStock) {
+    this.selectedStock =  sds;
   }
 }
