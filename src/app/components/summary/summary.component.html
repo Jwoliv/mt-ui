@@ -5,3 +5,8 @@
     }">
     </div>
 </div>
+<div class="summary-reports">
+    <div *ngFor="let report of summaryData.reports">
+        <app-period-report [report]="report" />
+    </div>
+</div>

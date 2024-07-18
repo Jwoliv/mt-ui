@@ -14,3 +14,12 @@
   justify-content: center;
   border: 1px solid #000000;
 }
+
+.summary-reports {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  border-top: 1px solid #000000;
+  border-right: 1px solid #000000;
+  padding: 10px;
+}

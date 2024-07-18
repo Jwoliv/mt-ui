@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {NgForOf} from "@angular/common";
+import {PeriodReportComponent} from "./period-report/period-report.component";
 
 export interface SummaryData {
   summaryDailyStocks: SummaryDailyStock[]
+  reports: Report[]
 }
 
 export interface SummaryDailyStock {
@@ -10,11 +12,19 @@ export interface SummaryDailyStock {
   color?: '#FF7676' | '#76FF94'
 }
 
+export interface Report {
+  amount: number
+  percentage: number
+  isProfit: boolean
+  type: 'DAY' | 'WEEK' | 'MONTH' | 'YEAR'
+}
+
 @Component({
   selector: 'app-summary',
   standalone: true,
   imports: [
-    NgForOf
+    NgForOf,
+    PeriodReportComponent
   ],
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.scss'
@@ -37,6 +47,12 @@ export class SummaryComponent implements OnInit {
       { dailyAmount: 2100 }, { dailyAmount: 6000 },
       { dailyAmount: 9000 }, { dailyAmount: 10000 },
       { dailyAmount: 7000 }, { dailyAmount: 7500 },
+    ],
+    reports: [
+      {amount: 2000, percentage: 1, type: 'DAY', isProfit: true},
+      {amount: 2000, percentage: 0.5, type: 'WEEK', isProfit: false},
+      {amount: 2000, percentage: 0.64, type: 'MONTH', isProfit: false},
+      {amount: 2000, percentage: 1, type: 'YEAR', isProfit: true}
     ]
   };
 
