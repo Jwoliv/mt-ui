@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DatePipe, NgForOf} from "@angular/common";
+import {CurrencyPipe, DatePipe, NgForOf} from "@angular/common";
 import {PeriodReportComponent} from "./period-report/period-report.component";
 import {SummaryDailyStock, SummaryData} from "../../model/summary.model";
 
@@ -9,7 +9,8 @@ import {SummaryDailyStock, SummaryData} from "../../model/summary.model";
   imports: [
     NgForOf,
     PeriodReportComponent,
-    DatePipe
+    DatePipe,
+    CurrencyPipe
   ],
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.scss'
