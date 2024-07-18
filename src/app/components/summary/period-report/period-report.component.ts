@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
-import {Report} from "../summary.component";
 import {CurrencyPipe, PercentPipe} from "@angular/common";
 import {ProfitPipe} from "../../../pipe/profit.pipe";
+import {Report} from "../../../model/summary.model";
 
 @Component({
   selector: 'app-period-report',
