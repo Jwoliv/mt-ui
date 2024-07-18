@@ -2,13 +2,15 @@ import { Component } from '@angular/core';
 import {Transaction} from "../../model/transaction.model";
 import {TransactionItemComponent} from "../../shared/components/transaction-item/transaction-item.component";
 import {NgForOf} from "@angular/common";
+import {NavigationComponent} from "../../shared/components/navigation/navigation.component";
 
 @Component({
   selector: 'app-transactions',
   standalone: true,
   imports: [
     TransactionItemComponent,
-    NgForOf
+    NgForOf,
+    NavigationComponent
   ],
   templateUrl: './transactions.component.html',
   styleUrl: './transactions.component.scss'
