@@ -3,6 +3,7 @@ import {CurrencyPipe, NgForOf} from "@angular/common";
 import {AccountFullInfo} from "../../model/account.model";
 import {RouterLink} from "@angular/router";
 import {NavigationComponent} from "../../shared/components/navigation/navigation.component";
+import {AddAccountComponent} from "../../shared/components/add-account/add-account.component";
 
 @Component({
   selector: 'app-accounts',
@@ -11,7 +12,8 @@ import {NavigationComponent} from "../../shared/components/navigation/navigation
     NgForOf,
     RouterLink,
     CurrencyPipe,
-    NavigationComponent
+    NavigationComponent,
+    AddAccountComponent
   ],
   templateUrl: './accounts.component.html',
   styleUrl: './accounts.component.scss'

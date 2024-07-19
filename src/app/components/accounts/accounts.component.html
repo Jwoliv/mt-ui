@@ -1,10 +1,13 @@
-<div class="accounts-items">
-    <div *ngFor="let account of accounts" class="accounts-item-wrapper">
-        <a [routerLink]="['account', account.id]" class="accounts-item">
-            <div id="earning">{{ account.earning | currency }}</div>
-            <div>{{ account.name }}</div>
-            <div id="spending">{{ account.spending | currency }}</div>
-        </a>
+<div class="accounts-wrapper">
+    <app-add-account/>
+    <div class="accounts-items">
+        <div *ngFor="let account of accounts" class="accounts-item-wrapper">
+            <a [routerLink]="['account', account.id]" class="accounts-item">
+                <div id="earning">{{ account.earning | currency }}</div>
+                <div>{{ account.name }}</div>
+                <div id="spending">{{ account.spending | currency }}</div>
+            </a>
+        </div>
     </div>
+    <app-navigation link="/accounts"/>
 </div>
-<app-navigation link="/accounts"/>
