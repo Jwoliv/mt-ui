@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {ReactiveFormsModule} from "@angular/forms";
-import {NewFormComponent} from "../../new-form/new-form.component";
 
 @Component({
   selector: 'app-transaction-buttons',
@@ -9,8 +8,7 @@ import {NewFormComponent} from "../../new-form/new-form.component";
   imports: [
     NgForOf,
     NgIf,
-    ReactiveFormsModule,
-    NewFormComponent
+    ReactiveFormsModule
   ],
   templateUrl: './transaction-buttons.component.html',
   styleUrl: './transaction-buttons.component.scss'

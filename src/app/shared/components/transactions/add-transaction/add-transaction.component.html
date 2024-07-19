@@ -1,45 +1,63 @@
-<app-new-form (onClose)="onChangeAddNewEarningTransaction($event)" [isShowForm]="isShowNewEarning">
-    <input id="amount-earning" placeholder="Value" type="number"/>
-    <h3>Total {{data.total}}</h3>
-    <select id="account-earning">
-        <option *ngFor="let account of data.accounts" [value]="account">{{account}}</option>
-    </select>
-    <select id="categories-earning">
-        <option *ngFor="let category of data.earningCategories" [value]="category">{{category}}</option>
-    </select>
-    <input placeholder="Date" type="date">
-    <input id="sender-earning" placeholder="From (Optional)" type="text"/>
-    <input id="note-earning" placeholder="Note (Optional)" type="text"/>
-</app-new-form>
+<div (click)="isShowNewEarning = false" *ngIf="isShowNewEarning" class="forms">
+    <form (click)="stopPropagation($event)" (ngSubmit)="onSubmitEarningForm()" [formGroup]="earningForm">
+        <input formControlName="amount" id="amount-earning" placeholder="Value" type="number"/>
+        <h3>Total {{data.total}}</h3>
+        <select formControlName="accountId" id="account-earning">
+            <option *ngFor="let account of data.accounts" [value]="account.id">{{account.name}}</option>
+        </select>
+        <select formControlName="categoryId" id="categories-earning">
+            <option *ngFor="let category of data.earningCategories" [value]="category.id">{{category.name}}</option>
+        </select>
+        <input formControlName="date" placeholder="Date" type="date">
+        <input formControlName="sender" placeholder="From (Optional)" type="text"/>
+        <input formControlName="note" placeholder="Note (Optional)" type="text"/>
+        <div class="form-buttons">
+            <button class="add-btn" type="submit">save</button>
+            <button (click)="onCloseForm()" class="close-btn" type="button">close</button>
+        </div>
+    </form>
+</div>
 
-<app-new-form (onClose)="onChangeAddNewSpendingTransaction($event)" [isShowForm]="isShowNewSpending">
-    <input id="amount-spending" placeholder="Value" type="number"/>
-    <h3>Total {{data.total}}</h3>
-    <select id="account-spending">
-        <option *ngFor="let account of data.accounts" [value]="account">{{account}}</option>
-    </select>
-    <select id="categories-spending">
-        <option *ngFor="let category of data.spendingCategories" [value]="category">{{category}}</option>
-    </select>
-    <input placeholder="Date" type="date">
-    <input id="note-spending" placeholder="Note (Optional)" type="text"/>
-</app-new-form>
+<div (click)="isShowNewSpending = false" *ngIf="isShowNewSpending" class="forms">
+    <form (click)="stopPropagation($event)" (ngSubmit)="onSubmitSpendingForm()" [formGroup]="spendingForm">
+        <input formControlName="amount" id="amount-spending" placeholder="Value" type="number"/>
+        <h3>Total {{data.total}}</h3>
+        <select formControlName="accountId" id="account-spending">
+            <option *ngFor="let account of data.accounts" [value]="account.id">{{account.name}}</option>
+        </select>
+        <select formControlName="categoryId" id="categories-spending">
+            <option *ngFor="let category of data.spendingCategories" [value]="category.id">{{category.name}}</option>
+        </select>
+        <input formControlName="date" placeholder="Date" type="date">
+        <input formControlName="note" id="note-spending" placeholder="Note (Optional)" type="text"/>
+        <div class="form-buttons">
+            <button class="add-btn" type="submit">save</button>
+            <button (click)="onCloseForm()" class="close-btn" type="button">close</button>
+        </div>
+    </form>
+</div>
 
-<app-new-form (onClose)="onChangeAddNewTransferTransaction($event)" [isShowForm]="isShowNewTransfer">
-    <input id="amount-transfer" placeholder="Value" type="number"/>
-    <label for="from">From</label>
-    <select id="from">
-        <option *ngFor="let account of data.accounts" [value]="account">{{account}}</option>
-    </select>
-
-    <label for="to">To</label>
-    <select id="to">
-        <option *ngFor="let account of data.accounts" [value]="account">{{account}}</option>
-    </select>
-</app-new-form>
+<div (click)="isShowNewTransfer = false" *ngIf="isShowNewTransfer" class="forms">
+    <form (click)="stopPropagation($event)" (ngSubmit)="onSubmitTransferForm()" [formGroup]="transferForm">
+        <input formControlName="amount" placeholder="Value" type="number"/>
+        <label for="from">From</label>
+        <select formControlName="sender" id="from">
+            <option *ngFor="let account of data.accounts" [value]="account.id">{{account.name}}</option>
+        </select>
+        <label for="to">To</label>
+        <select formControlName="receiver" id="to">
+            <option *ngFor="let account of data.accounts" [value]="account.id">{{account.name}}</option>
+        </select>
+        <input formControlName="date" placeholder="Date" type="date">
+        <div class="form-buttons">
+            <button class="add-btn" type="submit">save</button>
+            <button (click)="onCloseForm()" class="close-btn" type="button">close</button>
+        </div>
+    </form>
+</div>
 
 <app-transaction-buttons
         (changeEarning)="onChangeAddNewEarningTransaction(true)"
         (changeSpending)="onChangeAddNewSpendingTransaction(true)"
         (changeTransfer)="onChangeAddNewTransferTransaction(true)"
-/>
+></app-transaction-buttons>
