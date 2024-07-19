@@ -24,7 +24,7 @@ export class AddTransactionComponent {
 
   public isShowNewEarning = false
   public isShowNewSpending = false
-  public isShowNewTransaction = false
+  public isShowNewTransfer = false
 
   onChangeAddNewEarningTransaction = (status: boolean) => {
     this.isShowNewEarning = status;
@@ -33,6 +33,6 @@ export class AddTransactionComponent {
     this.isShowNewSpending = status;
   }
   onChangeAddNewTransferTransaction = (status: boolean) => {
-    this.isShowNewTransaction = status;
+    this.isShowNewTransfer = status;
   }
 }

@@ -23,11 +23,11 @@ export class TransactionButtonsComponent {
     total: 20000
   }
 
-  @Output() changeEarning: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() changeSpending: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() changeTransfer: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() changeEarning: EventEmitter<void> = new EventEmitter<void>();
+  @Output() changeSpending: EventEmitter<void> = new EventEmitter<void>();
+  @Output() changeTransfer: EventEmitter<void> = new EventEmitter<void>();
 
-  onChangeAddNewEarningTransaction = () => this.changeEarning.emit(true);
-  onChangeAddNewSpendingTransaction = () => this.changeSpending.emit(true);
-  onChangeAddNewTransferTransfer = () => this.changeTransfer.emit(true);
+  onChangeAddNewEarningTransaction = () => this.changeEarning.emit();
+  onChangeAddNewSpendingTransaction = () => this.changeSpending.emit();
+  onChangeAddNewTransferTransfer = () => this.changeTransfer.emit();
 }

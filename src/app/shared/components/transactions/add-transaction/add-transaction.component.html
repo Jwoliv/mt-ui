@@ -25,7 +25,7 @@
     <input id="note-spending" placeholder="Note (Optional)" type="text"/>
 </app-new-form>
 
-<app-new-form (onClose)="onChangeAddNewTransferTransaction(true)" [isShowForm]="isShowNewTransaction">
+<app-new-form (onClose)="onChangeAddNewTransferTransaction($event)" [isShowForm]="isShowNewTransfer">
     <input id="amount-transfer" placeholder="Value" type="number"/>
     <label for="from">From</label>
     <select id="from">
@@ -39,7 +39,7 @@
 </app-new-form>
 
 <app-transaction-buttons
-        (changeEarning)="onChangeAddNewEarningTransaction($event)"
-        (changeSpending)="onChangeAddNewSpendingTransaction($event)"
-        (changeTransfer)="onChangeAddNewTransferTransaction($event)"
+        (changeEarning)="onChangeAddNewEarningTransaction(true)"
+        (changeSpending)="onChangeAddNewSpendingTransaction(true)"
+        (changeTransfer)="onChangeAddNewTransferTransaction(true)"
 />
