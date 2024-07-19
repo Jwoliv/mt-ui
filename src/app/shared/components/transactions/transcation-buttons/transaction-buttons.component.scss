@@ -1,0 +1,62 @@
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 10px 0;
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    cursor: pointer;
+    transition-duration: .3s;
+    border: 1px solid #000000;
+
+    &:hover {
+      transition-duration: .3s;
+    }
+
+    img {
+      height: 15px;
+      width: 15px;
+    }
+  }
+}
+
+.plus {
+  background-color: #76FF94;
+}
+
+.minus {
+  background-color: #FF7676;
+}
+
+.transfer {
+  background-color: #7BD4FA;
+}
+
+.button.plus:hover {
+  background-color: #56e075;
+}
+
+.button.minus:hover {
+  background-color: #e05b5b;
+}
+
+.button.transfer:hover {
+  background-color: #5bc2e8;
+}
+
+
+// -------------------------------------
+
+input, select {
+  height: 50px;
+  padding: 0 10px;
+  border: 1px solid #000000;
+}
+
+label {
+  margin-bottom: -15px;
+}

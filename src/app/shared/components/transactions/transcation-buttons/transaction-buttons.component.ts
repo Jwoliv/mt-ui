@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {ReactiveFormsModule} from "@angular/forms";
+import {NewFormComponent} from "../../new-form/new-form.component";
 
 @Component({
   selector: 'app-transaction-buttons',
@@ -8,7 +9,8 @@ import {ReactiveFormsModule} from "@angular/forms";
   imports: [
     NgForOf,
     NgIf,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NewFormComponent
   ],
   templateUrl: './transaction-buttons.component.html',
   styleUrl: './transaction-buttons.component.scss'
@@ -24,29 +26,8 @@ export class TransactionButtonsComponent {
   public isShowNewEarning = false
   public isShowNewSpending = false
   public isShowNewTransaction = false
-  protected readonly close = close;
 
-  onShowAddNewEarningTransaction() {
-    this.isShowNewEarning = true;
-  }
-
-  onShowAddNewSpendingTransaction() {
-
-    this.isShowNewSpending = true;
-  }
-
-  onShowAddNewTransferTransaction() {
-
-    this.isShowNewTransaction = true;
-  }
-
-  stopPropagation(event: Event): void {
-    event.stopPropagation();
-  }
-
-  onCloseForms() {
-    this.isShowNewSpending = false;
-    this.isShowNewEarning = false;
-    this.isShowNewTransaction = false;
-  }
+  onChangeAddNewEarningTransaction = (status: boolean) => this.isShowNewEarning = status;
+  onChangeAddNewSpendingTransaction = (status: boolean) => this.isShowNewSpending = status;
+  onChangeAddNewTransferTransaction = (status: boolean) => this.isShowNewTransaction = status;
 }

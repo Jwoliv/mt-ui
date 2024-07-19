@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {NgForOf, NgIf} from "@angular/common";
 import {ReactiveFormsModule} from "@angular/forms";
+import {NewFormComponent} from "../new-form/new-form.component";
 
 @Component({
   selector: 'app-add-account',
@@ -10,7 +11,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     RouterLink,
     NgForOf,
     NgIf,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NewFormComponent
   ],
   templateUrl: './add-account.component.html',
   styleUrl: './add-account.component.scss'
@@ -18,12 +20,6 @@ import {ReactiveFormsModule} from "@angular/forms";
 export class AddAccountComponent {
   isShowNewAccount: boolean = false;
 
-  onCloseForms() {
-    this.isShowNewAccount = false;
-  }
 
-  stopPropagation(event: Event): void {
-    event.stopPropagation();
-  }
-
+  onChangeAddNewAccount = (status: boolean) => this.isShowNewAccount = status;
 }

@@ -1,0 +1,9 @@
+<div (click)="isShowForm = false" *ngIf="isShowForm" class="forms">
+    <form (click)="stopPropagation($event)">
+        <ng-content/>
+        <div class="form-buttons">
+            <button class="add-btn">save</button>
+            <button (click)="onCloseForm()" class="close-btn" type="button">close</button>
+        </div>
+    </form>
+</div>

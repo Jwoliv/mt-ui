@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
 import {Transaction} from "../../model/transaction.model";
-import {TransactionItemComponent} from "../../shared/components/transaction-item/transaction-item.component";
 import {NgForOf} from "@angular/common";
 import {NavigationComponent} from "../../shared/components/navigation/navigation.component";
-import {TransactionButtonsComponent} from "../../shared/components/transcation-buttons/transaction-buttons.component";
+import {
+  TransactionButtonsComponent
+} from "../../shared/components/transactions/transcation-buttons/transaction-buttons.component";
+import {
+  TransactionItemComponent
+} from "../../shared/components/transactions/transaction-item/transaction-item.component";
 
 @Component({
   selector: 'app-transactions',
