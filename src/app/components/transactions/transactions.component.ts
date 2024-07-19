@@ -3,6 +3,9 @@ import {Transaction} from "../../model/transaction.model";
 import {TransactionItemComponent} from "../../shared/components/transaction-item/transaction-item.component";
 import {NgForOf} from "@angular/common";
 import {NavigationComponent} from "../../shared/components/navigation/navigation.component";
+import {
+  TransactionButtonsComponent
+} from "../dashboard/transactions-block/transcation-buttons/transaction-buttons.component";
 
 @Component({
   selector: 'app-transactions',
@@ -10,7 +13,8 @@ import {NavigationComponent} from "../../shared/components/navigation/navigation
   imports: [
     TransactionItemComponent,
     NgForOf,
-    NavigationComponent
+    NavigationComponent,
+    TransactionButtonsComponent
   ],
   templateUrl: './transactions.component.html',
   styleUrl: './transactions.component.scss'
