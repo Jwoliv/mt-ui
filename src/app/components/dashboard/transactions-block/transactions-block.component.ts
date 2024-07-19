@@ -8,6 +8,9 @@ import {
 import {
   TransactionItemComponent
 } from "../../../shared/components/transactions/transaction-item/transaction-item.component";
+import {
+  AddTransactionComponent
+} from "../../../shared/components/transactions/add-transaction/add-transaction.component";
 
 @Component({
   selector: 'app-transactions-block',
@@ -18,7 +21,8 @@ import {
     DatePipe,
     NgStyle,
     TransactionButtonsComponent,
-    TransactionItemComponent
+    TransactionItemComponent,
+    AddTransactionComponent
   ],
   templateUrl: './transactions-block.component.html',
   styleUrl: './transactions-block.component.scss'

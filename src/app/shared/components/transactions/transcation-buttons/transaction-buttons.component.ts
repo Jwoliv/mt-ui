@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {ReactiveFormsModule} from "@angular/forms";
 import {NewFormComponent} from "../../new-form/new-form.component";
@@ -23,11 +23,11 @@ export class TransactionButtonsComponent {
     total: 20000
   }
 
-  public isShowNewEarning = false
-  public isShowNewSpending = false
-  public isShowNewTransaction = false
+  @Output() changeEarning: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() changeSpending: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() changeTransfer: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  onChangeAddNewEarningTransaction = (status: boolean) => this.isShowNewEarning = status;
-  onChangeAddNewSpendingTransaction = (status: boolean) => this.isShowNewSpending = status;
-  onChangeAddNewTransferTransaction = (status: boolean) => this.isShowNewTransaction = status;
+  onChangeAddNewEarningTransaction = () => this.changeEarning.emit(true);
+  onChangeAddNewSpendingTransaction = () => this.changeSpending.emit(true);
+  onChangeAddNewTransferTransfer = () => this.changeTransfer.emit(true);
 }

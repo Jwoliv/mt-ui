@@ -8,6 +8,7 @@ import {
 import {
   TransactionItemComponent
 } from "../../shared/components/transactions/transaction-item/transaction-item.component";
+import {AddTransactionComponent} from "../../shared/components/transactions/add-transaction/add-transaction.component";
 
 @Component({
   selector: 'app-transactions',
@@ -16,7 +17,8 @@ import {
     TransactionItemComponent,
     NgForOf,
     NavigationComponent,
-    TransactionButtonsComponent
+    TransactionButtonsComponent,
+    AddTransactionComponent
   ],
   templateUrl: './transactions.component.html',
   styleUrl: './transactions.component.scss'

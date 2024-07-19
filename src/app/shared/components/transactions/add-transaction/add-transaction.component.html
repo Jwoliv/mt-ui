@@ -1,0 +1,45 @@
+<app-new-form (onClose)="onChangeAddNewEarningTransaction($event)" [isShowForm]="isShowNewEarning">
+    <input id="amount-earning" placeholder="Value" type="number"/>
+    <h3>Total {{data.total}}</h3>
+    <select id="account-earning">
+        <option *ngFor="let account of data.accounts" [value]="account">{{account}}</option>
+    </select>
+    <select id="categories-earning">
+        <option *ngFor="let category of data.earningCategories" [value]="category">{{category}}</option>
+    </select>
+    <input placeholder="Date" type="date">
+    <input id="sender-earning" placeholder="From (Optional)" type="text"/>
+    <input id="note-earning" placeholder="Note (Optional)" type="text"/>
+</app-new-form>
+
+<app-new-form (onClose)="onChangeAddNewSpendingTransaction($event)" [isShowForm]="isShowNewSpending">
+    <input id="amount-spending" placeholder="Value" type="number"/>
+    <h3>Total {{data.total}}</h3>
+    <select id="account-spending">
+        <option *ngFor="let account of data.accounts" [value]="account">{{account}}</option>
+    </select>
+    <select id="categories-spending">
+        <option *ngFor="let category of data.spendingCategories" [value]="category">{{category}}</option>
+    </select>
+    <input placeholder="Date" type="date">
+    <input id="note-spending" placeholder="Note (Optional)" type="text"/>
+</app-new-form>
+
+<app-new-form (onClose)="onChangeAddNewTransferTransaction(true)" [isShowForm]="isShowNewTransaction">
+    <input id="amount-transfer" placeholder="Value" type="number"/>
+    <label for="from">From</label>
+    <select id="from">
+        <option *ngFor="let account of data.accounts" [value]="account">{{account}}</option>
+    </select>
+
+    <label for="to">To</label>
+    <select id="to">
+        <option *ngFor="let account of data.accounts" [value]="account">{{account}}</option>
+    </select>
+</app-new-form>
+
+<app-transaction-buttons
+        (changeEarning)="onChangeAddNewEarningTransaction($event)"
+        (changeSpending)="onChangeAddNewSpendingTransaction($event)"
+        (changeTransfer)="onChangeAddNewTransferTransaction($event)"
+/>
