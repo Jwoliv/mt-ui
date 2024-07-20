@@ -31,5 +31,15 @@ export const routes: Routes = [
         path: 'settings',
         title: 'Settings',
         loadComponent: () => import('./components/settings/settings.component').then(module => module.SettingsComponent)
+    },
+    {
+        path: 'login',
+        title: 'Login',
+        loadComponent: () => import('./components/auth/login/login.component').then(module => module.LoginComponent)
+    },
+    {
+        path: 'sign-up',
+        title: 'SignUp',
+        loadComponent: () => import('./components/auth/sign-up/sign-up.component').then(module => module.SignUpComponent)
     }
 ];
