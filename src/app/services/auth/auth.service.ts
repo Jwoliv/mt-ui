@@ -1,6 +1,5 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {JwtTokenService} from "./jwt-token.service";
 import {getBasePathUrl} from "../data/service.data";
 import {LoginCredentialsRequest, SignUpCredentialsRequest} from "../../model/auth.model";
 
@@ -10,11 +9,6 @@ import {LoginCredentialsRequest, SignUpCredentialsRequest} from "../../model/aut
 export class AuthService {
 
   private httpClient: HttpClient = inject(HttpClient);
-  private jwtTokenService: JwtTokenService = inject(JwtTokenService);
-
-  constructor() {
-
-  }
 
   public login(request: LoginCredentialsRequest) {
     console.log(request);

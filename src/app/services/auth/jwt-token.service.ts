@@ -6,17 +6,17 @@ import {Router} from "@angular/router";
   providedIn: 'root'
 })
 export class JwtTokenService {
+  private static readonly TOKEN_NAME: string = 'auth-jwt-token';
 
   private router: Router = inject(Router);
 
 
-  public getJwtToken() {
-    const token = localStorage.getItem('auth-jwt-token');
-    return token ? JSON.parse(token) : null;
+  get jwtToken() {
+    return localStorage.getItem(JwtTokenService.TOKEN_NAME);
   }
 
   public save(user: User) {
-    localStorage.setItem('auth-jwt-token', user.token);
+    localStorage.setItem(JwtTokenService.TOKEN_NAME, user.token);
     this.router.navigate(['']).then();
   }
 }
