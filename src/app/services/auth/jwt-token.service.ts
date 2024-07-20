@@ -11,8 +11,8 @@ export class JwtTokenService {
   private router: Router = inject(Router);
 
 
-  get jwtToken() {
-    return localStorage.getItem(JwtTokenService.TOKEN_NAME);
+  get jwtToken(): string {
+    return localStorage.getItem(JwtTokenService.TOKEN_NAME) ?? '';
   }
 
   public save(user: User) {

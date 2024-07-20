@@ -1,7 +1,7 @@
 <div (click)="isShowNewAccount = false" *ngIf="isShowNewAccount" class="forms">
-    <form (click)="stopPropagation($event)">
-        <input id="name" placeholder="Account name" type="text"/>
-        <input id="init-value" placeholder="Amount of money" type="number"/>
+    <form (click)="stopPropagation($event)" (ngSubmit)="createNewAccount()" [formGroup]="form">
+        <input placeholder="Account name" type="text" formControlName="name" />
+        <input placeholder="Amount of money" type="number" formControlName="startBalance"/>
         <div class="form-buttons">
             <button class="add-btn" type="submit">save</button>
             <button (click)="isShowNewAccount = false" class="close-btn" type="button">close</button>
