@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Account, NewAccountRequest} from '../model/account.model';
+import {Account, AccountFullInfo, NewAccountRequest} from '../model/account.model';
 import {getBasePathUrl} from './data/service.data';
 import {JwtTokenService} from './auth/jwt-token.service';
 import {BehaviorSubject} from "rxjs";
@@ -31,6 +31,13 @@ export class AccountService {
   public createNewAccount(request: NewAccountRequest) {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.jwtTokenService.jwtToken}`);
     return this.httpClient.post(`${getBasePathUrl()}/accounts/new`, request, { headers });
+  }
+
+  public getAccounts(request: {pageNumber: number, pageSize: number}) {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.jwtTokenService.jwtToken}`);
+    return this.httpClient.get<AccountFullInfo[]>(`${getBasePathUrl()}/accounts`, {
+      params: request, headers
+    })
   }
 
   public updateDashboardAccounts(account: Account) {
