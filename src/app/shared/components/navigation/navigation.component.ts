@@ -13,24 +13,21 @@ import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
   styleUrl: './navigation.component.scss'
 })
 export class NavigationComponent {
-  @Input({required: true}) link!: string
-  public _pageSize: number = 20;
+  @Input({required: true}) link!: string;
+  public _pageSize: number = 5;
   public _pageNumber: number = 0;
   public form = new FormGroup({
     pageSize: new FormControl(this._pageSize, [Validators.required, Validators.min(1)]),
-  })
+  });
   private router: Router = inject(Router);
   @Output() private changeNavigationConfig: EventEmitter<any> = new EventEmitter();
 
   get prevPageNumber() {
-    this._pageNumber = this._pageNumber > 1 ? this._pageNumber - 1 : 1
-    console.log(this._pageNumber)
-    return this._pageNumber;
+    return this._pageNumber > 0 ? this._pageNumber - 1 : 0;
   }
 
   get nextPageNumber() {
-    this._pageNumber = this._pageNumber + 1;
-    return this._pageNumber
+    return this._pageNumber + 1;
   }
 
   onPrevPage() {
@@ -48,7 +45,7 @@ export class NavigationComponent {
   }
 
   saveNavigationConfig() {
-    this._pageSize = this.form.controls['pageSize'].value as number
+    this._pageSize = this.form.controls['pageSize'].value as number;
     this.sendChangesNavigationConfig();
     this.navigate();
   }
@@ -57,10 +54,18 @@ export class NavigationComponent {
     this.changeNavigationConfig.emit({
       pageNumber: this._pageNumber,
       pageSize: this._pageSize
-    })
+    });
   }
 
   navigate() {
-    this.router.navigate([this.link], {queryParams: {pageNumber: this._pageNumber, pageSize: this._pageSize}}).then();
+    this.router.navigate([this.link], { queryParams: { pageNumber: this._pageNumber, pageSize: this._pageSize } }).then();
+  }
+
+  rollbackPage() {
+    if (this._pageNumber > 0) {
+      this._pageNumber -= 1;
+      this.sendChangesNavigationConfig();
+      this.navigate();
+    }
   }
 }
