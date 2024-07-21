@@ -1,7 +1,6 @@
-import {Component, inject, OnInit, signal} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {DailyStockComponent} from "./daily-stock/daily-stock.component";
-import {Stock} from "../../model/stock.model";
 import {TransactionsBlockComponent} from "./transactions-block/transactions-block.component";
 import {AccountsBlockComponent} from "./accounts-block/accounts-block.component";
 import {DailyReportService} from "../../services/daily-report.service";
