@@ -1,6 +1,8 @@
 import {Component, EventEmitter, inject, Input, Output} from '@angular/core';
 import {Router} from "@angular/router";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {NavigationConfig} from "../../../model/navigation.model";
+import {DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE} from "../../../services/config/properties.config";
 
 @Component({
   selector: 'app-navigation',
@@ -14,13 +16,14 @@ import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 })
 export class NavigationComponent {
   @Input({required: true}) link!: string;
-  public _pageSize: number = 5;
-  public _pageNumber: number = 0;
+  @Output() private changeNavigationConfig: EventEmitter<NavigationConfig> = new EventEmitter<NavigationConfig>();
+
+  public _pageSize: number = DEFAULT_PAGE_SIZE;
+  public _pageNumber: number = DEFAULT_PAGE_NUMBER;
   public form = new FormGroup({
     pageSize: new FormControl(this._pageSize, [Validators.required, Validators.min(1)]),
   });
   private router: Router = inject(Router);
-  @Output() private changeNavigationConfig: EventEmitter<any> = new EventEmitter();
 
   get prevPageNumber() {
     return this._pageNumber > 0 ? this._pageNumber - 1 : 0;

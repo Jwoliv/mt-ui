@@ -5,6 +5,8 @@ import {Router, RouterLink} from "@angular/router";
 import {NavigationComponent} from "../../shared/components/navigation/navigation.component";
 import {AddAccountComponent} from "../../shared/components/add-account/add-account.component";
 import {AccountService} from "../../services/account.service";
+import {NavigationConfig} from "../../model/navigation.model";
+import {DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE} from "../../services/config/properties.config";
 
 @Component({
   selector: 'app-accounts',
@@ -20,35 +22,32 @@ import {AccountService} from "../../services/account.service";
   styleUrls: ['./accounts.component.scss']
 })
 export class AccountsComponent implements OnInit {
+  private navigationComponent = viewChild.required<NavigationComponent>('navigation')
   public accountService: AccountService = inject(AccountService);
-  public router: Router = inject(Router);
+
   public accounts: AccountFullInfo[] = [];
 
-  navigationComponent = viewChild.required<NavigationComponent>('navigation')
-
   ngOnInit() {
-    this.loadAccounts({ pageNumber: 0, pageSize: 5 });
+    this.loadAccounts({ pageNumber: DEFAULT_PAGE_NUMBER, pageSize: DEFAULT_PAGE_SIZE });
   }
 
-  loadAccounts(params: { pageNumber: number, pageSize: number }) {
-    this.accountService.getAccounts(params).subscribe({
+  loadAccounts(navigationConfig: NavigationConfig): void {
+    this.accountService.getAccounts(navigationConfig).subscribe({
       next: (accounts: AccountFullInfo[]) => {
         if (accounts.length > 0) {
           this.accounts = accounts;
-        } else if (params.pageNumber > 0) {
+        } else if (navigationConfig.pageNumber > 0) {
           this.rollbackPage();
         }
       }
     });
   }
 
-  updateAccounts($event: any) {
-    const pageNumber = $event.pageNumber;
-    const pageSize = $event.pageSize;
-    this.loadAccounts({ pageNumber, pageSize });
+  public updateAccounts(navigationConfig: NavigationConfig): void {
+    this.loadAccounts({ pageNumber: navigationConfig.pageNumber, pageSize: navigationConfig.pageSize });
   }
 
-  rollbackPage() {
+  public rollbackPage() {
     this.navigationComponent().rollbackPage();
   }
 }

@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {getBasePathUrl} from "../data/service.data";
+import {getBasePathUrl} from "../config/properties.config";
 import {LoginCredentialsRequest, SignUpCredentialsRequest} from "../../model/auth.model";
 
 @Injectable({
