@@ -4,14 +4,14 @@
              [class.active]="isActive"
              [style.height]="getSpendingHeight()">
             <div class="value">
-                {{ _stock().spending }}
+                {{ _stock().spending | currency }}
             </div>
         </div>
         <div class="earning"
              [class.active]="isActive"
              [style.height]="getEarningHeight()">
             <div class="value">
-                {{ _stock().earning }}
+                {{ _stock().earning | currency }}
             </div>
         </div>
     </div>

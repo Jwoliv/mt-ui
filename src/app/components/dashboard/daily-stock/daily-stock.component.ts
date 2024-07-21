@@ -1,13 +1,14 @@
 import {Component, inject, Input, signal} from '@angular/core';
 import {Stock} from "../../../model/stock.model";
-import {DatePipe} from "@angular/common";
+import {CurrencyPipe, DatePipe} from "@angular/common";
 import {StockService} from "../../../services/stock.service";
 
 @Component({
   selector: 'app-daily-stock',
   standalone: true,
   imports: [
-    DatePipe
+    DatePipe,
+    CurrencyPipe
   ],
   templateUrl: './daily-stock.component.html',
   styleUrl: './daily-stock.component.scss'

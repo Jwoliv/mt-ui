@@ -1,9 +1,11 @@
-import {Component, signal} from '@angular/core';
+import {Component, inject, OnInit, signal} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {DailyStockComponent} from "./daily-stock/daily-stock.component";
 import {Stock} from "../../model/stock.model";
 import {TransactionsBlockComponent} from "./transactions-block/transactions-block.component";
 import {AccountsBlockComponent} from "./accounts-block/accounts-block.component";
+import {DailyReportService} from "../../services/daily-report.service";
+import {DailyReport} from "../../model/report.model";
 
 @Component({
   selector: 'app-dashboard',
@@ -17,39 +19,14 @@ import {AccountsBlockComponent} from "./accounts-block/accounts-block.component"
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
+  private dailyReportService: DailyReportService = inject(DailyReportService);
+  public dailyReports: DailyReport[] = []
 
-  public _data= signal<any>({
-    dailyStocks: [
-      {earning: 1000, spending: 20, date: new Date()},
-      {earning: 90, spending: 20, date: new Date()},
-      {earning: 80, spending: 30, date: new Date()},
-      {earning: 70, spending: 40, date: new Date()},
-      {earning: 1000, spending: 20, date: new Date()},
-      {earning: 90, spending: 20, date: new Date()},
-      {earning: 80, spending: 30000, date: new Date()},
-      {earning: 70, spending: 405, date: new Date()},
-      {earning: 1000, spending: 20, date: new Date()},
-      {earning: 90, spending: 20, date: new Date()},
-      {earning: 805, spending: 30, date: new Date()},
-      {earning: 70, spending: 40, date: new Date()},
-      {earning: 100, spending: 20, date: new Date()},
-      {earning: 902, spending: 206, date: new Date()},
-      {earning: 100, spending: 30, date: new Date()},
-      {earning: 70, spending: 40, date: new Date()},
-      {earning: 160, spending: 20, date: new Date()},
-      {earning: 100, spending: 203, date: new Date()},
-      {earning: 400, spending: 30, date: new Date()},
-      {earning: 60, spending: 40, date: new Date()},
-      {earning: 10, spending: 20, date: new Date()},
-      {earning: 90, spending: 20, date: new Date()},
-      {earning: 80, spending: 305, date: new Date()},
-      {earning: 70, spending: 460, date: new Date()},
-    ]
-  })
-
-  get dailyStocks(): Stock[] {
-    return this._data().dailyStocks.slice(0, 20);
+  ngOnInit() {
+    this.dailyReportService.getDailyReports().subscribe({
+      next: data => this.dailyReports = data
+    })
   }
 
 }
