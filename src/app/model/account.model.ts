@@ -9,3 +9,8 @@ export interface AccountFullInfo {
     earning: number
     spending: number
 }
+
+export interface NewAccountRequest {
+  name: string;
+  startBalance: string;
+}
