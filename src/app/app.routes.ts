@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
+import {resolveNavigationConfig} from "./components/transactions/transactions.component";
 
 export const routes: Routes = [
     {
@@ -20,6 +21,9 @@ export const routes: Routes = [
     {
         path: 'transactions',
         title: 'Transactions',
+        resolve: {
+          navigationConfig: resolveNavigationConfig
+        },
         loadComponent: () => import('./components/transactions/transactions.component').then(module => module.TransactionsComponent)
     },
     {

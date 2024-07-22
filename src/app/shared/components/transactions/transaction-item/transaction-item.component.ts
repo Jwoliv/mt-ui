@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {DatePipe} from "@angular/common";
+import {CurrencyPipe, DatePipe} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {Transaction, TransactionDashboard} from "../../../../model/transaction.model";
 
@@ -8,7 +8,8 @@ import {Transaction, TransactionDashboard} from "../../../../model/transaction.m
   standalone: true,
   imports: [
     DatePipe,
-    RouterLink
+    RouterLink,
+    CurrencyPipe
   ],
   templateUrl: './transaction-item.component.html',
   styleUrl: './transaction-item.component.scss'

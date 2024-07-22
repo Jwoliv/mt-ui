@@ -3,7 +3,7 @@
                     'earning': transaction.type === 'EARNING',
                     'spending': transaction.type === 'SPENDING'
                 }">
-        {{ transaction.amount }}
+        {{ transaction.amount | currency }}
     </div>
 
     <div class="transactions-main-info">
