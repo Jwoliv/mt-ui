@@ -83,7 +83,7 @@ export class AddTransactionComponent {
 
   submitEarningForm() {
     console.log(this.earningForm.value);
-    this.transactionService.saveNewTransaction(this.earningForm.value as NewTransactionRequest).subscribe({
+    this.transactionService.createNewTransaction(this.earningForm.value as NewTransactionRequest).subscribe({
       next: response => console.log(response)
     });
     this.closeAllForms();
@@ -91,7 +91,7 @@ export class AddTransactionComponent {
 
   submitSpendingForm() {
     console.log(this.spendingForm.value);
-    this.transactionService.saveNewTransaction(this.spendingForm.value as NewTransactionRequest).subscribe({
+    this.transactionService.createNewTransaction(this.spendingForm.value as NewTransactionRequest).subscribe({
       next: response => console.log(response)
     });
     this.closeAllForms();
@@ -99,7 +99,7 @@ export class AddTransactionComponent {
 
   submitTransferForm() {
     console.log(this.transferForm.value);
-    this.transactionService.saveNewTransaction(this.transferForm.value as NewTransactionRequest).subscribe({
+    this.transactionService.createNewTransaction(this.transferForm.value as NewTransactionRequest).subscribe({
       next: response => console.log(response)
     });
     this.closeAllForms();

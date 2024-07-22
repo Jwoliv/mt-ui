@@ -16,7 +16,16 @@ export interface NewTransactionRequest {
     date: Date;
     from?: string;
     note?: string;
-    type: 'EARNING' | 'SPENDING' | 'TRANSFER'
+    type: TransactionType
+}
+
+export interface TransactionDashboard {
+  id: number;
+  amount: number;
+  type: TransactionType;
+  categoryName: string;
+  accountName: string;
+  date: Date;
 }
 
 type TransactionType = 'EARNING' | 'SPENDING'

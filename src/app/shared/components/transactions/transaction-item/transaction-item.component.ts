@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {DatePipe} from "@angular/common";
 import {RouterLink} from "@angular/router";
-import {Transaction} from "../../../../model/transaction.model";
+import {Transaction, TransactionDashboard} from "../../../../model/transaction.model";
 
 @Component({
   selector: 'app-transaction-item',
@@ -14,5 +14,5 @@ import {Transaction} from "../../../../model/transaction.model";
   styleUrl: './transaction-item.component.scss'
 })
 export class TransactionItemComponent {
-  @Input() transaction!: Transaction
+  @Input() transaction!: TransactionDashboard
 }

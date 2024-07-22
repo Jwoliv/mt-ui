@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Transaction} from "../../model/transaction.model";
+import {Transaction, TransactionDashboard} from "../../model/transaction.model";
 import {NgForOf} from "@angular/common";
 import {NavigationComponent} from "../../shared/components/navigation/navigation.component";
 import {
@@ -24,14 +24,14 @@ import {AddTransactionComponent} from "../../shared/components/transactions/add-
   styleUrl: './transactions.component.scss'
 })
 export class TransactionsComponent {
-  public transactions: Transaction[] = [
-    {id: 1, category: 'Salary', type: 'EARNING', amount: 300, date: new Date(), account: {id: 1, name: 'cash'}},
-    {id: 1, category: 'Salary', type: 'SPENDING', amount: 300, date: new Date(), account: {id: 1, name: 'cash'}},
-    {id: 1, category: 'Salary', type: 'SPENDING', amount: 300, date: new Date(), account: {id: 1, name: 'cash'}},
-    {id: 1, category: 'Salary', type: 'EARNING', amount: 300, date: new Date(), account: {id: 1, name: 'cash'}},
-    {id: 1, category: 'Salary', type: 'SPENDING', amount: 300, date: new Date(), account: {id: 1, name: 'cash'}},
-    {id: 1, category: 'Salary', type: 'SPENDING', amount: 300, date: new Date(), account: {id: 1, name: 'cash'}},
-    {id: 1, category: 'Salary', type: 'EARNING', amount: 300, date: new Date(), account: {id: 1, name: 'cash'}},
-    {id: 1, category: 'Salary', type: 'SPENDING', amount: 300, date: new Date(), account: {id: 1, name: 'cash'}},
+  public transactions: TransactionDashboard[] = [
+    {id: 1, categoryName: 'Salary', type: 'EARNING', amount: 300, date: new Date(), accountName: 'cash'},
+    {id: 1, categoryName: 'Salary', type: 'SPENDING', amount: 300, date: new Date(), accountName: 'cash'},
+    {id: 1, categoryName: 'Salary', type: 'SPENDING', amount: 300, date: new Date(), accountName: 'cash'},
+    {id: 1, categoryName: 'Salary', type: 'EARNING', amount: 300, date: new Date(), accountName: 'cash'},
+    {id: 1, categoryName: 'Salary', type: 'SPENDING', amount: 300, date: new Date(), accountName: 'cash'},
+    {id: 1, categoryName: 'Salary', type: 'SPENDING', amount: 300, date: new Date(), accountName: 'cash'},
+    {id: 1, categoryName: 'Salary', type: 'EARNING', amount: 300, date: new Date(), accountName: 'cash'},
+    {id: 1, categoryName: 'Salary', type: 'SPENDING', amount: 300, date: new Date(), accountName: 'cash'},
   ]
 }
