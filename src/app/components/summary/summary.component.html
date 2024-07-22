@@ -1,11 +1,11 @@
 <div [class.show]="selectedStock" class="summary-selected-stock">
-    {{selectedStock?.dailyAmount | currency }} at {{ selectedStock?.date | date: 'MM/dd' }}
+    {{selectedStock?.amount | currency }} at {{ selectedStock?.date | date: 'MM/dd' }}
 </div>
 <div class="summary-daily-stocks">
-    <div *ngFor="let sds of summaryData.summaryDailyStocks"
+    <div *ngFor="let sds of summaryData.dailyAmountReports"
          (click)="changeSelectedData(sds)"
          class="summary-daily-stock"
-         [style.height]="getHeight(sds.dailyAmount)"
+         [style.height]="getHeight(sds.amount)"
          [style.background-color]="sds.color">
     </div>
 </div>

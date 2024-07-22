@@ -1,11 +1,11 @@
 export interface SummaryData {
-    summaryDailyStocks: SummaryDailyStock[]
+    dailyAmountReports: DailyAmountReport[]
     reports: Report[]
 }
 
-export interface SummaryDailyStock {
+export interface DailyAmountReport {
     index: number,
-    dailyAmount: number
+    amount: number
     date: Date,
     color?: string
 }

@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, viewChild} from '@angular/core';
+import {Component, inject, Input, OnInit, viewChild} from '@angular/core';
 import {CurrencyPipe, NgForOf} from "@angular/common";
 import {AccountFullInfo} from "../../model/account.model";
 import {RouterLink} from "@angular/router";
@@ -24,15 +24,16 @@ import {DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE} from "../../services/config/prop
 export class AccountsComponent implements OnInit {
   private navigationComponent = viewChild.required<NavigationComponent>('navigation')
   public accountService: AccountService = inject(AccountService);
-
+  @Input() public navigationConfig!: NavigationConfig;
   public accounts: AccountFullInfo[] = [];
 
   ngOnInit() {
-    this.loadAccounts({ pageNumber: DEFAULT_PAGE_NUMBER, pageSize: DEFAULT_PAGE_SIZE });
+    this.loadAccounts();
   }
 
-  loadAccounts(navigationConfig: NavigationConfig): void {
-    this.accountService.getAccounts(navigationConfig).subscribe({
+  loadAccounts(navigationConfig: NavigationConfig = this.navigationConfig): void {
+    this.navigationConfig = navigationConfig;
+    this.accountService.getAccounts(this.navigationConfig).subscribe({
       next: (accounts: AccountFullInfo[]) => {
         if (accounts.length > 0) {
           this.accounts = accounts;

@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {CurrencyPipe, DatePipe, NgForOf, NgIf} from "@angular/common";
 import {PeriodReportComponent} from "./period-report/period-report.component";
-import {SummaryDailyStock, SummaryData} from "../../model/summary.model";
+import {DailyAmountReport, SummaryData} from "../../model/summary.model";
+import {DailyReportService} from "../../services/daily-report.service";
 
 @Component({
   selector: 'app-summary',
@@ -17,9 +18,10 @@ import {SummaryDailyStock, SummaryData} from "../../model/summary.model";
   styleUrl: './summary.component.scss'
 })
 export class SummaryComponent implements OnInit {
+  public reportService: DailyReportService = inject(DailyReportService);
 
   public summaryData: SummaryData = {
-    summaryDailyStocks: this.generateSummaryDailyStocks(),
+    dailyAmountReports: [],
     reports: [
       {amount: 2000, percentage: 1, type: 'DAY', isProfit: true},
       {amount: 2000, percentage: 0.5, type: 'WEEK', isProfit: false},
@@ -27,10 +29,10 @@ export class SummaryComponent implements OnInit {
       {amount: 2000, percentage: 1, type: 'YEAR', isProfit: true}
     ]
   };
-  public selectedStock!: SummaryDailyStock | null
+  public selectedStock!: DailyAmountReport | null
 
   get maxDailyAmount(): number {
-    return Math.max(...this.summaryData.summaryDailyStocks.map(stock => stock.dailyAmount));
+    return Math.max(...this.summaryData.dailyAmountReports.map(stock => stock.amount));
   }
 
   getHeight(dailyAmount: number): string {
@@ -41,28 +43,22 @@ export class SummaryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const summaryDailyStocks = this.summaryData.summaryDailyStocks;
-    for (let i = 0; i < summaryDailyStocks.length; i++) {
-      if (i === 0 || summaryDailyStocks[i].dailyAmount > summaryDailyStocks[i - 1].dailyAmount) {
-        summaryDailyStocks[i].color = '#76FF94';
-      } else {
-        summaryDailyStocks[i].color = '#FF7676';
+    this.reportService.getDailyAmountReports().subscribe({
+      next: reports => {
+        this.summaryData.dailyAmountReports = reports;
+        for (let i = 0; i < this.summaryData.dailyAmountReports.length; i++) {
+          if (i === 0 || this.summaryData.dailyAmountReports[i].amount > this.summaryData.dailyAmountReports[i - 1].amount) {
+            this.summaryData.dailyAmountReports[i].color = '#76FF94';
+          } else {
+            this.summaryData.dailyAmountReports[i].color = '#FF7676';
+          }
+        }
       }
-    }
-    this.summaryData.summaryDailyStocks = summaryDailyStocks;
+    });
   }
 
-  private generateSummaryDailyStocks() { // todo: remove when connect backend
-    const values: SummaryDailyStock[] = [];
-    for (let i = 0; i < 60; i++) {
-      values.push({
-        index: i, dailyAmount: Math.floor((Math.random() * 10000) + 1000), date: new Date()
-      })
-    }
-    return values;
-  }
 
-  changeSelectedData(sds: SummaryDailyStock) {
+  changeSelectedData(sds: DailyAmountReport) {
     this.resetSelectedStock();
     if (sds.index === this.selectedStock?.index) {
       this.selectedStock = null;

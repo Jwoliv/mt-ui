@@ -3,3 +3,8 @@ export interface DailyReport {
   earning: number
   date: Date
 }
+
+export interface DailyAmountReport {
+  amount: number
+  date: Date
+}

@@ -6,8 +6,8 @@ export interface Account {
 export interface AccountFullInfo {
     id: number
     name: string
-    earning: number
-    spending: number
+    earnMoney: number
+    spendMoney: number
 }
 
 export interface NewAccountRequest {

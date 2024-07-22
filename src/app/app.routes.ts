@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
-import {resolveNavigationConfig} from "./components/transactions/transactions.component";
+import {resolveNavigationConfig} from "./shared/components/app.resolver";
 
 export const routes: Routes = [
     {
@@ -29,6 +29,9 @@ export const routes: Routes = [
     {
         path: 'accounts',
         title: 'Accounts',
+        resolve: {
+          navigationConfig: resolveNavigationConfig
+        },
         loadComponent: () => import('./components/accounts/accounts.component').then(module => module.AccountsComponent)
     },
     {

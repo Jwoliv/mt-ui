@@ -51,11 +51,3 @@ export class TransactionsComponent implements OnInit {
   }
 
 }
-
-export const resolveNavigationConfig: ResolveFn<NavigationConfig> = (activateRoute: ActivatedRouteSnapshot) => {
-  const pageNumber = +(activateRoute.queryParamMap.get("pageNumber") ?? DEFAULT_PAGE_NUMBER);
-  const pageSize = +(activateRoute.queryParamMap.get("pageSize") ?? DEFAULT_PAGE_SIZE);
-  return {
-    pageNumber, pageSize
-  }
-}
