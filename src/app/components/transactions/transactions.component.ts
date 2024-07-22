@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnInit} from '@angular/core';
+import {Component, inject, Input, OnInit, viewChild} from '@angular/core';
 import {TransactionDashboard} from "../../model/transaction.model";
 import {NgForOf} from "@angular/common";
 import {NavigationComponent} from "../../shared/components/navigation/navigation.component";
@@ -28,13 +28,25 @@ import {NavigationConfig} from "../../model/navigation.model";
   styleUrl: './transactions.component.scss'
 })
 export class TransactionsComponent implements OnInit {
+  private navigationComponent = viewChild.required<NavigationComponent>('navigation')
   public transactionService: TransactionService = inject(TransactionService);
   @Input() public navigationConfig!: NavigationConfig;
   public transactions: TransactionDashboard[] = []
 
   ngOnInit() {
+    this.loadTransaction();
+  }
+
+  public loadTransaction(navigationConfig: NavigationConfig = this.navigationConfig): void {
+    this.navigationConfig = navigationConfig;
     this.transactionService.getTransaction(this.navigationConfig).subscribe({
-      next: transactions => this.transactions = transactions
+      next: transactions => {
+        if (transactions.length > 0) {
+          this.transactions = transactions;
+        } else if (this.navigationConfig.pageNumber > 0) {
+          this.navigationComponent().rollbackPage();
+        }
+      }
     })
   }
 

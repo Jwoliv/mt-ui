@@ -3,5 +3,5 @@
     <div class="transactions-item">
         <app-transaction-item *ngFor="let transaction of transactions" [transaction]="transaction"/>
     </div>
-    <app-navigation link="/transactions"/>
+    <app-navigation link="/transactions" (changeNavigationConfig)="loadTransaction($event)" #navigation/>
 </div>

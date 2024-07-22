@@ -1,7 +1,7 @@
-import {Component, EventEmitter, inject, OnInit, viewChild, ViewChild} from '@angular/core';
+import {Component, inject, OnInit, viewChild} from '@angular/core';
 import {CurrencyPipe, NgForOf} from "@angular/common";
 import {AccountFullInfo} from "../../model/account.model";
-import {Router, RouterLink} from "@angular/router";
+import {RouterLink} from "@angular/router";
 import {NavigationComponent} from "../../shared/components/navigation/navigation.component";
 import {AddAccountComponent} from "../../shared/components/add-account/add-account.component";
 import {AccountService} from "../../services/account.service";
