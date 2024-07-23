@@ -17,9 +17,9 @@ export class CategoryService {
   }
 
 
-  public getCategoriesForTransactionForm() {
+  public getCategoriesForTransactionForm(type: 'SPENDING' | 'EARNING' ) {
     return this.httpClient.get<CategoryFormDto[]>(`${getBasePathUrl()}/category/form-data`, {
-      headers: this.headers
+      headers: this.headers, params: { type }
     });
   }
 }

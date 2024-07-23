@@ -26,57 +26,72 @@ export class AddTransactionComponent implements OnInit {
   public accountService: AccountService = inject(AccountService);
   public categoryService: CategoryService = inject(CategoryService);
 
+  public spendingCategories: CategoryFormDto[] = [];
+  public earningCategories: CategoryFormDto[] = [];
   public accounts: AccountFormDto[] = [];
-  public categories: CategoryFormDto[] = [];
-
-  public data = {
-    earningCategories: [{id: 1, name: 'Salary'}, {id: 2, name: 'Investment'}],
-    spendingCategories: [{id: 1, name: 'Food'}, {id: 2, name: 'Travel'}],
-    accounts: [{id: 1, name: 'Cash'}, {id: 2, name: 'Universal Card'}],
-    total: 20000
-  }
 
   public isShowNewEarning = false;
   public isShowNewSpending = false;
   public isShowNewTransfer = false;
 
+  public earningForm!: FormGroup;
+  public spendingForm!: FormGroup;
+  public transferForm!: FormGroup;
+
   ngOnInit() {
     this.accountService.getAccountsForTransactionForm().subscribe({
-      next: accounts => this.accounts = accounts
-    })
+      next: accounts => {
+        this.accounts = accounts;
+        this.initializeForms();
+      }
+    });
 
-    this.categoryService.getCategoriesForTransactionForm().subscribe({
-      next: categories => this.categories = categories
-    })
+    this.categoryService.getCategoriesForTransactionForm('SPENDING').subscribe({
+      next: categories => {
+        this.spendingCategories = categories;
+        this.initializeForms();
+      }
+    });
+
+    this.categoryService.getCategoriesForTransactionForm('EARNING').subscribe({
+      next: categories => {
+        this.earningCategories = categories;
+        this.initializeForms();
+      }
+    });
   }
 
-  public earningForm = new FormGroup({
-    amount: new FormControl(0, [Validators.required, Validators.min(0.01)]),
-    accountId: new FormControl<number>(this.data.accounts[0].id, [Validators.required]),
-    categoryId: new FormControl<number>(this.data.earningCategories[0].id, [Validators.required]),
-    date: new FormControl(new Date(), [Validators.required]),
-    sender: new FormControl(''),
-    note: new FormControl(''),
-    type: new FormControl('EARNING')
-  });
+  private initializeForms() {
+    if (this.accounts.length > 0 && this.earningCategories.length > 0 && this.spendingCategories.length > 0) {
+      this.earningForm = new FormGroup({
+        amount: new FormControl(0, [Validators.required, Validators.min(0.01)]),
+        accountId: new FormControl<number>(this.accounts[0].id, [Validators.required]),
+        categoryId: new FormControl<number>(this.earningCategories[0].id, [Validators.required]),
+        date: new FormControl(new Date(), [Validators.required]),
+        sender: new FormControl(''),
+        note: new FormControl(''),
+        type: new FormControl('EARNING')
+      });
 
-  public spendingForm = new FormGroup({
-    amount: new FormControl(0, [Validators.required, Validators.min(0.01)]),
-    accountId: new FormControl<number>(this.data.accounts[0].id, [Validators.required]),
-    categoryId: new FormControl<number>(this.data.spendingCategories[0].id, [Validators.required]),
-    date: new FormControl(new Date(), [Validators.required]),
-    sender: new FormControl(''),
-    note: new FormControl(''),
-    type: new FormControl('SPENDING')
-  });
+      this.spendingForm = new FormGroup({
+        amount: new FormControl(0, [Validators.required, Validators.min(0.01)]),
+        accountId: new FormControl<number>(this.accounts[0].id, [Validators.required]),
+        categoryId: new FormControl<number>(this.spendingCategories[0].id, [Validators.required]),
+        date: new FormControl(new Date(), [Validators.required]),
+        sender: new FormControl(''),
+        note: new FormControl(''),
+        type: new FormControl('SPENDING')
+      });
 
-  public transferForm = new FormGroup({
-    amount: new FormControl(0, [Validators.required, Validators.min(0.01)]),
-    date: new FormControl(new Date(), [Validators.required]),
-    senderAccount: new FormControl(this.data.accounts[0].id),
-    receiverAccount: new FormControl(this.data.accounts[1].id),
-    type: new FormControl('TRANSFER')
-  });
+      this.transferForm = new FormGroup({
+        amount: new FormControl(0, [Validators.required, Validators.min(0.01)]),
+        date: new FormControl(new Date(), [Validators.required]),
+        senderAccount: new FormControl(this.accounts[0].id),
+        receiverAccount: new FormControl(this.accounts[1].id),
+        type: new FormControl('TRANSFER')
+      });
+    }
+  }
 
   stopPropagation(event: Event) {
     event.stopPropagation();

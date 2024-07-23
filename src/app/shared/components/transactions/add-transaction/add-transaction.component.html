@@ -2,12 +2,12 @@
 <div (click)="toggleEarningForm(false)" *ngIf="isShowNewEarning" class="forms">
     <form (click)="stopPropagation($event)" (ngSubmit)="submitEarningForm()" [formGroup]="earningForm">
         <input formControlName="amount" placeholder="Value" type="number"/>
-        <h3>Total {{ data.total }}</h3>
+        <h3>Total {{ 12354 }}</h3>
         <select formControlName="accountId">
             <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
         </select>
         <select formControlName="categoryId">
-            <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+            <option *ngFor="let category of earningCategories" [value]="category.id">{{ category.name }}</option>
         </select>
         <input formControlName="date" placeholder="Date" type="date">
         <input formControlName="sender" placeholder="From (Optional)" type="text"/>
@@ -23,12 +23,12 @@
 <div (click)="toggleSpendingForm(false)" *ngIf="isShowNewSpending" class="forms">
     <form (click)="stopPropagation($event)" (ngSubmit)="submitSpendingForm()" [formGroup]="spendingForm">
         <input formControlName="amount" placeholder="Value" type="number"/>
-        <h3>Total {{ data.total }}</h3>
+        <h3>Total {{ 21414 }}</h3>
         <select formControlName="accountId">
           <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
         </select>
         <select formControlName="categoryId">
-          <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+          <option *ngFor="let category of spendingCategories" [value]="category.id">{{ category.name }}</option>
         </select>
         <input formControlName="date" placeholder="Date" type="date">
         <input formControlName="sender" placeholder="From (Optional)" type="text"/>
