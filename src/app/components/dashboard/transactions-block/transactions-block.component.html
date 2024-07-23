@@ -5,5 +5,5 @@
            <app-transaction-item [transaction]="transaction"/>
         </div>
     </div>
-    <app-add-transaction/>
+    <app-add-transaction (updateTransactions)="updateTransactions($event)"/>
 </div>

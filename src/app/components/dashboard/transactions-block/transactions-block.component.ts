@@ -36,9 +36,14 @@ export class TransactionsBlockComponent implements OnInit {
   ngOnInit() {
     this.transactionService.getTransactionForDashboard().subscribe({
       next: (transactions: TransactionDashboard[]) => {
-        console.log(transactions)
         this.transactions = transactions
       }
     })
+  }
+
+  updateTransactions(transaction: TransactionDashboard) {
+    this.transactions.unshift(transaction);
+    console.log(transaction)
+    this.transactions = this.transactions.slice(0, 3)
   }
 }

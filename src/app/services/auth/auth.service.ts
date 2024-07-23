@@ -11,7 +11,6 @@ export class AuthService {
   private httpClient: HttpClient = inject(HttpClient);
 
   public login(request: LoginCredentialsRequest) {
-    console.log(request);
     return this.httpClient.post(`${getBasePathUrl()}/auth/login`, request)
   }
 

@@ -1,9 +1,9 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, EventEmitter, inject, OnInit, Output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {TransactionButtonsComponent} from "../transcation-buttons/transaction-buttons.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {TransactionService} from "../../../../services/transaction.service";
-import {NewTransactionRequest} from "../../../../model/transaction.model";
+import {NewTransactionRequest, TransactionDashboard} from "../../../../model/transaction.model";
 import {AccountFormDto} from "../../../../model/account.model";
 import {CategoryFormDto} from "../../../../model/category.model";
 import {AccountService} from "../../../../services/account.service";
@@ -37,6 +37,8 @@ export class AddTransactionComponent implements OnInit {
   public earningForm!: FormGroup;
   public spendingForm!: FormGroup;
   public transferForm!: FormGroup;
+
+  @Output() updateTransactions: EventEmitter<TransactionDashboard> = new EventEmitter<TransactionDashboard>();
 
   ngOnInit() {
     this.accountService.getAccountsForTransactionForm().subscribe({
@@ -116,25 +118,22 @@ export class AddTransactionComponent implements OnInit {
   }
 
   submitEarningForm() {
-    console.log(this.earningForm.value);
     this.transactionService.createNewTransaction(this.earningForm.value as NewTransactionRequest).subscribe({
-      next: response => console.log(response)
+      next: response => this.updateTransactions.emit(response)
     });
     this.closeAllForms();
   }
 
   submitSpendingForm() {
-    console.log(this.spendingForm.value);
     this.transactionService.createNewTransaction(this.spendingForm.value as NewTransactionRequest).subscribe({
-      next: response => console.log(response)
+      next: response => this.updateTransactions.emit(response)
     });
     this.closeAllForms();
   }
 
   submitTransferForm() {
-    console.log(this.transferForm.value);
     this.transactionService.createNewTransaction(this.transferForm.value as NewTransactionRequest).subscribe({
-      next: response => console.log(response)
+      next: response => this.updateTransactions.emit(response)
     });
     this.closeAllForms();
   }

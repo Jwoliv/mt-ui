@@ -15,7 +15,7 @@ export class TransactionService {
 
   public createNewTransaction(newTransaction: NewTransactionRequest) {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.jwtTokenService.jwtToken}`);
-    return this.httpClient.post(`${getBasePathUrl()}/transaction/new`, newTransaction, {
+    return this.httpClient.post<TransactionDashboard>(`${getBasePathUrl()}/transaction/new`, newTransaction, {
       headers
     })
   }
