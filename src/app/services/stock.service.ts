@@ -12,7 +12,6 @@ export class StockService {
   }
 
   private calculatePercentage(total: number, value: number): number {
-    let percentage: number = total > 0 ? (value / total) * 100 : 0;
-    return percentage < 20 ? 20 : percentage;
+    return total > 0 ? (value / total) * 100 : 0;
   }
 }
