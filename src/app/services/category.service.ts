@@ -1,9 +1,7 @@
 import {inject, Injectable} from '@angular/core';
-import {Account, AccountFormDto} from "../model/account.model";
 import {getBasePathUrl} from "./config/properties.config";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {JwtTokenService} from "./auth/jwt-token.service";
-import {BehaviorSubject} from "rxjs";
 import {CategoryFormDto} from "../model/category.model";
 
 @Injectable({
