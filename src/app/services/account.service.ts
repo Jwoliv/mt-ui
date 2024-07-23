@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Account, AccountFullInfo, NewAccountRequest} from '../model/account.model';
+import {Account, AccountFormDto, AccountFullInfo, NewAccountRequest} from '../model/account.model';
 import {getBasePathUrl} from './config/properties.config';
 import {JwtTokenService} from './auth/jwt-token.service';
 import {BehaviorSubject} from "rxjs";
@@ -23,25 +23,32 @@ export class AccountService {
     });
   }
 
+  get headers() {
+    return new HttpHeaders().set('Authorization', `Bearer ${this.jwtTokenService.jwtToken}`);
+  }
+
   public getAccountDashboard() {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.jwtTokenService.jwtToken}`);
-    return this.httpClient.get<Account[]>(`${getBasePathUrl()}/accounts/dashboard`, { headers });
+    return this.httpClient.get<Account[]>(`${getBasePathUrl()}/accounts/dashboard`, { headers: this.headers });
   }
 
   public createNewAccount(request: NewAccountRequest) {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.jwtTokenService.jwtToken}`);
-    return this.httpClient.post(`${getBasePathUrl()}/accounts/new`, request, { headers });
+    return this.httpClient.post(`${getBasePathUrl()}/accounts/new`, request, { headers: this.headers });
   }
 
   public getAccounts(request: {pageNumber: number, pageSize: number}) {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.jwtTokenService.jwtToken}`);
     return this.httpClient.get<AccountFullInfo[]>(`${getBasePathUrl()}/accounts`, {
-      params: request, headers
+      params: request, headers: this.headers
     })
   }
 
   public updateDashboardAccounts(account: Account) {
     const currentAccounts = this.dashboardAccountsSubject.getValue();
     this.dashboardAccountsSubject.next([account, ...currentAccounts]);
+  }
+
+  public getAccountsForTransactionForm() {
+    return this.httpClient.get<AccountFormDto[]>(`${getBasePathUrl()}/accounts/form-data`, {
+      headers: this.headers
+    });
   }
 }

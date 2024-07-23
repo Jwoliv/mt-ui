@@ -14,3 +14,8 @@ export interface NewAccountRequest {
   name: string;
   startBalance: string;
 }
+
+export interface AccountFormDto {
+  id: number
+  name: string
+}

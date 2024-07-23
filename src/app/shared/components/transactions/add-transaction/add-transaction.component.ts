@@ -1,9 +1,13 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {TransactionButtonsComponent} from "../transcation-buttons/transaction-buttons.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {TransactionService} from "../../../../services/transaction.service";
 import {NewTransactionRequest} from "../../../../model/transaction.model";
+import {AccountFormDto} from "../../../../model/account.model";
+import {CategoryFormDto} from "../../../../model/category.model";
+import {AccountService} from "../../../../services/account.service";
+import {CategoryService} from "../../../../services/category.service";
 
 @Component({
   selector: 'app-add-transaction',
@@ -17,8 +21,13 @@ import {NewTransactionRequest} from "../../../../model/transaction.model";
   templateUrl: './add-transaction.component.html',
   styleUrl: './add-transaction.component.scss'
 })
-export class AddTransactionComponent {
+export class AddTransactionComponent implements OnInit {
   public transactionService: TransactionService = inject(TransactionService);
+  public accountService: AccountService = inject(AccountService);
+  public categoryService: CategoryService = inject(CategoryService);
+
+  public accounts: AccountFormDto[] = [];
+  public categories: CategoryFormDto[] = [];
 
   public data = {
     earningCategories: [{id: 1, name: 'Salary'}, {id: 2, name: 'Investment'}],
@@ -30,6 +39,16 @@ export class AddTransactionComponent {
   public isShowNewEarning = false;
   public isShowNewSpending = false;
   public isShowNewTransfer = false;
+
+  ngOnInit() {
+    this.accountService.getAccountsForTransactionForm().subscribe({
+      next: accounts => this.accounts = accounts
+    })
+
+    this.categoryService.getCategoriesForTransactionForm().subscribe({
+      next: categories => this.categories = categories
+    })
+  }
 
   public earningForm = new FormGroup({
     amount: new FormControl(0, [Validators.required, Validators.min(0.01)]),

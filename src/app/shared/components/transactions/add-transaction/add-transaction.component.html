@@ -4,10 +4,10 @@
         <input formControlName="amount" placeholder="Value" type="number"/>
         <h3>Total {{ data.total }}</h3>
         <select formControlName="accountId">
-            <option *ngFor="let account of data.accounts" [value]="account.id">{{ account.name }}</option>
+            <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
         </select>
         <select formControlName="categoryId">
-            <option *ngFor="let category of data.earningCategories" [value]="category.id">{{ category.name }}</option>
+            <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
         </select>
         <input formControlName="date" placeholder="Date" type="date">
         <input formControlName="sender" placeholder="From (Optional)" type="text"/>
@@ -25,10 +25,10 @@
         <input formControlName="amount" placeholder="Value" type="number"/>
         <h3>Total {{ data.total }}</h3>
         <select formControlName="accountId">
-            <option *ngFor="let account of data.accounts" [value]="account.id">{{ account.name }}</option>
+          <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
         </select>
         <select formControlName="categoryId">
-            <option *ngFor="let category of data.spendingCategories" [value]="category.id">{{ category.name }}</option>
+          <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
         </select>
         <input formControlName="date" placeholder="Date" type="date">
         <input formControlName="sender" placeholder="From (Optional)" type="text"/>
@@ -46,11 +46,11 @@
         <input formControlName="amount" placeholder="Value" type="number"/>
         <label for="from">From</label>
         <select formControlName="senderAccount" id="from">
-            <option *ngFor="let account of data.accounts" [value]="account.id">{{ account.name }}</option>
+            <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
         </select>
         <label for="to">To</label>
         <select formControlName="receiverAccount" id="to">
-            <option *ngFor="let account of data.accounts" [value]="account.id">{{ account.name }}</option>
+            <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
         </select>
         <input formControlName="date" placeholder="Date" type="date">
         <div class="form-buttons">
