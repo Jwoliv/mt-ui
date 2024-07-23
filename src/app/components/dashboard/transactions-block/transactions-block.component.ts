@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {DatePipe, NgForOf, NgStyle} from "@angular/common";
 import {RouterLink} from "@angular/router";
-import {Transaction, TransactionDashboard} from "../../../model/transaction.model";
+import {TransactionDashboard} from "../../../model/transaction.model";
 import {
   TransactionButtonsComponent
 } from "../../../shared/components/transactions/transcation-buttons/transaction-buttons.component";
