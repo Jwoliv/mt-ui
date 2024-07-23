@@ -28,4 +28,4 @@ export interface TransactionDashboard {
   date: Date;
 }
 
-type TransactionType = 'EARNING' | 'SPENDING'
+type TransactionType = 'EARNING' | 'SPENDING' | 'TRANSFER'

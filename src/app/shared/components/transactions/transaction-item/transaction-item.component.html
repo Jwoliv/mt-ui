@@ -1,7 +1,8 @@
 <a class="transactions-block_item" [routerLink]="['transactions', transaction.id]">
     <div class="transactions-amount" [class]="{
                     'earning': transaction.type === 'EARNING',
-                    'spending': transaction.type === 'SPENDING'
+                    'spending': transaction.type === 'SPENDING',
+                    'transfer': transaction.type === 'TRANSFER'
                 }">
         {{ transaction.amount | currency }}
     </div>
