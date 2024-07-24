@@ -49,6 +49,8 @@ export class SummaryComponent implements OnInit {
         for (let i = 0; i < this.summaryData.dailyAmountReports.length; i++) {
           if (i === 0 || this.summaryData.dailyAmountReports[i].amount > this.summaryData.dailyAmountReports[i - 1].amount) {
             this.summaryData.dailyAmountReports[i].color = '#76FF94';
+          } else if (this.summaryData.dailyAmountReports[i].amount === this.summaryData.dailyAmountReports[i - 1].amount) {
+            this.summaryData.dailyAmountReports[i].color = '#5bc2e8';
           } else {
             this.summaryData.dailyAmountReports[i].color = '#FF7676';
           }
@@ -72,13 +74,17 @@ export class SummaryComponent implements OnInit {
       if (this.selectedStock.color === '#FF7676') {
         this.selectedStock.color = '#9A0000'
       }
+      if (this.selectedStock.color === '#5bc2e8') {
+        this.selectedStock.color = '#1c5f7c'
+      }
     }
   }
 
   resetSelectedStock() {
     if (this.selectedStock) {
       if (this.selectedStock.color === '#00861c') this.selectedStock.color = '#76FF94';
-      if (this.selectedStock.color === '#9A0000') this.selectedStock.color = '#FF7676';
+      if (this.selectedStock.color === '#9A0000') this.selectedStock.color = '#5bc2e8';
+      if (this.selectedStock.color === '#1c5f7c') this.selectedStock.color = '#5bc2e8';
     }
   }
 }

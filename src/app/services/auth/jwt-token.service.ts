@@ -15,6 +15,10 @@ export class JwtTokenService {
     return localStorage.getItem(JwtTokenService.TOKEN_NAME) ?? '';
   }
 
+  public redirectToLogin() {
+    this.router.navigate(['/login']).then();
+  }
+
   public save(user: User) {
     localStorage.setItem(JwtTokenService.TOKEN_NAME, user.token);
     this.router.navigate(['']).then();
