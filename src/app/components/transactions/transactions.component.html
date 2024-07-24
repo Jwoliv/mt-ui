@@ -1,5 +1,5 @@
 <div class="transactions-container">
-    <app-add-transaction/>
+    <app-add-transaction (updateTransactions)="updateTransactions($event)"/>
     <div class="transactions-item">
         <app-transaction-item *ngFor="let transaction of transactions" [transaction]="transaction"/>
     </div>

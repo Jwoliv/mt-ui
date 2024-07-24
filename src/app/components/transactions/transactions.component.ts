@@ -50,4 +50,7 @@ export class TransactionsComponent implements OnInit {
     })
   }
 
+  public updateTransactions(transaction: TransactionDashboard) {
+    this.transactions.unshift(transaction)
+  }
 }
