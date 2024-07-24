@@ -83,7 +83,7 @@ export class SummaryComponent implements OnInit {
   resetSelectedStock() {
     if (this.selectedStock) {
       if (this.selectedStock.color === '#00861c') this.selectedStock.color = '#76FF94';
-      if (this.selectedStock.color === '#9A0000') this.selectedStock.color = '#5bc2e8';
+      if (this.selectedStock.color === '#9A0000') this.selectedStock.color = '#FF7676';
       if (this.selectedStock.color === '#1c5f7c') this.selectedStock.color = '#5bc2e8';
     }
   }
