@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {CurrencyPipe, PercentPipe, UpperCasePipe} from "@angular/common";
 import {ProfitPipe} from "../../../pipe/profit.pipe";
 import {ProfitReport} from "../../../model/summary.model";
+import {Colors} from "../../../shared/app.colors";
 
 @Component({
   selector: 'app-period-report',
@@ -19,6 +20,6 @@ export class PeriodReportComponent {
   @Input() report!: ProfitReport
 
   public getColor(isProfit: boolean) {
-    return isProfit ? '#76FF94' : '#FF7676';
+    return isProfit ? Colors.LIGHT_GREEN : Colors.LIGHT_RED;
   }
 }
