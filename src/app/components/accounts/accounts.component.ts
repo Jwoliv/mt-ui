@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnInit, viewChild} from '@angular/core';
+import {Component, DestroyRef, inject, Input, OnInit, viewChild} from '@angular/core';
 import {CurrencyPipe, NgForOf} from "@angular/common";
 import {AccountFullInfo} from "../../model/account.model";
 import {RouterLink} from "@angular/router";
@@ -6,7 +6,6 @@ import {NavigationComponent} from "../../shared/components/navigation/navigation
 import {AddAccountComponent} from "../../shared/components/add-account/add-account.component";
 import {AccountService} from "../../services/account.service";
 import {NavigationConfig} from "../../model/navigation.model";
-import {DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE} from "../../services/config/properties.config";
 
 @Component({
   selector: 'app-accounts',
@@ -23,7 +22,9 @@ import {DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE} from "../../services/config/prop
 })
 export class AccountsComponent implements OnInit {
   private navigationComponent = viewChild.required<NavigationComponent>('navigation')
-  public accountService: AccountService = inject(AccountService);
+  private destroyRef: DestroyRef = inject(DestroyRef);
+  private accountService: AccountService = inject(AccountService);
+
   @Input() public navigationConfig!: NavigationConfig;
   public accounts: AccountFullInfo[] = [];
 
@@ -31,9 +32,13 @@ export class AccountsComponent implements OnInit {
     this.loadAccounts();
   }
 
-  loadAccounts(navigationConfig: NavigationConfig = this.navigationConfig): void {
+  public updateAccounts(navigationConfig: NavigationConfig): void {
+    this.loadAccounts({ pageNumber: navigationConfig.pageNumber, pageSize: navigationConfig.pageSize });
+  }
+
+  private loadAccounts(navigationConfig: NavigationConfig = this.navigationConfig): void {
     this.navigationConfig = navigationConfig;
-    this.accountService.getAccounts(this.navigationConfig).subscribe({
+    const subscription = this.accountService.getAccounts(this.navigationConfig).subscribe({
       next: (accounts: AccountFullInfo[]) => {
         if (accounts.length > 0) {
           this.accounts = accounts;
@@ -42,13 +47,11 @@ export class AccountsComponent implements OnInit {
         }
       }
     });
+
+    this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }
 
-  public updateAccounts(navigationConfig: NavigationConfig): void {
-    this.loadAccounts({ pageNumber: navigationConfig.pageNumber, pageSize: navigationConfig.pageSize });
-  }
-
-  public rollbackPage() {
+  private rollbackPage() {
     this.navigationComponent().rollbackPage();
   }
 }

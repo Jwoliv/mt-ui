@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, DestroyRef, inject} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {LoginCredentialsRequest} from "../../../model/auth.model";
 import {AuthService} from "../../../services/auth/auth.service";
@@ -19,6 +19,7 @@ import {JwtTokenService} from "../../../services/auth/jwt-token.service";
 export class LoginComponent {
   private authService: AuthService = inject(AuthService);
   private jwtTokenService: JwtTokenService = inject(JwtTokenService);
+  private destroyRef: DestroyRef = inject(DestroyRef);
 
   public form: FormGroup = new FormGroup({
     username: new FormControl('', [Validators.required]),
@@ -27,9 +28,9 @@ export class LoginComponent {
 
 
   public onLogin() {
-    this.authService.login(this.form.value as LoginCredentialsRequest)
-      .subscribe({
-        next: response => this.jwtTokenService.save(response as User)
-      })
+    const subscription = this.authService.login(this.form.value as LoginCredentialsRequest).subscribe({
+      next: response => this.jwtTokenService.save(response as User)
+    })
+    this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }
 }
