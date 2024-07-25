@@ -1,8 +1,8 @@
 import {Colors} from "../shared/app.colors";
 
-export interface SummaryData {
-  dailyAmountReports: DailyAmountReport[]
-  reports: ProfitReport[]
+export interface SummaryResponse {
+  dailyReports: DailyAmountReport[]
+  profitReports: ProfitReport[]
 }
 
 export interface DailyAmountReport {

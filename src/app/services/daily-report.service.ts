@@ -3,8 +3,9 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {JwtTokenService} from "./auth/jwt-token.service";
 import {DailyReport} from "../model/report.model";
 import {getBasePathUrl} from "./config/properties.config";
-import {DailyAmountReport, ProfitReport} from "../model/summary.model";
+import {DailyAmountReport, ProfitReport, SummaryResponse} from "../model/summary.model";
 import {TransactionDashboard} from "../model/transaction.model";
+import {Colors} from "../shared/app.colors";
 
 @Injectable({
   providedIn: 'root'
@@ -53,11 +54,30 @@ export class DailyReportService {
     }
   }
 
+  public updateProfitReport(report: ProfitReport): ProfitReport {
+    return {
+      ...report, isProfit: report.profit > 0, percentage: report.percentage / 100
+    };
+  }
+
   public isTheSameDateInReport(reportDate: Date, transactionDate: Date) {
     return (
       reportDate.getDate() === transactionDate.getDate() &&
       reportDate.getMonth() === transactionDate.getMonth() &&
       reportDate.getFullYear() === transactionDate.getFullYear()
     );
+  }
+
+  public updatedReportsColor(reports: DailyAmountReport[]) {
+    for (let i = 0; i < reports.length; i++) {
+      if (i === 0 || reports[i].amount > reports[i - 1].amount) {
+        reports[i].color = Colors.LIGHT_GREEN;
+      } else if (reports[i].amount === reports[i - 1].amount) {
+        reports[i].color = Colors.LIGHT_BLUE;
+      } else {
+        reports[i].color = Colors.LIGHT_RED;
+      }
+    }
+    return reports;
   }
 }

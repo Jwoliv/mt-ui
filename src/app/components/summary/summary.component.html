@@ -2,15 +2,15 @@
     {{selectedStock?.amount | currency }} at {{ selectedStock?.date | date: 'MM/dd' }}
 </div>
 <div class="summary-daily-stocks">
-    <div *ngFor="let sds of summaryData.dailyAmountReports"
-         (click)="changeSelectedData(sds)"
+    <div *ngFor="let sds of response.dailyReports"
+         (click)="this.selectedStock = this.colorChanger.changeSelectedData(sds, this.selectedStock)"
          class="summary-daily-stock"
-         [style.height]="getHeight(sds.amount)"
+         [style.height]="this.summaryStockCalcService.getHeight(sds.amount, this.response)"
          [style.background-color]="sds.color">
     </div>
 </div>
 <div class="summary-reports">
-    <div *ngFor="let report of summaryData.reports">
+    <div *ngFor="let report of response.profitReports">
         <app-period-report [report]="report"></app-period-report>
     </div>
 </div>
