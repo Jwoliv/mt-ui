@@ -17,9 +17,7 @@ export class AccountService {
 
   constructor() {
     this.getAccountDashboard().subscribe({
-      next: (accounts: Account[]) => {
-        this.dashboardAccountsSubject.next(accounts);
-      }
+      next: (accounts: Account[]) => this.dashboardAccountsSubject.next(accounts)
     });
   }
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {DailyAmountReport} from "../model/summary.model";
-import {getActiveColor, getLightColor} from "../utils/app.stock-color-changes";
 import {Colors} from "../shared/app.colors";
+import {DAILY_AMOUNT_STACK_COLORS_CHANGE} from "../shared/app.constants";
 
 @Injectable({
   providedIn: 'root'
@@ -9,21 +9,32 @@ import {Colors} from "../shared/app.colors";
 export class ColorChangerService {
 
   public changeSelectedData(sds: DailyAmountReport, selectedStock: DailyAmountReport | null): DailyAmountReport | null {
-    if (sds.index === selectedStock?.index) {
+    if (this.isSameIndex(sds, selectedStock)) {
       this.resetSelectedStock(selectedStock);
       return null;
     }
     this.resetSelectedStock(selectedStock);
-    if (sds.index !== selectedStock?.index) {
-      selectedStock = sds;
-      selectedStock.color = getActiveColor(selectedStock.color as Colors);
+    if (!this.isSameIndex(sds, selectedStock)) {
+      sds.color = this.getActiveColor(sds.color as Colors);
     }
-    return selectedStock;
+    return sds;
   }
 
-  public resetSelectedStock(selectedStock: DailyAmountReport | null) {
+  private resetSelectedStock(selectedStock: DailyAmountReport | null) {
     if (selectedStock) {
-      selectedStock.color = getLightColor(selectedStock.color as Colors);
+      selectedStock.color = this.getLightColor(selectedStock.color as Colors);
     }
+  }
+
+  private getActiveColor(color: Colors): Colors {
+    return DAILY_AMOUNT_STACK_COLORS_CHANGE.get(color) ?? color;
+  }
+
+  private getLightColor(color: Colors): Colors {
+    return DAILY_AMOUNT_STACK_COLORS_CHANGE.get(color) ?? color;
+  }
+
+  private isSameIndex(sds: DailyAmountReport, selectedStock: DailyAmountReport | null) {
+    return sds.index === selectedStock?.index;
   }
 }

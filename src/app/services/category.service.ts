@@ -16,7 +16,6 @@ export class CategoryService {
     return new HttpHeaders().set('Authorization', `Bearer ${this.jwtTokenService.jwtToken}`);
   }
 
-
   public getCategoriesForTransactionForm(type: 'SPENDING' | 'EARNING' ) {
     return this.httpClient.get<CategoryFormDto[]>(`${getBasePathUrl()}/category/form-data`, {
       headers: this.headers, params: { type }
