@@ -32,16 +32,14 @@ import {UpperTitleUiComponent} from "../../../shared/components/upper-title-ui/u
   styleUrl: './transactions-block.component.scss'
 })
 export class TransactionsBlockComponent implements OnInit {
-  @Output() public updateDayStock: EventEmitter<TransactionDashboard> = new EventEmitter<TransactionDashboard>();
+  private transactionService: TransactionService = inject(TransactionService);
 
-  public transactionService: TransactionService = inject(TransactionService);
+  @Output() public updateDayStock: EventEmitter<TransactionDashboard> = new EventEmitter<TransactionDashboard>();
   public transactions: TransactionDashboard[] = []
 
   ngOnInit() {
     this.transactionService.getTransactionForDashboard().subscribe({
-      next: (transactions: TransactionDashboard[]) => {
-        this.transactions = transactions
-      }
+      next: (transactions: TransactionDashboard[]) => this.transactions = transactions
     })
   }
 

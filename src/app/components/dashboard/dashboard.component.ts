@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, signal} from '@angular/core';
+import {Component, DestroyRef, inject, OnInit, signal} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {DailyStockComponent} from "./daily-stock/daily-stock.component";
 import {TransactionsBlockComponent} from "./transactions-block/transactions-block.component";
@@ -21,12 +21,14 @@ import {TransactionDashboard} from "../../model/transaction.model";
 })
 export class DashboardComponent implements OnInit {
   private dailyReportService: DailyReportService = inject(DailyReportService);
+  private destroyRef: DestroyRef = inject(DestroyRef);
   public dailyReports = signal<DailyReport[]>([])
 
   ngOnInit() {
-    this.dailyReportService.getDailyReports().subscribe({
-      next: data => this.dailyReports.set(data)
+    const subscription = this.dailyReportService.getDailyReports().subscribe({
+      next: reports => this.dailyReports.set(reports)
     })
+    this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }
 
   public updateDailyStockReports(transaction: TransactionDashboard) {

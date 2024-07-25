@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {Account} from "../../../model/account.model";
 import {NgForOf} from "@angular/common";
 import {RouterLink} from "@angular/router";
@@ -20,14 +20,16 @@ import {UpperTitleUiComponent} from "../../../shared/components/upper-title-ui/u
 })
 export class AccountsBlockComponent implements OnInit {
   private accountService: AccountService = inject(AccountService);
+  private destroyRef: DestroyRef = inject(DestroyRef);
 
   public accounts: Account[] = [];
 
   ngOnInit() {
-    this.accountService.dashboardAccounts$.subscribe({
+    const subscription = this.accountService.dashboardAccounts$.subscribe({
       next: (accounts: Account[]) => {
         this.accounts = accounts.slice(0, 3);
       }
     });
+    this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }
 }
