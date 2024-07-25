@@ -1,12 +1,9 @@
 import {Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {CurrencyPipe, DatePipe, NgForOf, NgIf} from "@angular/common";
 import {PeriodReportComponent} from "./period-report/period-report.component";
-import {DailyAmountReport, ProfitReport, SummaryResponse} from "../../model/summary.model";
+import {DailyAmountReport, SummaryResponse} from "../../model/summary.model";
 import {DailyReportService} from "../../services/daily-report.service";
-import {Colors} from "../../shared/app.colors";
-import {DAILY_AMOUNT_STACK_COLORS_CHANGE} from "../../shared/app.constants";
 import {map, tap} from "rxjs";
-import {getActiveColor, getLightColor} from "../../utils/app.stock-color-changes";
 import {StockCalcService} from "../../services/stock-calc.service";
 import {ColorChangerService} from "../../services/color-changer.service";
 

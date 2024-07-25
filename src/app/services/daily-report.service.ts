@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {JwtTokenService} from "./auth/jwt-token.service";
 import {DailyReport} from "../model/report.model";
 import {getBasePathUrl} from "./config/properties.config";
-import {DailyAmountReport, ProfitReport, SummaryResponse} from "../model/summary.model";
+import {DailyAmountReport, ProfitReport} from "../model/summary.model";
 import {TransactionDashboard} from "../model/transaction.model";
 import {Colors} from "../shared/app.colors";
 
