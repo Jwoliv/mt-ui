@@ -10,8 +10,6 @@ import {
 } from "../../shared/components/transactions/transaction-item/transaction-item.component";
 import {AddTransactionComponent} from "../../shared/components/transactions/add-transaction/add-transaction.component";
 import {TransactionService} from "../../services/transaction.service";
-import {ActivatedRouteSnapshot, ResolveFn} from "@angular/router";
-import {DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE} from "../../services/config/properties.config";
 import {NavigationConfig} from "../../model/navigation.model";
 
 @Component({

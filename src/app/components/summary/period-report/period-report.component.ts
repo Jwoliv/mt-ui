@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {CurrencyPipe, PercentPipe} from "@angular/common";
+import {CurrencyPipe, PercentPipe, UpperCasePipe} from "@angular/common";
 import {ProfitPipe} from "../../../pipe/profit.pipe";
 import {Report} from "../../../model/summary.model";
 
@@ -9,7 +9,8 @@ import {Report} from "../../../model/summary.model";
   imports: [
     CurrencyPipe,
     PercentPipe,
-    ProfitPipe
+    ProfitPipe,
+    UpperCasePipe
   ],
   templateUrl: './period-report.component.html',
   styleUrl: './period-report.component.scss'

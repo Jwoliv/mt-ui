@@ -1,5 +1,5 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {DatePipe, NgForOf, NgStyle} from "@angular/common";
+import {Component, EventEmitter, inject, OnInit, Output} from '@angular/core';
+import {DatePipe, NgForOf, NgStyle, UpperCasePipe} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {TransactionDashboard} from "../../../model/transaction.model";
 import {
@@ -12,6 +12,7 @@ import {
   AddTransactionComponent
 } from "../../../shared/components/transactions/add-transaction/add-transaction.component";
 import {TransactionService} from "../../../services/transaction.service";
+import {UpperTitleUiComponent} from "../../../shared/components/upper-title-ui/upper-title-ui.component";
 
 @Component({
   selector: 'app-transactions-block',
@@ -23,14 +24,17 @@ import {TransactionService} from "../../../services/transaction.service";
     NgStyle,
     TransactionButtonsComponent,
     TransactionItemComponent,
-    AddTransactionComponent
+    AddTransactionComponent,
+    UpperCasePipe,
+    UpperTitleUiComponent
   ],
   templateUrl: './transactions-block.component.html',
   styleUrl: './transactions-block.component.scss'
 })
 export class TransactionsBlockComponent implements OnInit {
-  public transactionService: TransactionService = inject(TransactionService);
+  @Output() public updateDayStock: EventEmitter<TransactionDashboard> = new EventEmitter<TransactionDashboard>();
 
+  public transactionService: TransactionService = inject(TransactionService);
   public transactions: TransactionDashboard[] = []
 
   ngOnInit() {
@@ -41,9 +45,9 @@ export class TransactionsBlockComponent implements OnInit {
     })
   }
 
-  updateTransactions(transaction: TransactionDashboard) {
+  public updateTransactions(transaction: TransactionDashboard) {
     this.transactions.unshift(transaction);
-    console.log(transaction)
     this.transactions = this.transactions.slice(0, 3)
+    this.updateDayStock.emit(transaction);
   }
 }

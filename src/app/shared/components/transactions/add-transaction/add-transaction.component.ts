@@ -119,21 +119,24 @@ export class AddTransactionComponent implements OnInit {
 
   submitEarningForm() {
     this.transactionService.createNewTransaction(this.earningForm.value as NewTransactionRequest).subscribe({
-      next: response => this.updateTransactions.emit(response)
+      next: response => this.updateTransactions.emit(response),
+      complete: () => this.earningForm.reset()
     });
     this.closeAllForms();
   }
 
   submitSpendingForm() {
     this.transactionService.createNewTransaction(this.spendingForm.value as NewTransactionRequest).subscribe({
-      next: response => this.updateTransactions.emit(response)
+      next: response => this.updateTransactions.emit(response),
+      complete: () => this.spendingForm.reset()
     });
     this.closeAllForms();
   }
 
   submitTransferForm() {
     this.transactionService.createNewTransaction(this.transferForm.value as NewTransactionRequest).subscribe({
-      next: response => this.updateTransactions.emit(response)
+      next: response => this.updateTransactions.emit(response),
+      complete: () => this.transferForm.reset()
     });
     this.closeAllForms();
   }

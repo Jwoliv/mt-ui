@@ -1,5 +1,5 @@
 <div class="accounts-block">
-    <p class="transactions-block-header">transactions</p>
+    <app-upper-title-ui title="transaction" />
     <div class="transactions-block_items">
         <div *ngFor="let transaction of transactions">
            <app-transaction-item [transaction]="transaction"/>

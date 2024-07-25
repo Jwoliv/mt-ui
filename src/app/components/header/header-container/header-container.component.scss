@@ -1,3 +1,33 @@
+h1 {
+  height: 50px;
+  padding: 10px 0;
+  text-align: center;
+}
+
+a {
+  font-size: 30px;
+
+  span {
+    transition-duration: .3s;
+  }
+
+  &:hover {
+    span {
+      transition-duration: .3s;
+      &:first-child {
+        color: #76FF94;
+      }
+      &:last-child {
+        color: #FF7676;
+      }
+    }
+  }
+}
+
+span {
+  font-size: 30px;
+}
+
 .links {
   display: grid;
   grid-template-columns: repeat(5, 1fr);

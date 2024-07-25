@@ -1,6 +1,6 @@
 import {Component, inject, Input, signal} from '@angular/core';
 import {Stock} from "../../../model/stock.model";
-import {CurrencyPipe, DatePipe} from "@angular/common";
+import {CurrencyPipe, DatePipe, NgIf} from "@angular/common";
 import {StockService} from "../../../services/stock.service";
 
 @Component({
@@ -8,7 +8,8 @@ import {StockService} from "../../../services/stock.service";
   standalone: true,
   imports: [
     DatePipe,
-    CurrencyPipe
+    CurrencyPipe,
+    NgIf
   ],
   templateUrl: './daily-stock.component.html',
   styleUrl: './daily-stock.component.scss'

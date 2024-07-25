@@ -15,6 +15,10 @@
   transition: background-color 0.3s ease;
 }
 
+.placeholder {
+  background: #c3c3c3;
+}
+
 .earning .value, .spending .value {
   position: absolute;
   width: 100%;

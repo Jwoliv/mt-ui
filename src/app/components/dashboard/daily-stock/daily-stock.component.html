@@ -14,6 +14,10 @@
                 {{ _stock().earning | currency }}
             </div>
         </div>
+        <div class="placeholder" *ngIf="getEarningHeight() === '0px' && getSpendingHeight() === '0px'"
+             [style.height]="'220px'">
+          <div class="value"></div>
+        </div>
     </div>
     <p>{{ _stock().date | date:'MM/dd' }}</p>
 </div>
