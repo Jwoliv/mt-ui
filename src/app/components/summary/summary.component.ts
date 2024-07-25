@@ -22,12 +22,7 @@ export class SummaryComponent implements OnInit {
 
   public summaryData: SummaryData = {
     dailyAmountReports: [],
-    reports: [
-      {amount: 2000, percentage: 1, type: 'DAY', isProfit: true},
-      {amount: 2000, percentage: 0.5, type: 'WEEK', isProfit: false},
-      {amount: 2000, percentage: 0.64, type: 'MONTH', isProfit: false},
-      {amount: 2000, percentage: 1, type: 'YEAR', isProfit: true}
-    ]
+    reports: []
   };
   public selectedStock!: DailyAmountReport | null
 
@@ -57,6 +52,15 @@ export class SummaryComponent implements OnInit {
         }
       }
     });
+    this.reportService.getProfitReports().subscribe({
+      next: reports => {
+        this.summaryData.reports = reports.reverse().map(report => ({
+          ...report,
+          isProfit: report.profit > 0,
+          percentage: report.percentage / 100
+        }));
+      }
+    })
   }
 
 

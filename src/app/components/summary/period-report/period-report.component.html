@@ -1,10 +1,10 @@
 <div class="summary-report">
-    <p class="summary-report-title">{{ 'current ' + report.type | uppercase }}</p>
+    <p class="summary-report-title">{{ 'current ' + report.period | uppercase }}</p>
 
     <div class="summary-report-results">
         <div [style]="{
             backgroundColor: getColor(report.isProfit)
-        }">{{report.amount | profit:report.isProfit | currency }}</div>
+        }">{{report.profit | profit:report.isProfit | currency }}</div>
         <div [style]="{
             backgroundColor: getColor(report.isProfit)
         }">{{report.percentage | profit:report.isProfit | percent }}</div>

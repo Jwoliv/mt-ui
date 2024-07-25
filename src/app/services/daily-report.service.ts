@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {JwtTokenService} from "./auth/jwt-token.service";
 import {DailyReport} from "../model/report.model";
 import {getBasePathUrl} from "./config/properties.config";
-import {DailyAmountReport} from "../model/summary.model";
+import {DailyAmountReport, ProfitReport} from "../model/summary.model";
 import {TransactionDashboard} from "../model/transaction.model";
 
 @Injectable({
@@ -24,6 +24,13 @@ export class DailyReportService {
   public getDailyAmountReports() {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.jwtTokenService.jwtToken}`);
     return this.httpClient.get<DailyAmountReport[]>(`${getBasePathUrl()}/reports/daily-amount-reports`, {
+      headers
+    })
+  }
+
+  public getProfitReports() {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.jwtTokenService.jwtToken}`);
+    return this.httpClient.get<ProfitReport[]>(`${getBasePathUrl()}/reports/profits-reports`, {
       headers
     })
   }
