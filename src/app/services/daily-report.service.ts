@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {DailyReport} from "../model/report.model";
-import {DailyAmountReport} from "../model/summary.model";
+import {DailyAmountReport, SummaryResponse} from "../model/summary.model";
 import {TransactionDashboard} from "../model/transaction.model";
 import {Colors} from "../shared/app.colors";
 
@@ -33,9 +33,10 @@ export class DailyReportService {
     );
   }
 
-  public updatedReportsColor(reports: DailyAmountReport[]) {
+  public updatedReportsColor(response: SummaryResponse) {
+    const reports = response.dailyReports;
     for (let i = 0; i < reports.length; i++) {
-      if (i === 0 || this.isPrevStockHigher(reports, i)) {
+      if (i === 0 || this.isPrevStockLower(reports, i)) {
         reports[i].color = Colors.LIGHT_GREEN;
       } else {
         reports[i].color = this.neighborhoodStockEqualByAmount(reports, i)
@@ -43,14 +44,15 @@ export class DailyReportService {
           : Colors.LIGHT_RED;
       }
     }
-    return reports;
+    response.dailyReports = reports;
+    return response;
   }
 
   private neighborhoodStockEqualByAmount(reports: DailyAmountReport[], i: number) {
     return reports[i].amount === reports[i - 1].amount;
   }
 
-  private isPrevStockHigher(reports: DailyAmountReport[], i: number) {
+  private isPrevStockLower(reports: DailyAmountReport[], i: number) {
     return reports[i].amount > reports[i - 1].amount;
   }
 }

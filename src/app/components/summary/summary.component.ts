@@ -34,17 +34,8 @@ export class SummaryComponent implements OnInit {
 
   ngOnInit(): void {
     const summaryResponseSub = this.summaryService.getSummaryResponse().pipe(
-      map(reports => {
-        this.reportService.updatedReportsColor(reports.dailyReports);
-        return reports;
-      }),
-      tap(reports => {
-        reports.profitReports.forEach(r => {
-          if (!r.profit) {
-            r.profit = 0;
-          }
-        });
-      }),
+      map(reports => this.reportService.updatedReportsColor(reports)),
+      tap(reports => this.updateEmptyProfit(reports)),
       tap(reports => this.response.dailyReports = reports.dailyReports)
     ).subscribe({
       next: value => this.response = value
@@ -56,4 +47,9 @@ export class SummaryComponent implements OnInit {
   }
 
 
+  private updateEmptyProfit(reports: SummaryResponse) {
+    reports.profitReports
+      .filter(r => !r.profit)
+      .forEach(r => r.profit = 0);
+  }
 }
