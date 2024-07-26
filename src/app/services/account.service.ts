@@ -13,7 +13,6 @@ export class AccountService {
   private authService: AuthService = inject(AuthService);
 
   private dashboardAccountsSubject = new BehaviorSubject<Account[]>([]);
-  public dashboardAccounts$ = this.dashboardAccountsSubject.asObservable();
 
   constructor() {
     this.getAccountDashboard().subscribe({

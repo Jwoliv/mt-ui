@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, EventEmitter, inject, Output} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {NgForOf, NgIf, UpperCasePipe} from "@angular/common";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -22,6 +22,8 @@ import {UpperTitleUiComponent} from "../upper-title-ui/upper-title-ui.component"
   styleUrl: './add-account.component.scss'
 })
 export class AddAccountComponent {
+  @Output() updateAccounts: EventEmitter<Account> = new EventEmitter<Account>();
+
   public accountService: AccountService = inject(AccountService);
   public isShowNewAccount: boolean = false;
   public form: FormGroup = new FormGroup({
@@ -38,6 +40,7 @@ export class AddAccountComponent {
       this.accountService.createNewAccount(this.form.value).subscribe({
         next: (response) => {
           this.accountService.updateDashboardAccounts(response as Account)
+          this.updateAccounts.emit(response as Account);
         },
         complete: () => {
           this.form.reset();

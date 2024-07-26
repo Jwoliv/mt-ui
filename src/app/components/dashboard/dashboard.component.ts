@@ -1,14 +1,12 @@
-import {Component, DestroyRef, inject, OnInit, signal} from '@angular/core';
+import {Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {DailyStockComponent} from "./daily-stock/daily-stock.component";
 import {TransactionsBlockComponent} from "./transactions-block/transactions-block.component";
 import {AccountsBlockComponent} from "./accounts-block/accounts-block.component";
 import {DailyReportService} from "../../services/daily-report.service";
-import {DailyReport} from "../../model/report.model";
 import {TransactionDashboard} from "../../model/transaction.model";
-import {TransactionService} from "../../services/transaction.service";
-import {Account} from "../../model/account.model";
-import {AccountService} from "../../services/account.service";
+import {DashboardResponse, DashboardService} from "../../services/new-api/dashboard.service";
+import {DailyReport} from "../../model/report.model";
 
 @Component({
   selector: 'app-dashboard',
@@ -24,37 +22,26 @@ import {AccountService} from "../../services/account.service";
 })
 export class DashboardComponent implements OnInit {
   private dailyReportService: DailyReportService = inject(DailyReportService);
-  private transactionService: TransactionService = inject(TransactionService);
-  private accountService: AccountService = inject(AccountService);
+  private dashboardService: DashboardService = inject(DashboardService);
   private destroyRef: DestroyRef = inject(DestroyRef);
 
-  public dailyReports = signal<DailyReport[]>([])
-  public transactions = signal<TransactionDashboard[]>([]);
-  public accounts = signal<Account[]>([]);
+  public response!: DashboardResponse
 
   ngOnInit() {
-    const dailyReportsSub = this.dailyReportService.getDailyReports().subscribe({
-      next: reports => this.dailyReports.set(reports)
+    const dashboardResponseSub = this.dashboardService.getDashboardResponse().subscribe({
+      next: response => this.response = response
     })
-    const transactionSub = this.transactionService.getTransactionForDashboard().subscribe({
-      next: (transactions: TransactionDashboard[]) => this.transactions.set(transactions)
-    })
-    const accountSub = this.accountService.dashboardAccounts$.subscribe({
-      next: (accounts: Account[]) => this.accounts.set(accounts.slice(0, 3))
-    });
 
     this.destroyRef.onDestroy(() => {
-      dailyReportsSub.unsubscribe()
-      transactionSub.unsubscribe()
-      accountSub.unsubscribe()
+      dashboardResponseSub.unsubscribe();
     });
   }
 
   public updateDailyStockReports(transaction: TransactionDashboard) {
     const transactionDate = new Date(transaction.date);
-    const reportIndex = this.dailyReports().findIndex(dr =>
+    const reportIndex = this.response.reports?.findIndex(dr =>
       this.dailyReportService.isTheSameDateInReport(new Date(dr.date), transactionDate)
     );
-    this.dailyReportService.changeDailyReportsAmount(transaction, this.dailyReports, reportIndex);
+    this.dailyReportService.changeDailyReportsAmount(transaction, this.response.reports as DailyReport[], reportIndex as number);
   }
 }

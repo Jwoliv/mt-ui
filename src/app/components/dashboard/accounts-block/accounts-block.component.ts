@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Account} from "../../../model/account.model";
 import {NgForOf} from "@angular/common";
 import {RouterLink} from "@angular/router";
@@ -19,4 +19,8 @@ import {UpperTitleUiComponent} from "../../../shared/components/upper-title-ui/u
 })
 export class AccountsBlockComponent {
   @Input() public accounts!: Account[];
+
+  public updateAccounts(account: Account) {
+    this.accounts.unshift(account)
+  }
 }

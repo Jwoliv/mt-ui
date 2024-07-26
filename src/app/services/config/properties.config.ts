@@ -8,3 +8,7 @@ export const DEFAULT_PAGE_SIZE: number = 5;
 export function getBasePathUrl(): string {
   return BASE_URL + PREFIX_VERSION;
 }
+
+export function getBasePathUrl2(): string {
+  return "http://localhost:9052" + "/api/middle";
+}

@@ -19,12 +19,6 @@ export class TransactionService {
     })
   }
 
-  public getTransactionForDashboard() {
-    return this.httpClient.get<TransactionDashboard[]>(`${getBasePathUrl()}/transaction/dashboard`, {
-      headers: this.authService.baseHeaders
-    })
-  }
-
   public getTransaction(navigationConfig: NavigationConfig): Observable<TransactionDashboard[]> {
     return this.httpClient.get<TransactionDashboard[]>(`${getBasePathUrl()}/transaction`, {
       headers: this.authService.baseHeaders, params: {

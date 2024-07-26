@@ -15,12 +15,6 @@ export class DailyReportService {
   private authService: AuthService = inject(AuthService);
 
 
-  public getDailyReports() {
-    return this.httpClient.get<DailyReport[]>(`${getBasePathUrl()}/reports/daily-dashboard`, {
-      headers: this.authService.baseHeaders
-    })
-  }
-
   public getDailyAmountReports() {
     return this.httpClient.get<DailyAmountReport[]>(`${getBasePathUrl()}/reports/daily-amount-reports`, {
       headers: this.authService.baseHeaders
@@ -33,14 +27,14 @@ export class DailyReportService {
     })
   }
 
-  public changeDailyReportsAmount(transaction: TransactionDashboard, dailyReports: WritableSignal<DailyReport[]>, reportIndex: number) {
+  public changeDailyReportsAmount(transaction: TransactionDashboard, dailyReports: DailyReport[], reportIndex: number) {
     if (reportIndex < 0) return;
     switch (transaction.type) {
       case "SPENDING":
-        dailyReports()[reportIndex].spending += transaction.amount;
+        dailyReports[reportIndex].spending += transaction.amount;
         break;
       case "EARNING":
-        dailyReports()[reportIndex].earning += transaction.amount;
+        dailyReports[reportIndex].earning += transaction.amount;
         break;
       case "TRANSFER":
         break;
