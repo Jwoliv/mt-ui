@@ -6,6 +6,9 @@ import {AccountsBlockComponent} from "./accounts-block/accounts-block.component"
 import {DailyReportService} from "../../services/daily-report.service";
 import {DailyReport} from "../../model/report.model";
 import {TransactionDashboard} from "../../model/transaction.model";
+import {TransactionService} from "../../services/transaction.service";
+import {Account} from "../../model/account.model";
+import {AccountService} from "../../services/account.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -21,14 +24,30 @@ import {TransactionDashboard} from "../../model/transaction.model";
 })
 export class DashboardComponent implements OnInit {
   private dailyReportService: DailyReportService = inject(DailyReportService);
+  private transactionService: TransactionService = inject(TransactionService);
+  private accountService: AccountService = inject(AccountService);
   private destroyRef: DestroyRef = inject(DestroyRef);
+
   public dailyReports = signal<DailyReport[]>([])
+  public transactions = signal<TransactionDashboard[]>([]);
+  public accounts = signal<Account[]>([]);
 
   ngOnInit() {
-    const subscription = this.dailyReportService.getDailyReports().subscribe({
+    const dailyReportsSub = this.dailyReportService.getDailyReports().subscribe({
       next: reports => this.dailyReports.set(reports)
     })
-    this.destroyRef.onDestroy(() => subscription.unsubscribe());
+    const transactionSub = this.transactionService.getTransactionForDashboard().subscribe({
+      next: (transactions: TransactionDashboard[]) => this.transactions.set(transactions)
+    })
+    const accountSub = this.accountService.dashboardAccounts$.subscribe({
+      next: (accounts: Account[]) => this.accounts.set(accounts.slice(0, 3))
+    });
+
+    this.destroyRef.onDestroy(() => {
+      dailyReportsSub.unsubscribe()
+      transactionSub.unsubscribe()
+      accountSub.unsubscribe()
+    });
   }
 
   public updateDailyStockReports(transaction: TransactionDashboard) {

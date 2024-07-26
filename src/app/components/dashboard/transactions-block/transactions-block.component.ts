@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
 import {DatePipe, NgForOf, NgStyle, UpperCasePipe} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {TransactionDashboard} from "../../../model/transaction.model";
@@ -31,17 +31,9 @@ import {UpperTitleUiComponent} from "../../../shared/components/upper-title-ui/u
   templateUrl: './transactions-block.component.html',
   styleUrl: './transactions-block.component.scss'
 })
-export class TransactionsBlockComponent implements OnInit {
-  private transactionService: TransactionService = inject(TransactionService);
-
+export class TransactionsBlockComponent {
   @Output() public updateDayStock: EventEmitter<TransactionDashboard> = new EventEmitter<TransactionDashboard>();
-  public transactions: TransactionDashboard[] = []
-
-  ngOnInit() {
-    this.transactionService.getTransactionForDashboard().subscribe({
-      next: (transactions: TransactionDashboard[]) => this.transactions = transactions
-    })
-  }
+  @Input() public transactions: TransactionDashboard[] = []
 
   public updateTransactions(transaction: TransactionDashboard) {
     this.transactions.unshift(transaction);
