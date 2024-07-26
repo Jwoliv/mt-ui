@@ -26,7 +26,6 @@ export class SummaryComponent implements OnInit {
   public colorChangerService: ColorChangerService = inject(ColorChangerService);
   public summaryService: SummaryService = inject(SummaryService);
   public reportService: DailyReportService = inject(DailyReportService);
-
   public destroyRef: DestroyRef = inject(DestroyRef);
 
   public response: SummaryResponse = { dailyReports: [], profitReports: [] };
@@ -40,9 +39,7 @@ export class SummaryComponent implements OnInit {
       }),
       tap(reports => this.response.dailyReports = reports.dailyReports)
     ).subscribe({
-      next: value => {
-        this.response = value;
-      }
+      next: value => this.response = value
     });
 
     this.destroyRef.onDestroy(() => {
