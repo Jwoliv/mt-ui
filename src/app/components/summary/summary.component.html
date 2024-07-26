@@ -3,7 +3,7 @@
 </div>
 <div class="summary-daily-stocks">
     <div *ngFor="let sds of response.dailyReports"
-         (click)="this.selectedStock = this.colorChanger.changeSelectedData(sds, this.selectedStock)"
+         (click)="this.selectedStock = this.colorChangerService.changeSelectedData(sds, this.selectedStock)"
          class="summary-daily-stock"
          [style.height]="this.summaryStockCalcService.getHeight(sds.amount, this.response)"
          [style.background-color]="sds.color">

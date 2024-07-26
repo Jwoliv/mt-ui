@@ -23,7 +23,8 @@ import {ColorChangerService} from "../../services/color-changer.service";
 export class SummaryComponent implements OnInit {
   public reportService: DailyReportService = inject(DailyReportService);
   public summaryStockCalcService: StockCalcService = inject(StockCalcService);
-  public colorChanger: ColorChangerService = inject(ColorChangerService);
+  public colorChangerService: ColorChangerService = inject(ColorChangerService);
+
   public destroyRef: DestroyRef = inject(DestroyRef);
 
   public response: SummaryResponse = { dailyReports: [], profitReports: [] };
