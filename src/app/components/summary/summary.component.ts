@@ -38,6 +38,13 @@ export class SummaryComponent implements OnInit {
         this.reportService.updatedReportsColor(reports.dailyReports);
         return reports;
       }),
+      tap(reports => {
+        reports.profitReports.forEach(r => {
+          if (!r.profit) {
+            r.profit = 0;
+          }
+        });
+      }),
       tap(reports => this.response.dailyReports = reports.dailyReports)
     ).subscribe({
       next: value => this.response = value
@@ -47,5 +54,6 @@ export class SummaryComponent implements OnInit {
       summaryResponseSub.unsubscribe();
     });
   }
+
 
 }

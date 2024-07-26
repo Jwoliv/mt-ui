@@ -42,7 +42,6 @@ export class DailyReportService {
           ? Colors.LIGHT_BLUE
           : Colors.LIGHT_RED;
       }
-
     }
     return reports;
   }
