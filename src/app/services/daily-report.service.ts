@@ -6,33 +6,31 @@ import {getBasePathUrl} from "./config/properties.config";
 import {DailyAmountReport, ProfitReport} from "../model/summary.model";
 import {TransactionDashboard} from "../model/transaction.model";
 import {Colors} from "../shared/app.colors";
+import {AuthService} from "./auth/auth.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DailyReportService {
   private httpClient: HttpClient = inject(HttpClient);
-  private jwtTokenService: JwtTokenService = inject(JwtTokenService);
+  private authService: AuthService = inject(AuthService);
 
 
   public getDailyReports() {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.jwtTokenService.jwtToken}`);
     return this.httpClient.get<DailyReport[]>(`${getBasePathUrl()}/reports/daily-dashboard`, {
-      headers
+      headers: this.authService.baseHeaders
     })
   }
 
   public getDailyAmountReports() {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.jwtTokenService.jwtToken}`);
     return this.httpClient.get<DailyAmountReport[]>(`${getBasePathUrl()}/reports/daily-amount-reports`, {
-      headers
+      headers: this.authService.baseHeaders
     })
   }
 
   public getProfitReports() {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.jwtTokenService.jwtToken}`);
     return this.httpClient.get<ProfitReport[]>(`${getBasePathUrl()}/reports/profits-reports`, {
-      headers
+      headers: this.authService.baseHeaders
     })
   }
 
@@ -46,10 +44,8 @@ export class DailyReportService {
         dailyReports()[reportIndex].earning += transaction.amount;
         break;
       case "TRANSFER":
-        console.log('Transfer reports don\'t change daily stock report');
         break;
       default:
-        console.log('Unknown transaction type');
         break;
     }
   }
@@ -70,14 +66,23 @@ export class DailyReportService {
 
   public updatedReportsColor(reports: DailyAmountReport[]) {
     for (let i = 0; i < reports.length; i++) {
-      if (i === 0 || reports[i].amount > reports[i - 1].amount) {
+      if (i === 0 || this.isPrevStockHigher(reports, i)) {
         reports[i].color = Colors.LIGHT_GREEN;
-      } else if (reports[i].amount === reports[i - 1].amount) {
-        reports[i].color = Colors.LIGHT_BLUE;
       } else {
-        reports[i].color = Colors.LIGHT_RED;
+        reports[i].color = this.neighborhoodStockEqualByAmount(reports, i)
+          ? Colors.LIGHT_BLUE
+          : Colors.LIGHT_RED;
       }
+
     }
     return reports;
+  }
+
+  private neighborhoodStockEqualByAmount(reports: DailyAmountReport[], i: number) {
+    return reports[i].amount === reports[i - 1].amount;
+  }
+
+  private isPrevStockHigher(reports: DailyAmountReport[], i: number) {
+    return reports[i].amount > reports[i - 1].amount;
   }
 }

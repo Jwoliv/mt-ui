@@ -6,14 +6,15 @@ import {SummaryResponse} from "../model/summary.model";
 })
 export class StockCalcService {
 
-  maxDailyAmount(summaryData: SummaryResponse): number {
-    return Math.max(...summaryData.dailyReports.map(stock => stock.amount));
-  }
+  private static readonly MAX_HEIGHT = 480;
 
   public getHeight(dailyAmount: number, summaryData: SummaryResponse): string {
-    const maxHeight = 480;
-    const scaleFactor = maxHeight / this.maxDailyAmount(summaryData);
+    const scaleFactor = StockCalcService.MAX_HEIGHT / this.maxDailyAmount(summaryData);
     const value = Math.floor(scaleFactor * dailyAmount);
     return `${value > 1 ? value : 1}px`;
+  }
+
+  private maxDailyAmount(summaryData: SummaryResponse): number {
+    return Math.max(...summaryData.dailyReports.map(stock => stock.amount));
   }
 }

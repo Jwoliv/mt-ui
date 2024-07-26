@@ -4,13 +4,14 @@ import {Account, AccountFormDto, AccountFullInfo, NewAccountRequest} from '../mo
 import {getBasePathUrl} from './config/properties.config';
 import {JwtTokenService} from './auth/jwt-token.service';
 import {BehaviorSubject} from "rxjs";
+import {AuthService} from "./auth/auth.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
   private httpClient: HttpClient = inject(HttpClient);
-  private jwtTokenService: JwtTokenService = inject(JwtTokenService);
+  private authService: AuthService = inject(AuthService);
 
   private dashboardAccountsSubject = new BehaviorSubject<Account[]>([]);
   public dashboardAccounts$ = this.dashboardAccountsSubject.asObservable();
@@ -21,32 +22,33 @@ export class AccountService {
     });
   }
 
-  get headers() {
-    return new HttpHeaders().set('Authorization', `Bearer ${this.jwtTokenService.jwtToken}`);
-  }
-
   public getAccountDashboard() {
-    return this.httpClient.get<Account[]>(`${getBasePathUrl()}/accounts/dashboard`, { headers: this.headers });
+    return this.httpClient.get<Account[]>(`${getBasePathUrl()}/accounts/dashboard`, {
+      headers: this.authService.baseHeaders
+    });
   }
 
   public createNewAccount(request: NewAccountRequest) {
-    return this.httpClient.post(`${getBasePathUrl()}/accounts/new`, request, { headers: this.headers });
+    return this.httpClient.post(`${getBasePathUrl()}/accounts/new`, request, {
+      headers: this.authService.baseHeaders
+    });
   }
 
   public getAccounts(request: {pageNumber: number, pageSize: number}) {
     return this.httpClient.get<AccountFullInfo[]>(`${getBasePathUrl()}/accounts`, {
-      params: request, headers: this.headers
+      params: request,
+      headers: this.authService.baseHeaders
     })
+  }
+
+  public getAccountsForTransactionForm() {
+    return this.httpClient.get<AccountFormDto[]>(`${getBasePathUrl()}/accounts/form-data`, {
+      headers: this.authService.baseHeaders
+    });
   }
 
   public updateDashboardAccounts(account: Account) {
     const currentAccounts = this.dashboardAccountsSubject.getValue();
     this.dashboardAccountsSubject.next([account, ...currentAccounts]);
-  }
-
-  public getAccountsForTransactionForm() {
-    return this.httpClient.get<AccountFormDto[]>(`${getBasePathUrl()}/accounts/form-data`, {
-      headers: this.headers
-    });
   }
 }
