@@ -1,6 +1,5 @@
 import {inject, Injectable, WritableSignal} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {JwtTokenService} from "./auth/jwt-token.service";
+import {HttpClient} from "@angular/common/http";
 import {DailyReport} from "../model/report.model";
 import {getBasePathUrl} from "./config/properties.config";
 import {DailyAmountReport, ProfitReport} from "../model/summary.model";

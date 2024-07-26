@@ -1,7 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {getBasePathUrl} from "./config/properties.config";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {JwtTokenService} from "./auth/jwt-token.service";
+import {HttpClient} from "@angular/common/http";
 import {CategoryFormDto} from "../model/category.model";
 import {AuthService} from "./auth/auth.service";
 

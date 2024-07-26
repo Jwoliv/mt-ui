@@ -1,8 +1,7 @@
 import {inject, Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Account, AccountFormDto, AccountFullInfo, NewAccountRequest} from '../model/account.model';
 import {getBasePathUrl} from './config/properties.config';
-import {JwtTokenService} from './auth/jwt-token.service';
 import {BehaviorSubject} from "rxjs";
 import {AuthService} from "./auth/auth.service";
 

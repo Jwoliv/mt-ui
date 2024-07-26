@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {DatePipe, NgForOf, NgStyle, UpperCasePipe} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {TransactionDashboard} from "../../../model/transaction.model";
@@ -11,7 +11,6 @@ import {
 import {
   AddTransactionComponent
 } from "../../../shared/components/transactions/add-transaction/add-transaction.component";
-import {TransactionService} from "../../../services/transaction.service";
 import {UpperTitleUiComponent} from "../../../shared/components/upper-title-ui/upper-title-ui.component";
 
 @Component({
