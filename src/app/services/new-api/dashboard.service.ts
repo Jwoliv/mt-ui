@@ -20,6 +20,8 @@ export class DashboardService {
   private authService: AuthService = inject(AuthService);
 
   public getDashboardResponse() {
-    return this.httpClient.get<DashboardResponse>(`${getBasePathUrl2()}/dashboard`, {headers: this.authService.baseHeaders});
+    return this.httpClient.get<DashboardResponse>(`${getBasePathUrl2()}/dashboard`, {
+      headers: this.authService.baseHeaders
+    });
   }
 }

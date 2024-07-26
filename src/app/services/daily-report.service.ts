@@ -1,31 +1,13 @@
-import {inject, Injectable, WritableSignal} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {Injectable} from '@angular/core';
 import {DailyReport} from "../model/report.model";
-import {getBasePathUrl} from "./config/properties.config";
-import {DailyAmountReport, ProfitReport} from "../model/summary.model";
+import {DailyAmountReport} from "../model/summary.model";
 import {TransactionDashboard} from "../model/transaction.model";
 import {Colors} from "../shared/app.colors";
-import {AuthService} from "./auth/auth.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DailyReportService {
-  private httpClient: HttpClient = inject(HttpClient);
-  private authService: AuthService = inject(AuthService);
-
-
-  public getDailyAmountReports() {
-    return this.httpClient.get<DailyAmountReport[]>(`${getBasePathUrl()}/reports/daily-amount-reports`, {
-      headers: this.authService.baseHeaders
-    })
-  }
-
-  public getProfitReports() {
-    return this.httpClient.get<ProfitReport[]>(`${getBasePathUrl()}/reports/profits-reports`, {
-      headers: this.authService.baseHeaders
-    })
-  }
 
   public changeDailyReportsAmount(transaction: TransactionDashboard, dailyReports: DailyReport[], reportIndex: number) {
     if (reportIndex < 0) return;
@@ -41,12 +23,6 @@ export class DailyReportService {
       default:
         break;
     }
-  }
-
-  public updateProfitReport(report: ProfitReport): ProfitReport {
-    return {
-      ...report, isProfit: report.profit > 0, percentage: report.percentage / 100
-    };
   }
 
   public isTheSameDateInReport(reportDate: Date, transactionDate: Date) {

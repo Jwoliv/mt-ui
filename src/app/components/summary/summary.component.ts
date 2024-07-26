@@ -6,6 +6,7 @@ import {DailyReportService} from "../../services/daily-report.service";
 import {map, tap} from "rxjs";
 import {StockCalcService} from "../../services/stock-calc.service";
 import {ColorChangerService} from "../../services/color-changer.service";
+import {SummaryService} from "../../services/new-api/summary.service";
 
 @Component({
   selector: 'app-summary',
@@ -21,9 +22,10 @@ import {ColorChangerService} from "../../services/color-changer.service";
   styleUrl: './summary.component.scss'
 })
 export class SummaryComponent implements OnInit {
-  public reportService: DailyReportService = inject(DailyReportService);
   public summaryStockCalcService: StockCalcService = inject(StockCalcService);
   public colorChangerService: ColorChangerService = inject(ColorChangerService);
+  public summaryService: SummaryService = inject(SummaryService);
+  public reportService: DailyReportService = inject(DailyReportService);
 
   public destroyRef: DestroyRef = inject(DestroyRef);
 
@@ -31,20 +33,21 @@ export class SummaryComponent implements OnInit {
   public selectedStock!: DailyAmountReport | null
 
   ngOnInit(): void {
-    const dailyReportsSub = this.reportService.getDailyAmountReports().pipe(
-      map(reports => this.reportService.updatedReportsColor(reports)),
-      tap(reports => this.response.dailyReports = reports)
-    ).subscribe();
-
-    const profitReportsSub = this.reportService.getProfitReports().pipe(
-      map(reports => reports.reverse().map(report => this.reportService.updateProfitReport(report))),
-      tap(transformedReports => this.response.profitReports = transformedReports)
-    ).subscribe();
+    const summaryResponseSub = this.summaryService.getSummaryResponse().pipe(
+      map(reports => {
+        this.reportService.updatedReportsColor(reports.dailyReports);
+        return reports;
+      }),
+      tap(reports => this.response.dailyReports = reports.dailyReports)
+    ).subscribe({
+      next: value => {
+        this.response = value;
+      }
+    });
 
     this.destroyRef.onDestroy(() => {
-      dailyReportsSub.unsubscribe();
-      profitReportsSub.unsubscribe();
-    })
+      summaryResponseSub.unsubscribe();
+    });
   }
 
 }
