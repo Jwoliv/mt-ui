@@ -40,6 +40,8 @@ export class SummaryComponent implements OnInit {
       tap(transformedReports => this.response.profitReports = transformedReports)
     ).subscribe();
 
+    setTimeout(() => console.log(this.response.profitReports), 1000);
+
     this.destroyRef.onDestroy(() => {
       dailyReportsSub.unsubscribe();
       profitReportsSub.unsubscribe();
