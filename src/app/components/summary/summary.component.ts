@@ -22,11 +22,12 @@ import {SummaryService} from "../../services/new-api/summary.service";
   styleUrl: './summary.component.scss'
 })
 export class SummaryComponent implements OnInit {
+  private summaryService: SummaryService = inject(SummaryService);
+  private reportService: DailyReportService = inject(DailyReportService);
+  private destroyRef: DestroyRef = inject(DestroyRef);
+
   public summaryStockCalcService: StockCalcService = inject(StockCalcService);
   public colorChangerService: ColorChangerService = inject(ColorChangerService);
-  public summaryService: SummaryService = inject(SummaryService);
-  public reportService: DailyReportService = inject(DailyReportService);
-  public destroyRef: DestroyRef = inject(DestroyRef);
 
   public response: SummaryResponse = { dailyReports: [], profitReports: [] };
   public selectedStock!: DailyAmountReport | null
