@@ -9,7 +9,7 @@ import {
   TransactionItemComponent
 } from "../../shared/components/transactions/transaction-item/transaction-item.component";
 import {AddTransactionComponent} from "../../shared/components/transactions/add-transaction/add-transaction.component";
-import {TransactionService} from "../../services/transaction.service";
+import {TransactionService} from "../../services/new-api/transaction.service";
 import {NavigationConfig} from "../../model/navigation.model";
 
 @Component({
