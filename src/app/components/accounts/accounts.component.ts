@@ -42,6 +42,7 @@ export class AccountsComponent implements OnInit {
       next: (accounts: AccountFullInfo[]) => {
         if (accounts.length > 0) {
           this.accounts = accounts;
+          console.log(accounts)
         } else if (navigationConfig.pageNumber > 0) {
           this.rollbackPage();
         }

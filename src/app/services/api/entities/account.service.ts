@@ -45,6 +45,12 @@ export class AccountService {
     });
   }
 
+  public getUserAccountById(id: number) {
+    return this.httpClient.get<AccountFullInfo>(`${HttpConfigService.ACCOUNT_PATH}/${id}`, {
+      headers: this.authService.baseHeaders
+    });
+  }
+
   public updateDashboardAccounts(account: Account) {
     const currentAccounts = this.dashboardAccountsSubject.getValue();
     this.dashboardAccountsSubject.next([account, ...currentAccounts]);

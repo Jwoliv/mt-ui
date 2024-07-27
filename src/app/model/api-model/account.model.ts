@@ -4,10 +4,13 @@ export interface Account {
 }
 
 export interface AccountFullInfo {
-    id: number
-    name: string
-    earnMoney: number
-    spendMoney: number
+    id: number;
+    name: number;
+    spendMoney: number;
+    earnMoney: number;
+    currentBalance: number;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 export interface NewAccountRequest {
