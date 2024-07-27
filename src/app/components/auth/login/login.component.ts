@@ -4,7 +4,7 @@ import {LoginCredentialsRequest} from "../../../model/auth.model";
 import {AuthService} from "../../../services/auth/auth.service";
 import {AuthFormComponent} from "../auth-form/auth-form.component";
 import {User} from "../../../model/user.model";
-import {JwtTokenService} from "../../../services/auth/jwt-token.service";
+import {JwtTokenService} from "../../../utils/jwt-token.service";
 
 @Component({
   selector: 'app-login',

@@ -2,13 +2,12 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {getBasePathUrl} from "../config/properties.config";
 import {LoginCredentialsRequest, SignUpCredentialsRequest} from "../../model/auth.model";
-import {JwtTokenService} from "./jwt-token.service";
+import {JwtTokenService} from "../../utils/jwt-token.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
   private httpClient: HttpClient = inject(HttpClient);
   private jwtTokenService: JwtTokenService = inject(JwtTokenService);
 

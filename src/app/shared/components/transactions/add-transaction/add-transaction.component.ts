@@ -6,8 +6,8 @@ import {TransactionService} from "../../../../services/new-api/transaction.servi
 import {NewTransactionRequest, TransactionDashboard} from "../../../../model/transaction.model";
 import {AccountFormDto} from "../../../../model/account.model";
 import {CategoryFormDto} from "../../../../model/category.model";
-import {AccountService} from "../../../../services/account.service";
-import {CategoryService} from "../../../../services/category.service";
+import {AccountService} from "../../../../services/new-api/account.service";
+import {CategoryService} from "../../../../services/new-api/category.service";
 
 @Component({
   selector: 'app-add-transaction',

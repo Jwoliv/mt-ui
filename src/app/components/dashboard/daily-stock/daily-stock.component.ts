@@ -1,7 +1,7 @@
 import {Component, inject, Input, signal} from '@angular/core';
 import {Stock} from "../../../model/stock.model";
 import {CurrencyPipe, DatePipe, NgIf} from "@angular/common";
-import {StockService} from "../../../services/stock.service";
+import {StockService} from "../../../utils/stock.service";
 
 @Component({
   selector: 'app-daily-stock',

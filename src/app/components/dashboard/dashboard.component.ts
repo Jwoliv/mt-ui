@@ -3,7 +3,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {DailyStockComponent} from "./daily-stock/daily-stock.component";
 import {TransactionsBlockComponent} from "./transactions-block/transactions-block.component";
 import {AccountsBlockComponent} from "./accounts-block/accounts-block.component";
-import {DailyReportService} from "../../services/daily-report.service";
+import {DailyReportService} from "../../utils/daily-report.service";
 import {TransactionDashboard} from "../../model/transaction.model";
 import {DashboardResponse, DashboardService} from "../../services/new-api/dashboard.service";
 import {DailyReport} from "../../model/report.model";
