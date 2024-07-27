@@ -1,9 +1,9 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter, withComponentInputBinding, withRouterConfig } from '@angular/router';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import {ApplicationConfig, provideZoneChangeDetection} from '@angular/core';
+import {provideRouter, withComponentInputBinding, withRouterConfig} from '@angular/router';
+import {provideHttpClient, withInterceptors} from '@angular/common/http';
 
-import { routes } from './app.routes';
-import {redirectInterceptor} from "./services/interceptor/redirect-interceptor.service";
+import {routes} from './app.routes';
+import {redirectToLoginInterceptor} from "./utils/interceptor/redirect-interceptor.service";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,7 +18,7 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     provideHttpClient(
-      withInterceptors([redirectInterceptor])
+      withInterceptors([redirectToLoginInterceptor])
     )
   ]
 };

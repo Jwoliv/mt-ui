@@ -31,10 +31,10 @@ export class DailyStockComponent {
   }
 
   public getEarningHeight(): string {
-    return this.stockService.calculateHeight(this.total, this._stock().earning);
+    return this.stockService.getDashboardStockHeight(this.total, this._stock().earning);
   }
 
   public getSpendingHeight(): string {
-    return this.stockService.calculateHeight(this.total, this._stock().spending);
+    return this.stockService.getDashboardStockHeight(this.total, this._stock().spending);
   }
 }

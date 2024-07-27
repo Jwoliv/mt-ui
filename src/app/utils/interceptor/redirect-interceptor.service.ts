@@ -3,9 +3,9 @@ import {HttpErrorResponse, HttpInterceptorFn} from '@angular/common/http';
 import {throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Router} from '@angular/router';
-import {JwtTokenService} from "../../utils/jwt-token.service";
+import {JwtTokenService} from "../jwt-token.service";
 
-export const redirectInterceptor: HttpInterceptorFn = (req, next) => {
+export const redirectToLoginInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
 
   return next(req).pipe(

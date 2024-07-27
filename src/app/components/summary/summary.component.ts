@@ -4,9 +4,9 @@ import {PeriodReportComponent} from "./period-report/period-report.component";
 import {DailyAmountReport, SummaryResponse} from "../../model/api-model/summary.model";
 import {DailyReportService} from "../../utils/daily-report.service";
 import {map, tap} from "rxjs";
-import {StockCalcService} from "../../utils/stock-calc.service";
 import {ColorChangerService} from "../../utils/color-changer.service";
 import {SummaryService} from "../../services/api/complex/summary.service";
+import {StockService} from "../../utils/stock.service";
 
 @Component({
   selector: 'app-summary',
@@ -26,7 +26,7 @@ export class SummaryComponent implements OnInit {
   private reportService: DailyReportService = inject(DailyReportService);
   private destroyRef: DestroyRef = inject(DestroyRef);
 
-  public summaryStockCalcService: StockCalcService = inject(StockCalcService);
+  public stockService: StockService = inject(StockService);
   public colorChangerService: ColorChangerService = inject(ColorChangerService);
 
   public response: SummaryResponse = { dailyReports: [], profitReports: [] };
