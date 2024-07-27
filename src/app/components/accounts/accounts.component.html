@@ -2,7 +2,7 @@
     <app-add-account/>
     <div class="accounts-items">
         <div *ngFor="let account of accounts" class="accounts-item-wrapper">
-            <a [routerLink]="['account', account.id]" class="accounts-item">
+            <a [routerLink]="['/accounts', account.id]" class="accounts-item">
                 <div id="earning">{{ account.earnMoney | currency }}</div>
                 <div>{{ account.name }}</div>
                 <div id="spending">{{ account.spendMoney | currency }}</div>

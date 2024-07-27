@@ -27,12 +27,20 @@ export const routes: Routes = [
         loadComponent: () => import('./components/transactions/transactions.component').then(module => module.TransactionsComponent)
     },
     {
+        path: 'transactions/:id',
+        loadComponent: () => import('./components/select-transaction/select-transaction.component').then(module => module.SelectTransactionComponent)
+    },
+    {
         path: 'accounts',
         title: 'Accounts',
         resolve: {
           navigationConfig: resolveNavigationConfig
         },
         loadComponent: () => import('./components/accounts/accounts.component').then(module => module.AccountsComponent)
+    },
+    {
+        path: 'accounts/:id',
+        loadComponent: () => import('./components/select-account/select-account.component').then(module => module.SelectAccountComponent)
     },
     {
         path: 'settings',

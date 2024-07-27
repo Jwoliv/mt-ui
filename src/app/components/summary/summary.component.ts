@@ -56,6 +56,5 @@ export class SummaryComponent implements OnInit {
         r.isProfit = r.profit >= 0
         r.percentage = r.percentage / 100
       });
-    console.log(reports)
   }
 }
