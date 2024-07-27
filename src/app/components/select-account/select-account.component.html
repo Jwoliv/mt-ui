@@ -1,1 +1,3 @@
 <pre>{{ account | json }}</pre>
+
+<app-change-entity-call-buttons (callDeleteBtn)="accountService.deleteAccount(_id)" (callUpdateBtn)="showUpdateAccountForm()" />

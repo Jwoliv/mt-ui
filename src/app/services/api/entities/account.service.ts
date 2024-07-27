@@ -55,4 +55,8 @@ export class AccountService {
     const currentAccounts = this.dashboardAccountsSubject.getValue();
     this.dashboardAccountsSubject.next([account, ...currentAccounts]);
   }
+
+  public deleteAccount(id: number) {
+    console.log('delete')
+  }
 }

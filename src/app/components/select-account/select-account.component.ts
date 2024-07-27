@@ -2,22 +2,31 @@ import {Component, DestroyRef, inject, input, OnInit} from '@angular/core';
 import {AccountFullInfo} from "../../model/api-model/account.model";
 import {AccountService} from "../../services/api/entities/account.service";
 import {JsonPipe} from "@angular/common";
+import {
+  ChangeEntityCallButtonsComponent
+} from "../../shared/components/change-entity-call-buttons/change-entity-call-buttons.component";
 
 @Component({
   selector: 'app-select-account',
   standalone: true,
   imports: [
-    JsonPipe
+    JsonPipe,
+    ChangeEntityCallButtonsComponent
   ],
   templateUrl: './select-account.component.html',
   styleUrl: './select-account.component.scss'
 })
 export class SelectAccountComponent implements OnInit {
-  private accountService: AccountService = inject(AccountService);
   private destroyRef: DestroyRef = inject(DestroyRef);
 
+  public accountService: AccountService = inject(AccountService);
   public id = input<number>();
   public account!: AccountFullInfo
+
+
+  get _id() {
+    return <number>this.id();
+  }
 
   ngOnInit() {
     if (this.id()) {
@@ -26,5 +35,9 @@ export class SelectAccountComponent implements OnInit {
       })
       this.destroyRef.onDestroy(() => accountSub.unsubscribe());
     }
+  }
+
+  public showUpdateAccountForm() {
+
   }
 }

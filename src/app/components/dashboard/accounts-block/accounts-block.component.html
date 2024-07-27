@@ -1,7 +1,7 @@
 <div class="accounts-block">
   <app-upper-title-ui title="accounts" />
   <div class="accounts-block_items">
-        <a *ngFor="let account of accounts" class="accounts-block_item" [routerLink]="['accounts', account.id]">{{account.name}}</a>
+        <a *ngFor="let account of accounts" class="accounts-block_item" [routerLink]="['/accounts', account.id]">{{account.name}}</a>
     </div>
     <app-add-account (updateAccounts)="updateAccounts($event)"/>
 </div>

@@ -34,4 +34,7 @@ export class TransactionService {
     })
   }
 
+  public deleteTransaction(id: number) {
+
+  }
 }
