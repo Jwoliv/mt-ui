@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {CurrencyPipe, PercentPipe, UpperCasePipe} from "@angular/common";
-import {ProfitReport} from "../../../model/summary.model";
+import {ProfitReport} from "../../../model/api-model/summary.model";
 import {Colors} from "../../../shared/app.colors";
 
 @Component({

@@ -1,7 +1,7 @@
 import {Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {CurrencyPipe, DatePipe, NgForOf, NgIf} from "@angular/common";
 import {PeriodReportComponent} from "./period-report/period-report.component";
-import {DailyAmountReport, SummaryResponse} from "../../model/summary.model";
+import {DailyAmountReport, SummaryResponse} from "../../model/api-model/summary.model";
 import {DailyReportService} from "../../utils/daily-report.service";
 import {map, tap} from "rxjs";
 import {StockCalcService} from "../../utils/stock-calc.service";
@@ -38,7 +38,10 @@ export class SummaryComponent implements OnInit {
       tap(reports => this.updateEmptyProfit(reports)),
       tap(reports => this.response.dailyReports = reports.dailyReports)
     ).subscribe({
-      next: value => this.response = value
+      next: value => {
+        console.log(value)
+        this.response = value
+      }
     });
 
     this.destroyRef.onDestroy(() => {
@@ -49,7 +52,11 @@ export class SummaryComponent implements OnInit {
 
   private updateEmptyProfit(reports: SummaryResponse) {
     reports.profitReports
-      .filter(r => !r.profit)
-      .forEach(r => r.profit = 0);
+      .forEach(r => {
+        if (!r.profit) {
+          r.profit = 0
+        }
+        r.percentage = r.percentage / 100
+      });
   }
 }

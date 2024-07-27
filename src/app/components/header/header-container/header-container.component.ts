@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {RouterLink} from "@angular/router";
-import {Link} from "../../../model/link.model";
+import {Link} from "../../../model/component-model/link.model";
 import {HeaderLinkComponent} from "../header-link/header-link.component";
 
 @Component({

@@ -1,5 +1,5 @@
 import {ActivatedRouteSnapshot, ResolveFn} from "@angular/router";
-import {NavigationConfig} from "../../model/navigation.model";
+import {NavigationConfig} from "../../model/component-model/navigation.model";
 import {HttpConfigService} from "../../utils/http-config.service";
 
 export const resolveNavigationConfig: ResolveFn<NavigationConfig> = (activateRoute: ActivatedRouteSnapshot) => {

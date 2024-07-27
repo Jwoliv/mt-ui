@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {DatePipe, NgForOf, NgStyle, UpperCasePipe} from "@angular/common";
 import {RouterLink} from "@angular/router";
-import {TransactionDashboard} from "../../../model/transaction.model";
+import {TransactionDashboard} from "../../../model/api-model/transaction.model";
 import {
   TransactionButtonsComponent
 } from "../../../shared/components/transactions/transcation-buttons/transaction-buttons.component";

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Account} from "../../../model/account.model";
+import {Account} from "../../../model/api-model/account.model";
 import {NgForOf} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {AddAccountComponent} from "../../../shared/components/add-account/add-account.component";

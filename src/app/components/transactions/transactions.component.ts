@@ -1,5 +1,5 @@
 import {Component, inject, Input, OnInit, viewChild} from '@angular/core';
-import {TransactionDashboard} from "../../model/transaction.model";
+import {TransactionDashboard} from "../../model/api-model/transaction.model";
 import {NgForOf} from "@angular/common";
 import {NavigationComponent} from "../../shared/components/navigation/navigation.component";
 import {
@@ -10,7 +10,7 @@ import {
 } from "../../shared/components/transactions/transaction-item/transaction-item.component";
 import {AddTransactionComponent} from "../../shared/components/transactions/add-transaction/add-transaction.component";
 import {TransactionService} from "../../services/api/entities/transaction.service";
-import {NavigationConfig} from "../../model/navigation.model";
+import {NavigationConfig} from "../../model/component-model/navigation.model";
 
 @Component({
   selector: 'app-transactions',

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, inject, Input, Output} from '@angular/core';
 import {Router} from "@angular/router";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {NavigationConfig} from "../../../model/navigation.model";
+import {NavigationConfig} from "../../../model/component-model/navigation.model";
 import {HttpConfigService} from "../../../utils/http-config.service";
 
 @Component({

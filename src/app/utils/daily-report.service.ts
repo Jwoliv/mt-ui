@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {DailyReport} from "../model/report.model";
-import {DailyAmountReport, SummaryResponse} from "../model/summary.model";
-import {TransactionDashboard} from "../model/transaction.model";
+import {DailyReport} from "../model/api-model/report.model";
+import {DailyAmountReport, SummaryResponse} from "../model/api-model/summary.model";
+import {TransactionDashboard} from "../model/api-model/transaction.model";
 import {Colors} from "../shared/app.colors";
 
 @Injectable({

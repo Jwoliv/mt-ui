@@ -1,6 +1,6 @@
 import {Component, Input, signal} from '@angular/core';
 import {RouterLink, RouterLinkActive} from "@angular/router";
-import {Link} from "../../../model/link.model";
+import {Link} from "../../../model/component-model/link.model";
 import {UpperCasePipe} from "@angular/common";
 
 @Component({

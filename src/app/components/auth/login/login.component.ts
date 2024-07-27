@@ -1,9 +1,9 @@
 import {Component, DestroyRef, inject} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {LoginCredentialsRequest} from "../../../model/auth.model";
+import {LoginCredentialsRequest} from "../../../model/api-model/auth.model";
 import {AuthService} from "../../../services/api/auth/auth.service";
 import {AuthFormComponent} from "../auth-form/auth-form.component";
-import {User} from "../../../model/user.model";
+import {User} from "../../../model/api-model/user.model";
 import {JwtTokenService} from "../../../utils/jwt-token.service";
 
 @Component({

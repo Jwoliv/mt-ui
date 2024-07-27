@@ -4,9 +4,9 @@ import {DailyStockComponent} from "./daily-stock/daily-stock.component";
 import {TransactionsBlockComponent} from "./transactions-block/transactions-block.component";
 import {AccountsBlockComponent} from "./accounts-block/accounts-block.component";
 import {DailyReportService} from "../../utils/daily-report.service";
-import {TransactionDashboard} from "../../model/transaction.model";
+import {TransactionDashboard} from "../../model/api-model/transaction.model";
 import {DashboardResponse, DashboardService} from "../../services/api/complex/dashboard.service";
-import {DailyReport} from "../../model/report.model";
+import {DailyReport} from "../../model/api-model/report.model";
 
 @Component({
   selector: 'app-dashboard',

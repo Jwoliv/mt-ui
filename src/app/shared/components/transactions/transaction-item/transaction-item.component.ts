@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {CurrencyPipe, DatePipe} from "@angular/common";
 import {RouterLink} from "@angular/router";
-import {Transaction, TransactionDashboard} from "../../../../model/transaction.model";
+import {Transaction, TransactionDashboard} from "../../../../model/api-model/transaction.model";
 
 @Component({
   selector: 'app-transaction-item',

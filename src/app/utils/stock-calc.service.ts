@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {SummaryResponse} from "../model/summary.model";
+import {SummaryResponse} from "../model/api-model/summary.model";
 
 @Injectable({
   providedIn: 'root'

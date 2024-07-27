@@ -1,4 +1,4 @@
-import {Colors} from "../shared/app.colors";
+import {Colors} from "../../shared/app.colors";
 
 export interface SummaryResponse {
   dailyReports: DailyAmountReport[]

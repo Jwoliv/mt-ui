@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {LoginCredentialsRequest, SignUpCredentialsRequest} from "../../../model/auth.model";
+import {LoginCredentialsRequest, SignUpCredentialsRequest} from "../../../model/api-model/auth.model";
 import {JwtTokenService} from "../../../utils/jwt-token.service";
 import {HttpConfigService} from "../../../utils/http-config.service";
 

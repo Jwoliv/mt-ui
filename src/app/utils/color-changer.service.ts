@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {DailyAmountReport} from "../model/summary.model";
+import {DailyAmountReport} from "../model/api-model/summary.model";
 import {Colors} from "../shared/app.colors";
 import {DAILY_AMOUNT_STACK_COLORS_CHANGE} from "../shared/app.constants";
 

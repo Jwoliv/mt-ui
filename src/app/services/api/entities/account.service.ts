@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Account, AccountFormDto, AccountFullInfo, NewAccountRequest} from '../../../model/account.model';
+import {Account, AccountFormDto, AccountFullInfo, NewAccountRequest} from '../../../model/api-model/account.model';
 import {BehaviorSubject} from "rxjs";
 import {AuthService} from "../auth/auth.service";
 import {HttpConfigService} from "../../../utils/http-config.service";
