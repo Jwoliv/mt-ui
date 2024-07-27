@@ -2,7 +2,7 @@ import {Component, EventEmitter, inject, Input, Output} from '@angular/core';
 import {Router} from "@angular/router";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NavigationConfig} from "../../../model/navigation.model";
-import {DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE} from "../../../services/config/properties.config";
+import {HttpConfigService} from "../../../utils/http-config.service";
 
 @Component({
   selector: 'app-navigation',
@@ -18,8 +18,8 @@ export class NavigationComponent {
   @Input({required: true}) link!: string;
   @Output() private changeNavigationConfig: EventEmitter<NavigationConfig> = new EventEmitter<NavigationConfig>();
 
-  public _pageSize: number = DEFAULT_PAGE_SIZE;
-  public _pageNumber: number = DEFAULT_PAGE_NUMBER;
+  public _pageSize: number = HttpConfigService.DEFAULT_PAGE_SIZE;
+  public _pageNumber: number = HttpConfigService.DEFAULT_PAGE_NUMBER;
   public form = new FormGroup({
     pageSize: new FormControl(this._pageSize, [Validators.required, Validators.min(1)]),
   });

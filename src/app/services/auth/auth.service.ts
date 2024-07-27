@@ -1,8 +1,8 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {getBasePathUrl, getBasePathUrl2} from "../config/properties.config";
 import {LoginCredentialsRequest, SignUpCredentialsRequest} from "../../model/auth.model";
 import {JwtTokenService} from "../../utils/jwt-token.service";
+import {HttpConfigService} from "../../utils/http-config.service";
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +13,11 @@ export class AuthService {
 
 
   public login(request: LoginCredentialsRequest) {
-    return this.httpClient.post(`${getBasePathUrl2()}/auth/login`, request)
+    return this.httpClient.post(`${HttpConfigService.AUTH_PATH}/login`, request)
   }
 
   public signup(request: SignUpCredentialsRequest) {
-    return this.httpClient.post(`${getBasePathUrl2()}/auth/sign-up`, request)
+    return this.httpClient.post(`${HttpConfigService.AUTH_PATH}/sign-up`, request)
   }
 
   get baseHeaders(): HttpHeaders {

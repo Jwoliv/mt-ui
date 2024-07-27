@@ -1,9 +1,9 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Account, AccountFormDto, AccountFullInfo, NewAccountRequest} from '../../model/account.model';
-import {getBasePathUrl, getBasePathUrl2} from '../config/properties.config';
 import {BehaviorSubject} from "rxjs";
 import {AuthService} from "../auth/auth.service";
+import {HttpConfigService} from "../../utils/http-config.service";
 
 @Injectable({
   providedIn: 'root'
@@ -21,26 +21,26 @@ export class AccountService {
   }
 
   public getAccountDashboard() {
-    return this.httpClient.get<Account[]>(`${getBasePathUrl2()}/accounts/dashboard`, {
+    return this.httpClient.get<Account[]>(`${HttpConfigService.ACCOUNT_PATH}/dashboard`, {
       headers: this.authService.baseHeaders
     });
   }
 
   public createNewAccount(request: NewAccountRequest) {
-    return this.httpClient.post(`${getBasePathUrl()}/accounts/new`, request, {
+    return this.httpClient.post(`${HttpConfigService.ACCOUNT_PATH}/new`, request, {
       headers: this.authService.baseHeaders
     });
   }
 
   public getAccounts(request: {pageNumber: number, pageSize: number}) {
-    return this.httpClient.get<AccountFullInfo[]>(`${getBasePathUrl2()}/accounts`, {
+    return this.httpClient.get<AccountFullInfo[]>(HttpConfigService.ACCOUNT_PATH, {
       params: request,
       headers: this.authService.baseHeaders
     })
   }
 
   public getAccountsForTransactionForm() {
-    return this.httpClient.get<AccountFormDto[]>(`${getBasePathUrl2()}/accounts/form-data`, {
+    return this.httpClient.get<AccountFormDto[]>(`${HttpConfigService.ACCOUNT_PATH}/form-data`, {
       headers: this.authService.baseHeaders
     });
   }

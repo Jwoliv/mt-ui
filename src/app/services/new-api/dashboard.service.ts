@@ -3,8 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {DailyReport} from "../../model/report.model";
 import {TransactionDashboard} from "../../model/transaction.model";
 import {Account} from "../../model/account.model";
-import {getBasePathUrl2} from "../config/properties.config";
 import {AuthService} from "../auth/auth.service";
+import {HttpConfigService} from "../../utils/http-config.service";
 
 export interface DashboardResponse {
   reports: DailyReport[];
@@ -20,7 +20,7 @@ export class DashboardService {
   private authService: AuthService = inject(AuthService);
 
   public getDashboardResponse() {
-    return this.httpClient.get<DashboardResponse>(`${getBasePathUrl2()}/dashboard`, {
+    return this.httpClient.get<DashboardResponse>(HttpConfigService.DASHBOARD_PATH, {
       headers: this.authService.baseHeaders
     });
   }
