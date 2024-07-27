@@ -38,10 +38,7 @@ export class SummaryComponent implements OnInit {
       tap(reports => this.updateEmptyProfit(reports)),
       tap(reports => this.response.dailyReports = reports.dailyReports)
     ).subscribe({
-      next: value => {
-        console.log(value)
-        this.response = value
-      }
+      next: value => this.response = value
     });
 
     this.destroyRef.onDestroy(() => {
@@ -56,7 +53,9 @@ export class SummaryComponent implements OnInit {
         if (!r.profit) {
           r.profit = 0
         }
+        r.isProfit = r.profit >= 0
         r.percentage = r.percentage / 100
       });
+    console.log(reports)
   }
 }
