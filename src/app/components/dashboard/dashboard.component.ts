@@ -1,5 +1,5 @@
 import {Component, DestroyRef, inject, OnInit} from '@angular/core';
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {DailyStockComponent} from "./daily-stock/daily-stock.component";
 import {TransactionsBlockComponent} from "./transactions-block/transactions-block.component";
 import {AccountsBlockComponent} from "./accounts-block/accounts-block.component";
@@ -15,7 +15,8 @@ import {DailyReport} from "../../model/report.model";
     NgForOf,
     DailyStockComponent,
     TransactionsBlockComponent,
-    AccountsBlockComponent
+    AccountsBlockComponent,
+    NgIf
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
@@ -31,10 +32,7 @@ export class DashboardComponent implements OnInit {
     const dashboardResponseSub = this.dashboardService.getDashboardResponse().subscribe({
       next: response => this.response = response
     })
-
-    this.destroyRef.onDestroy(() => {
-      dashboardResponseSub.unsubscribe();
-    });
+    this.destroyRef.onDestroy(() => dashboardResponseSub.unsubscribe());
   }
 
   public updateDailyStockReports(transaction: TransactionDashboard) {

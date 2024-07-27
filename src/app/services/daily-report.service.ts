@@ -35,16 +35,18 @@ export class DailyReportService {
 
   public updatedReportsColor(response: SummaryResponse) {
     const reports = response.dailyReports;
-    for (let i = 0; i < reports.length; i++) {
-      if (i === 0 || this.isPrevStockLower(reports, i)) {
-        reports[i].color = Colors.LIGHT_GREEN;
-      } else {
-        reports[i].color = this.neighborhoodStockEqualByAmount(reports, i)
-          ? Colors.LIGHT_BLUE
-          : Colors.LIGHT_RED;
+    if (reports) {
+      for (let i = 0; i < reports.length; i++) {
+        if (i === 0 || this.isPrevStockLower(reports, i)) {
+          reports[i].color = Colors.LIGHT_GREEN;
+        } else {
+          reports[i].color = this.neighborhoodStockEqualByAmount(reports, i)
+            ? Colors.LIGHT_BLUE
+            : Colors.LIGHT_RED;
+        }
       }
+      response.dailyReports = reports;
     }
-    response.dailyReports = reports;
     return response;
   }
 

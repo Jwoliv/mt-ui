@@ -7,7 +7,7 @@ import {getBasePathUrl2} from "../config/properties.config";
 import {AuthService} from "../auth/auth.service";
 
 export interface DashboardResponse {
-  reports: DailyReport[] | undefined;
+  reports: DailyReport[];
   transactions: TransactionDashboard[];
   accounts: Account[];
 }

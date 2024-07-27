@@ -1,7 +1,7 @@
-<div class="stocks-list">
-    <app-daily-stock *ngFor="let report of response.reports" [stock]="report" />
+<div class="stocks-list" *ngIf="response?.reports">
+  <app-daily-stock *ngFor="let report of response.reports" [stock]="report"></app-daily-stock>
 </div>
-<div class="dashboard-row">
-    <app-transactions-block [transactions]="response.transactions" (updateDayStock)="updateDailyStockReports($event)" />
-    <app-accounts-block [accounts]="response.accounts" />
+<div class="dashboard-row" *ngIf="response">
+  <app-transactions-block [transactions]="response.transactions" (updateDayStock)="updateDailyStockReports($event)"></app-transactions-block>
+  <app-accounts-block [accounts]="response.accounts"></app-accounts-block>
 </div>
