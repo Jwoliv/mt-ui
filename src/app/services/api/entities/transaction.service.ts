@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {NewTransactionRequest, TransactionDashboard} from "../../../model/api-model/transaction.model";
+import {NewTransactionRequest, TransactionDashboard, TransactionDto} from "../../../model/api-model/transaction.model";
 import {HttpClient} from "@angular/common/http";
 import {NavigationConfig} from "../../../model/component-model/navigation.model";
 import {Observable} from "rxjs";
@@ -25,6 +25,12 @@ export class TransactionService {
         pageNumber: navigationConfig.pageNumber,
         pageSize: navigationConfig.pageSize
       }
+    })
+  }
+
+  public getUserTransactionById(id: number): Observable<TransactionDto> {
+    return this.httpClient.get<TransactionDto>(`${HttpConfigService.TRANSACTION_PATH}/${id}`, {
+      headers: this.authService.baseHeaders
     })
   }
 
