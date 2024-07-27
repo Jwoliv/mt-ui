@@ -3,5 +3,5 @@
 </div>
 <div class="dashboard-row" *ngIf="response">
   <app-transactions-block [transactions]="response.transactions" (updateDayStock)="updateDailyStockReports($event)"></app-transactions-block>
-  <app-accounts-block [accounts]="response.accounts"></app-accounts-block>
+  <app-accounts-block [accounts]="response.accounts" />
 </div>

@@ -51,12 +51,14 @@ export class AccountService {
     });
   }
 
+  public deleteAccountById(id: number) {
+    return this.httpClient.delete<void>(`${HttpConfigService.ACCOUNT_PATH}/${id}`, {
+      headers: this.authService.baseHeaders
+    })
+  }
+
   public updateDashboardAccounts(account: Account) {
     const currentAccounts = this.dashboardAccountsSubject.getValue();
     this.dashboardAccountsSubject.next([account, ...currentAccounts]);
-  }
-
-  public deleteAccount(id: number) {
-    console.log('delete')
   }
 }

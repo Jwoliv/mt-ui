@@ -4,7 +4,14 @@
         <div *ngFor="let account of accounts" class="accounts-item-wrapper">
             <a [routerLink]="['/accounts', account.id]" class="accounts-item">
                 <div id="earning">{{ account.earnMoney | currency }}</div>
-                <div>{{ account.name }}</div>
+                <div class="center">
+                  <span>
+                    {{ account.name }}
+                  </span>
+                  <span>
+                    {{ account.currentBalance | currency }}
+                  </span>
+                </div>
                 <div id="spending">{{ account.spendMoney | currency }}</div>
             </a>
         </div>

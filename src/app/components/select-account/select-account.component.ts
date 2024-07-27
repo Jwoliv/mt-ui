@@ -5,6 +5,7 @@ import {JsonPipe} from "@angular/common";
 import {
   ChangeEntityCallButtonsComponent
 } from "../../shared/components/change-entity-call-buttons/change-entity-call-buttons.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-select-account',
@@ -18,6 +19,7 @@ import {
 })
 export class SelectAccountComponent implements OnInit {
   private destroyRef: DestroyRef = inject(DestroyRef);
+  private router: Router = inject(Router);
 
   public accountService: AccountService = inject(AccountService);
   public id = input<number>();
@@ -39,5 +41,12 @@ export class SelectAccountComponent implements OnInit {
 
   public showUpdateAccountForm() {
 
+  }
+
+  public deleteAccountById() {
+    const deleteAccountSub = this.accountService.deleteAccountById(<number>this.id()).subscribe({
+      next: () => this.router.navigate(['./']).then(),
+    })
+    this.destroyRef.onDestroy(() => deleteAccountSub.unsubscribe());
   }
 }
