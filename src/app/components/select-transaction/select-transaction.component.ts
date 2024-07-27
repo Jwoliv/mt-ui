@@ -1,4 +1,4 @@
-import {Component, DestroyRef, inject, input, Input, OnInit} from '@angular/core';
+import {Component, DestroyRef, inject, input, OnInit} from '@angular/core';
 import {TransactionDto} from "../../model/api-model/transaction.model";
 import {TransactionService} from "../../services/api/entities/transaction.service";
 import {JsonPipe} from "@angular/common";
