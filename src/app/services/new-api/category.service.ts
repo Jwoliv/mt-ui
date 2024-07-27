@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {getBasePathUrl, getBasePathUrl2} from "../config/properties.config";
+import {getBasePathUrl2} from "../config/properties.config";
 import {HttpClient} from "@angular/common/http";
 import {CategoryFormDto} from "../../model/category.model";
 import {AuthService} from "../auth/auth.service";
