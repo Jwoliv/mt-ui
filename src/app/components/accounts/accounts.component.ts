@@ -4,7 +4,7 @@ import {AccountFullInfo} from "../../model/account.model";
 import {RouterLink} from "@angular/router";
 import {NavigationComponent} from "../../shared/components/navigation/navigation.component";
 import {AddAccountComponent} from "../../shared/components/add-account/add-account.component";
-import {AccountService} from "../../services/new-api/account.service";
+import {AccountService} from "../../services/api/entities/account.service";
 import {NavigationConfig} from "../../model/navigation.model";
 
 @Component({

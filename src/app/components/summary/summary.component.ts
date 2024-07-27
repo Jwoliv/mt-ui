@@ -6,7 +6,7 @@ import {DailyReportService} from "../../utils/daily-report.service";
 import {map, tap} from "rxjs";
 import {StockCalcService} from "../../utils/stock-calc.service";
 import {ColorChangerService} from "../../utils/color-changer.service";
-import {SummaryService} from "../../services/new-api/summary.service";
+import {SummaryService} from "../../services/api/complex/summary.service";
 
 @Component({
   selector: 'app-summary',

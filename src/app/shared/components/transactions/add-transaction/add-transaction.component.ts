@@ -2,12 +2,12 @@ import {Component, EventEmitter, inject, OnInit, Output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {TransactionButtonsComponent} from "../transcation-buttons/transaction-buttons.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {TransactionService} from "../../../../services/new-api/transaction.service";
+import {TransactionService} from "../../../../services/api/entities/transaction.service";
 import {NewTransactionRequest, TransactionDashboard} from "../../../../model/transaction.model";
 import {AccountFormDto} from "../../../../model/account.model";
 import {CategoryFormDto} from "../../../../model/category.model";
-import {AccountService} from "../../../../services/new-api/account.service";
-import {CategoryService} from "../../../../services/new-api/category.service";
+import {AccountService} from "../../../../services/api/entities/account.service";
+import {CategoryService} from "../../../../services/api/entities/category.service";
 
 @Component({
   selector: 'app-add-transaction',

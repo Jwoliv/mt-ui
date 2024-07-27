@@ -1,8 +1,8 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {CategoryFormDto} from "../../model/category.model";
+import {CategoryFormDto} from "../../../model/category.model";
 import {AuthService} from "../auth/auth.service";
-import {HttpConfigService} from "../../utils/http-config.service";
+import {HttpConfigService} from "../../../utils/http-config.service";
 
 @Injectable({
   providedIn: 'root'

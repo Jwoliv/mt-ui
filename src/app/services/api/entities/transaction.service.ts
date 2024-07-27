@@ -1,10 +1,10 @@
 import {inject, Injectable} from '@angular/core';
-import {NewTransactionRequest, TransactionDashboard} from "../../model/transaction.model";
+import {NewTransactionRequest, TransactionDashboard} from "../../../model/transaction.model";
 import {HttpClient} from "@angular/common/http";
-import {NavigationConfig} from "../../model/navigation.model";
+import {NavigationConfig} from "../../../model/navigation.model";
 import {Observable} from "rxjs";
 import {AuthService} from "../auth/auth.service";
-import {HttpConfigService} from "../../utils/http-config.service";
+import {HttpConfigService} from "../../../utils/http-config.service";
 
 @Injectable({
   providedIn: 'root'

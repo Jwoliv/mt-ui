@@ -1,10 +1,10 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {DailyReport} from "../../model/report.model";
-import {TransactionDashboard} from "../../model/transaction.model";
-import {Account} from "../../model/account.model";
+import {DailyReport} from "../../../model/report.model";
+import {TransactionDashboard} from "../../../model/transaction.model";
+import {Account} from "../../../model/account.model";
 import {AuthService} from "../auth/auth.service";
-import {HttpConfigService} from "../../utils/http-config.service";
+import {HttpConfigService} from "../../../utils/http-config.service";
 
 export interface DashboardResponse {
   reports: DailyReport[];
