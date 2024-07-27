@@ -6,7 +6,7 @@ import {Router} from "@angular/router";
   providedIn: 'root'
 })
 export class JwtTokenService {
-  private static readonly TOKEN_NAME: string = 'auth-jwt-token';
+  public static readonly TOKEN_NAME: string = 'auth-jwt-token';
 
   private router: Router = inject(Router);
 
