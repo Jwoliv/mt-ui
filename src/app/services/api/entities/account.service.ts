@@ -1,4 +1,4 @@
-import {inject, Injectable} from '@angular/core';
+import {DestroyRef, inject, Injectable, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Account, AccountFormDto, AccountFullInfo, NewAccountRequest} from '../../../model/api-model/account.model';
 import {BehaviorSubject} from "rxjs";
@@ -8,16 +8,18 @@ import {HttpConfigService} from "../../../utils/http-config.service";
 @Injectable({
   providedIn: 'root'
 })
-export class AccountService {
+export class AccountService implements OnInit {
   private httpClient: HttpClient = inject(HttpClient);
   private authService: AuthService = inject(AuthService);
-
+  private destroyRef: DestroyRef = inject(DestroyRef);
   private dashboardAccountsSubject = new BehaviorSubject<Account[]>([]);
 
-  constructor() {
-    this.getAccountDashboard().subscribe({
+  ngOnInit() {
+    const accountSub = this.getAccountDashboard().subscribe({
       next: (accounts: Account[]) => this.dashboardAccountsSubject.next(accounts)
     });
+
+    this.destroyRef.onDestroy(() => accountSub.unsubscribe());
   }
 
   public getAccountDashboard() {
