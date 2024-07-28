@@ -3,7 +3,7 @@ import {RouterLink} from "@angular/router";
 import {NgForOf, NgIf, UpperCasePipe} from "@angular/common";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AccountService} from "../../../services/api/entities/account.service";
-import {Account} from "../../../model/api-model/account.model";
+import {Account, AccountFullInfo} from "../../../model/api-model/account.model";
 import {UpperTitleUiComponent} from "../upper-title-ui/upper-title-ui.component";
 
 @Component({
@@ -22,7 +22,7 @@ import {UpperTitleUiComponent} from "../upper-title-ui/upper-title-ui.component"
   styleUrl: './add-account.component.scss'
 })
 export class AddAccountComponent {
-  @Output() updateAccounts: EventEmitter<Account> = new EventEmitter<Account>();
+  @Output() updateAccounts: EventEmitter<AccountFullInfo> = new EventEmitter<AccountFullInfo>();
 
   public accountService: AccountService = inject(AccountService);
   public isShowNewAccount: boolean = false;
@@ -39,8 +39,8 @@ export class AddAccountComponent {
     if (this.form.valid) {
       this.accountService.createNewAccount(this.form.value).subscribe({
         next: (response) => {
-          this.accountService.updateDashboardAccounts(response as Account)
-          this.updateAccounts.emit(response as Account);
+          this.accountService.updateDashboardAccounts(response)
+          this.updateAccounts.emit(response);
         },
         complete: () => {
           this.form.reset();

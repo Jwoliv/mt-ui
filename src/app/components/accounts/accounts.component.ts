@@ -1,6 +1,6 @@
 import {Component, DestroyRef, inject, Input, OnInit, viewChild} from '@angular/core';
 import {CurrencyPipe, NgForOf} from "@angular/common";
-import {AccountFullInfo} from "../../model/api-model/account.model";
+import {Account, AccountFullInfo} from "../../model/api-model/account.model";
 import {RouterLink} from "@angular/router";
 import {NavigationComponent} from "../../shared/components/navigation/navigation.component";
 import {AddAccountComponent} from "../../shared/components/add-account/add-account.component";
@@ -42,7 +42,6 @@ export class AccountsComponent implements OnInit {
       next: (accounts: AccountFullInfo[]) => {
         if (accounts.length > 0) {
           this.accounts = accounts;
-          console.log(accounts)
         } else if (navigationConfig.pageNumber > 0) {
           this.rollbackPage();
         }
@@ -54,5 +53,9 @@ export class AccountsComponent implements OnInit {
 
   private rollbackPage() {
     this.navigationComponent().rollbackPage();
+  }
+
+  public unshiftAccountToCollection(account: AccountFullInfo) {
+    this.accounts.unshift(account)
   }
 }

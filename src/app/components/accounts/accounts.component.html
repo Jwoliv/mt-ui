@@ -1,5 +1,5 @@
 <div class="accounts-wrapper">
-    <app-add-account/>
+    <app-add-account (updateAccounts)="unshiftAccountToCollection($event)"/>
     <div class="accounts-items">
         <div *ngFor="let account of accounts" class="accounts-item-wrapper">
             <a [routerLink]="['/accounts', account.id]" class="accounts-item">

@@ -29,7 +29,7 @@ export class AccountService implements OnInit {
   }
 
   public createNewAccount(request: NewAccountRequest) {
-    return this.httpClient.post(`${HttpConfigService.ACCOUNT_PATH}/new`, request, {
+    return this.httpClient.post<AccountFullInfo>(`${HttpConfigService.ACCOUNT_PATH}/new`, request, {
       headers: this.authService.baseHeaders
     });
   }
@@ -59,7 +59,7 @@ export class AccountService implements OnInit {
     })
   }
 
-  public updateDashboardAccounts(account: Account) {
+  public updateDashboardAccounts(account: AccountFullInfo) {
     const currentAccounts = this.dashboardAccountsSubject.getValue();
     this.dashboardAccountsSubject.next([account, ...currentAccounts]);
   }
