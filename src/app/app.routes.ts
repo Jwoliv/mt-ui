@@ -1,6 +1,10 @@
 import { Routes } from '@angular/router';
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
-import {resolveNavigationConfig, resolveTitleSelectedTransaction} from "./shared/components/app.resolver";
+import {
+  resolveNavigationConfig,
+  resolveTitleSelectedAccount,
+  resolveTitleSelectedTransaction
+} from "./shared/components/app.resolver";
 
 export const routes: Routes = [
     {
@@ -41,6 +45,7 @@ export const routes: Routes = [
     },
     {
         path: 'accounts/:id',
+        title: resolveTitleSelectedAccount,
         loadComponent: () => import('./components/select-account/select-account.component').then(module => module.SelectAccountComponent)
     },
     {

@@ -5,7 +5,7 @@ export interface Account {
 
 export interface AccountFullInfo {
     id: number;
-    name: number;
+    name: string;
     spendMoney: number;
     earnMoney: number;
     currentBalance: number;
