@@ -65,4 +65,5 @@
         (changeEarning)="toggleEarningForm(true)"
         (changeSpending)="toggleSpendingForm(true)"
         (changeTransfer)="toggleTransferForm(true)"
-></app-transaction-buttons>
+        [isTwoAccounts]="isTwoAccounts()"
+/>

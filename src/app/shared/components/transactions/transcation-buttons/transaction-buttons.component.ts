@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {ReactiveFormsModule} from "@angular/forms";
 
@@ -14,13 +14,7 @@ import {ReactiveFormsModule} from "@angular/forms";
   styleUrl: './transaction-buttons.component.scss'
 })
 export class TransactionButtonsComponent {
-  public data = {
-    earningCategories: ['Salary', 'Investment', 'Company'],
-    spendingCategories: ['Food', 'Transport', 'Tech', 'Study'],
-    accounts: ['Cash', 'Universal Card', 'Dollars'],
-    total: 20000
-  }
-
+  @Input() isTwoAccounts!: boolean
   @Output() changeEarning: EventEmitter<void> = new EventEmitter<void>();
   @Output() changeSpending: EventEmitter<void> = new EventEmitter<void>();
   @Output() changeTransfer: EventEmitter<void> = new EventEmitter<void>();

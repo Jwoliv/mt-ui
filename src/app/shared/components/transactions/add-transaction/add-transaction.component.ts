@@ -84,15 +84,20 @@ export class AddTransactionComponent implements OnInit {
         note: new FormControl(''),
         type: new FormControl('SPENDING')
       });
-
-      this.transferForm = new FormGroup({
-        amount: new FormControl(0, [Validators.required, Validators.min(0.01)]),
-        date: new FormControl(new Date(), [Validators.required]),
-        senderAccount: new FormControl(this.accounts[0].id),
-        receiverAccount: new FormControl(this.accounts[1].id),
-        type: new FormControl('TRANSFER')
-      });
+      if (this.isTwoAccounts()) {
+        this.transferForm = new FormGroup({
+          amount: new FormControl(0, [Validators.required, Validators.min(0.01)]),
+          date: new FormControl(new Date(), [Validators.required]),
+          senderAccount: new FormControl(this.accounts[0].id),
+          receiverAccount: new FormControl(this.accounts[1].id),
+          type: new FormControl('TRANSFER')
+        });
+      }
     }
+  }
+
+  public isTwoAccounts() {
+    return this.accounts.length == 2;
   }
 
   stopPropagation(event: Event) {
