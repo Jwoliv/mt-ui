@@ -84,7 +84,7 @@ export class AddTransactionComponent implements OnInit {
         note: new FormControl(''),
         type: new FormControl('SPENDING')
       });
-      if (this.isTwoAccounts()) {
+      if (this.isMoreThenTwoAccounts()) {
         this.transferForm = new FormGroup({
           amount: new FormControl(0, [Validators.required, Validators.min(0.01)]),
           date: new FormControl(new Date(), [Validators.required]),
@@ -96,8 +96,8 @@ export class AddTransactionComponent implements OnInit {
     }
   }
 
-  public isTwoAccounts() {
-    return this.accounts.length == 2;
+  public isMoreThenTwoAccounts() {
+    return this.accounts.length >= 2;
   }
 
   stopPropagation(event: Event) {

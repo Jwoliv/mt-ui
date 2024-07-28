@@ -22,3 +22,8 @@ export interface AccountFormDto {
   id: number
   name: string
 }
+
+export interface AccountUpdateDto {
+  name: string;
+  balance: number;
+}

@@ -17,4 +17,8 @@ export class ChangeEntityCallButtonsComponent {
   public triggerDeleteEntity() {
     this.callDeleteBtn.emit()
   }
+
+  public triggerUpdateBtn() {
+    this.callUpdateBtn.emit()
+  }
 }

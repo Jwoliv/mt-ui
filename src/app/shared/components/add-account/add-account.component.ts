@@ -3,7 +3,7 @@ import {RouterLink} from "@angular/router";
 import {NgForOf, NgIf, UpperCasePipe} from "@angular/common";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AccountService} from "../../../services/api/entities/account.service";
-import {Account, AccountFullInfo} from "../../../model/api-model/account.model";
+import {AccountFullInfo} from "../../../model/api-model/account.model";
 import {UpperTitleUiComponent} from "../upper-title-ui/upper-title-ui.component";
 
 @Component({

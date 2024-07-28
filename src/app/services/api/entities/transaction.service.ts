@@ -19,7 +19,7 @@ export class TransactionService {
     })
   }
 
-  public getTransaction(navigationConfig: NavigationConfig): Observable<TransactionDashboard[]> {
+  public getTransaction(navigationConfig: NavigationConfig) {
     return this.httpClient.get<TransactionDashboard[]>(HttpConfigService.TRANSACTION_PATH, {
       headers: this.authService.baseHeaders, params: {
         pageNumber: navigationConfig.pageNumber,
@@ -28,7 +28,7 @@ export class TransactionService {
     })
   }
 
-  public getUserTransactionById(id: number): Observable<TransactionDto> {
+  public getUserTransactionById(id: number) {
     return this.httpClient.get<TransactionDto>(`${HttpConfigService.TRANSACTION_PATH}/${id}`, {
       headers: this.authService.baseHeaders
     })

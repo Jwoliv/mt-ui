@@ -1,6 +1,6 @@
 import {Component, DestroyRef, inject, Input, OnInit, viewChild} from '@angular/core';
 import {CurrencyPipe, NgForOf} from "@angular/common";
-import {Account, AccountFullInfo} from "../../model/api-model/account.model";
+import {AccountFullInfo} from "../../model/api-model/account.model";
 import {RouterLink} from "@angular/router";
 import {NavigationComponent} from "../../shared/components/navigation/navigation.component";
 import {AddAccountComponent} from "../../shared/components/add-account/add-account.component";

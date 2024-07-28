@@ -5,7 +5,7 @@
     <button (click)="onChangeAddNewSpendingTransaction()" class="button minus">
         <img alt="img error" src="/transaction-buttons/minus.svg">
     </button>
-    <button (click)="onChangeAddNewTransferTransfer()" [disabled]="!isTwoAccounts" class="button transfer">
+    <button (click)="onChangeAddNewTransferTransfer()" [disabled]="!isMoreThenTwoAccounts" class="button transfer">
         <img alt="img error" src="/transaction-buttons/transfer.svg">
     </button>
 </div>

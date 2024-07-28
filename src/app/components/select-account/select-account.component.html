@@ -1,3 +1,14 @@
 <pre>{{ account | json }}</pre>
 
-<app-change-entity-call-buttons (callDeleteBtn)="deleteAccountById()" (callUpdateBtn)="showUpdateAccountForm()" />
+<div (click)="isShowNewAccount = false" *ngIf="isShowNewAccount" class="forms">
+  <form (click)="stopPropagation($event)" (ngSubmit)="updateExistedAccount()" [formGroup]="form">
+    <input placeholder="Account name" type="text" formControlName="name" />
+    <input placeholder="Amount of money" type="number" value="0" formControlName="balance"/>
+    <div class="form-buttons">
+      <button class="add-btn" type="submit">save</button>
+      <button (click)="isShowNewAccount = false" class="close-btn" type="button">close</button>
+    </div>
+  </form>
+</div>
+
+<app-change-entity-call-buttons (callDeleteBtn)="deleteAccountById()" (callUpdateBtn)="this.isShowNewAccount = true" />

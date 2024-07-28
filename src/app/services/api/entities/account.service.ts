@@ -1,6 +1,12 @@
 import {DestroyRef, inject, Injectable, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Account, AccountFormDto, AccountFullInfo, NewAccountRequest} from '../../../model/api-model/account.model';
+import {
+  Account,
+  AccountFormDto,
+  AccountFullInfo,
+  AccountUpdateDto,
+  NewAccountRequest
+} from '../../../model/api-model/account.model';
 import {BehaviorSubject} from "rxjs";
 import {AuthService} from "../auth/auth.service";
 import {HttpConfigService} from "../../../utils/http-config.service";
@@ -55,6 +61,12 @@ export class AccountService implements OnInit {
 
   public deleteAccountById(id: number) {
     return this.httpClient.delete<void>(`${HttpConfigService.ACCOUNT_PATH}/${id}`, {
+      headers: this.authService.baseHeaders
+    })
+  }
+
+  public updateExistedAccount(request: AccountUpdateDto, id: number) {
+    return this.httpClient.patch<AccountFullInfo>(`${HttpConfigService.ACCOUNT_PATH}/${id}`, request, {
       headers: this.authService.baseHeaders
     })
   }

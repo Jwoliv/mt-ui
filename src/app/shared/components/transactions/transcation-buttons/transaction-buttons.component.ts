@@ -14,7 +14,7 @@ import {ReactiveFormsModule} from "@angular/forms";
   styleUrl: './transaction-buttons.component.scss'
 })
 export class TransactionButtonsComponent {
-  @Input() isTwoAccounts!: boolean
+  @Input() isMoreThenTwoAccounts!: boolean
   @Output() changeEarning: EventEmitter<void> = new EventEmitter<void>();
   @Output() changeSpending: EventEmitter<void> = new EventEmitter<void>();
   @Output() changeTransfer: EventEmitter<void> = new EventEmitter<void>();
