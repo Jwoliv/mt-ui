@@ -35,6 +35,8 @@ export class TransactionService {
   }
 
   public deleteTransaction(id: number) {
-
+    return this.httpClient.delete<TransactionDashboard>(`${HttpConfigService.TRANSACTION_PATH}/${id}`, {
+      headers: this.authService.baseHeaders
+    })
   }
 }

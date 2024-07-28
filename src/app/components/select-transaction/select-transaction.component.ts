@@ -5,6 +5,7 @@ import {JsonPipe} from "@angular/common";
 import {
   ChangeEntityCallButtonsComponent
 } from "../../shared/components/change-entity-call-buttons/change-entity-call-buttons.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-select-transaction',
@@ -18,6 +19,7 @@ import {
 })
 export class SelectTransactionComponent implements OnInit {
   private destroyRef: DestroyRef = inject(DestroyRef);
+  private router: Router = inject(Router);
 
   public transactionService: TransactionService = inject(TransactionService);
   public id = input<number>();
@@ -38,5 +40,11 @@ export class SelectTransactionComponent implements OnInit {
 
   showUpdateTransactionForm() {
 
+  }
+
+  deleteTransaction() {
+    this.transactionService.deleteTransaction(<number>this.id()).subscribe({
+      complete: () => this.router.navigate(['./']).then()
+    })
   }
 }
