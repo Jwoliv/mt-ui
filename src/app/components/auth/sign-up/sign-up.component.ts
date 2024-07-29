@@ -5,13 +5,15 @@ import {AuthService} from "../../../services/api/auth/auth.service";
 import {SignUpCredentialsRequest} from "../../../model/api-model/auth.model";
 import {JwtTokenService} from "../../../utils/jwt-token.service";
 import {User} from "../../../model/api-model/user.model";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
   imports: [
     AuthFormComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss'

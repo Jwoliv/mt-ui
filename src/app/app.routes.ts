@@ -1,7 +1,7 @@
 import {Routes} from '@angular/router';
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {
-  resolveNavigationConfig,
+  resolveNavigationConfig, resolveRedirectAuthPageToDashboard,
   resolveTitleSelectedAccount,
   resolveTitleSelectedTransaction
 } from "./shared/components/app.resolver";
@@ -56,11 +56,17 @@ export const routes: Routes = [
     {
         path: 'login',
         title: 'Login',
+        resolve: {
+          isRedirect: resolveRedirectAuthPageToDashboard
+        },
         loadComponent: () => import('./components/auth/login/login.component').then(module => module.LoginComponent)
     },
     {
         path: 'sign-up',
         title: 'SignUp',
+        resolve: {
+          isRedirect: resolveRedirectAuthPageToDashboard
+        },
         loadComponent: () => import('./components/auth/sign-up/sign-up.component').then(module => module.SignUpComponent)
     },
     {

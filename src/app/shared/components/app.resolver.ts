@@ -1,9 +1,10 @@
-import {ActivatedRouteSnapshot, ResolveFn} from "@angular/router";
+import {ActivatedRouteSnapshot, ResolveFn, Router} from "@angular/router";
 import {NavigationConfig} from "../../model/component-model/navigation.model";
 import {HttpConfigService} from "../../utils/http-config.service";
 import {inject} from "@angular/core";
 import {AccountService} from "../../services/api/entities/account.service";
 import {of, switchMap} from "rxjs";
+import {JwtTokenService} from "../../utils/jwt-token.service";
 
 const resolveNavigationConfig: ResolveFn<NavigationConfig> = (activateRoute: ActivatedRouteSnapshot) => {
   const pageNumber = +(activateRoute.queryParamMap.get("pageNumber") ?? HttpConfigService.DEFAULT_PAGE_NUMBER);
@@ -27,8 +28,18 @@ const resolveTitleSelectedAccount: ResolveFn<string> = (activateRoute: Activated
     : accountService.getUserAccountById(id).pipe(switchMap(account => of(account.name)));
 };
 
+const resolveRedirectAuthPageToDashboard: ResolveFn<boolean> = (activateRoute: ActivatedRouteSnapshot) => {
+  const router: Router = inject(Router);
+  if (localStorage.getItem(JwtTokenService.TOKEN_NAME)) {
+    router.navigate(['/dashboard']).then();
+    return true;
+  }
+  return false;
+}
+
 export {
   resolveTitleSelectedTransaction,
   resolveNavigationConfig,
-  resolveTitleSelectedAccount
+  resolveTitleSelectedAccount,
+  resolveRedirectAuthPageToDashboard
 }

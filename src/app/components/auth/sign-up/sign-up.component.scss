@@ -30,7 +30,7 @@ div {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 30px;
+    min-height: 40px;
     transition-duration: .3s;
 
     &:hover {

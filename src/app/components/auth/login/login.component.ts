@@ -5,13 +5,15 @@ import {AuthService} from "../../../services/api/auth/auth.service";
 import {AuthFormComponent} from "../auth-form/auth-form.component";
 import {User} from "../../../model/api-model/user.model";
 import {JwtTokenService} from "../../../utils/jwt-token.service";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    AuthFormComponent
+    AuthFormComponent,
+    RouterLink
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
