@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {
   resolveNavigationConfig,
@@ -62,5 +62,10 @@ export const routes: Routes = [
         path: 'sign-up',
         title: 'SignUp',
         loadComponent: () => import('./components/auth/sign-up/sign-up.component').then(module => module.SignUpComponent)
+    },
+    {
+        path: '**',
+        redirectTo: 'dashboard',
+        pathMatch: 'prefix',
     }
 ];
