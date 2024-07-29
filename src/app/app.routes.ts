@@ -63,7 +63,7 @@ export const routes: Routes = [
     },
     {
         path: 'sign-up',
-        title: 'SignUp',
+        title: 'Sign Up',
         resolve: {
           isRedirect: resolveRedirectAuthPageToDashboard
         },

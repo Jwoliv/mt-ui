@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {NavigationConfig} from "../../../model/component-model/navigation.model";
 import {AuthService} from "../auth/auth.service";
 import {HttpConfigService} from "../../../utils/http-config.service";
+import {NavigationComponent} from "../../../shared/components/navigation/navigation.component";
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,16 @@ export class TransactionService {
   public deleteTransaction(id: number) {
     return this.httpClient.delete<TransactionDashboard>(`${HttpConfigService.TRANSACTION_PATH}/${id}`, {
       headers: this.authService.baseHeaders
+    })
+  }
+
+  public getTransactionByAccountId(id: number, navigationConfig: NavigationConfig) {
+    return this.httpClient.get<TransactionDashboard[]>(`${HttpConfigService.TRANSACTION_PATH}/account/${id}`,  {
+      headers: this.authService.baseHeaders,
+      params: {
+        pageNumber: navigationConfig.pageNumber,
+        pageSize: navigationConfig.pageSize
+      }
     })
   }
 }

@@ -1,4 +1,16 @@
-<pre>{{ account | json }}</pre>
+<div *ngIf="account" class="selected-account-block">
+  <h1>{{account.name}}</h1>
+  <h2 [ngStyle]="{ backgroundColor: Colors.LIGHT_BLUE }">{{account.currentBalance | currency }}</h2>
+  <ul class="moneys">
+    <li *ngIf="account.earnMoney > 0"
+        [ngStyle]="{ width: earnWeight, backgroundColor: Colors.LIGHT_GREEN }"
+    >{{account.earnMoney | currency }}</li>
+    <li *ngIf="account.spendMoney > 0"
+        [ngStyle]="{ width: spendWeight, backgroundColor: Colors.LIGHT_RED }"
+    >{{account.spendMoney | currency }}</li>
+  </ul>
+</div>
+
 
 <div (click)="isShowNewAccount = false" *ngIf="isShowNewAccount" class="forms">
   <form (click)="stopPropagation($event)" (ngSubmit)="updateExistedAccount()" [formGroup]="form">
@@ -11,4 +23,4 @@
   </form>
 </div>
 
-<app-change-entity-call-buttons (callDeleteBtn)="deleteAccountById()" (callUpdateBtn)="this.isShowNewAccount = true" />
+<app-change-entity-call-buttons (callDeleteBtn)="deleteAccountById()" (callUpdateBtn)="this.isShowNewAccount = true"></app-change-entity-call-buttons>

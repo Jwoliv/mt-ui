@@ -56,3 +56,35 @@ form {
 .close-btn {
   background-color: #FF7676;
 }
+
+h1 {
+  font-size: 40px;
+  text-align: center;
+  margin: 20px;
+}
+
+h2 {
+  border: 1px solid #000000;
+  margin-bottom: 10px;
+  min-height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.moneys {
+  display: flex;
+  gap: 10px;
+
+  li {
+    border: 1px solid #000000;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.selected-account-block {
+  margin: 10px 0 60px;
+}
