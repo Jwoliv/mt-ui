@@ -40,10 +40,7 @@ export class AccountsComponent implements OnInit {
   private loadAccounts(navigationConfig: NavigationConfig = this.navigationConfig): void {
     this.navigationConfig = navigationConfig;
     const subscription = this.accountService.getAccountsByPageable(this.navigationConfig).subscribe({
-      next: (response: PageAccountResponse) => {
-        console.log(response)
-        this.response = response
-      }
+      next: (response: PageAccountResponse) => this.response = response
     });
     this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }

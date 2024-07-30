@@ -1,5 +1,5 @@
 import {Component, inject, Input, OnInit, viewChild} from '@angular/core';
-import {TransactionDashboard} from "../../model/api-model/transaction.model";
+import {PageTransactionResponse, TransactionDashboard} from "../../model/api-model/transaction.model";
 import {NgForOf} from "@angular/common";
 import {NavigationComponent} from "../../shared/components/navigation/navigation.component";
 import {
@@ -26,10 +26,10 @@ import {NavigationConfig} from "../../model/component-model/navigation.model";
   styleUrl: './transactions.component.scss'
 })
 export class TransactionsComponent implements OnInit {
-  private navigationComponent = viewChild.required<NavigationComponent>('navigation')
-  public transactionService: TransactionService = inject(TransactionService);
   @Input() public navigationConfig!: NavigationConfig;
-  public transactions: TransactionDashboard[] = []
+
+  public transactionService: TransactionService = inject(TransactionService);
+  public response: PageTransactionResponse = { elements: [], isNextPage: false, isPrevPage: false }
 
   ngOnInit() {
     this.loadTransaction();
@@ -37,17 +37,15 @@ export class TransactionsComponent implements OnInit {
 
   public loadTransaction(navigationConfig: NavigationConfig = this.navigationConfig): void {
     this.navigationConfig = navigationConfig;
-    this.transactionService.getTransaction(this.navigationConfig).subscribe({
-      next: transactions => {
-        if (transactions.length > 0) {
-          this.transactions = transactions;
-        } else if (this.navigationConfig.pageNumber > 0) {
-        }
+    this.transactionService.getTransactionPageable(this.navigationConfig).subscribe({
+      next: response => {
+        console.log(response)
+        this.response = response
       }
     })
   }
 
   public updateTransactions(transaction: TransactionDashboard) {
-    this.transactions.unshift(transaction)
+    this.response.elements.unshift(transaction)
   }
 }

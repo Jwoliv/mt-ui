@@ -1,7 +1,12 @@
 <div class="transactions-container">
     <app-add-transaction (updateTransactions)="updateTransactions($event)"/>
     <div class="transactions-item">
-        <app-transaction-item *ngFor="let transaction of transactions" [transaction]="transaction"/>
+        <app-transaction-item *ngFor="let transaction of response.elements"
+                              [transaction]="transaction"/>
     </div>
-    <app-navigation link="/transactions" (changeNavigationConfig)="loadTransaction($event)" #navigation/>
+    <app-navigation link="/transactions"
+                    (changeNavigationConfig)="loadTransaction($event)"
+                    [isNext]="response.isNextPage"
+                    [isPrev]="response.isPrevPage"
+    />
 </div>

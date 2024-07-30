@@ -43,4 +43,11 @@ export interface TransactionDto {
   updatedAt: Date;
 }
 
+
+export interface PageTransactionResponse {
+  elements: TransactionDashboard[],
+  isNextPage: boolean,
+  isPrevPage: boolean
+}
+
 type TransactionType = 'EARNING' | 'SPENDING' | 'TRANSFER'

@@ -1,5 +1,10 @@
 import {inject, Injectable} from '@angular/core';
-import {NewTransactionRequest, TransactionDashboard, TransactionDto} from "../../../model/api-model/transaction.model";
+import {
+  NewTransactionRequest,
+  PageTransactionResponse,
+  TransactionDashboard,
+  TransactionDto
+} from "../../../model/api-model/transaction.model";
 import {HttpClient} from "@angular/common/http";
 import {NavigationConfig} from "../../../model/component-model/navigation.model";
 import {AuthService} from "../auth/auth.service";
@@ -19,8 +24,8 @@ export class TransactionService {
     })
   }
 
-  public getTransaction(navigationConfig: NavigationConfig) {
-    return this.httpClient.get<TransactionDashboard[]>(HttpConfigService.TRANSACTION_PATH, {
+  public getTransactionPageable(navigationConfig: NavigationConfig) {
+    return this.httpClient.get<PageTransactionResponse>(HttpConfigService.TRANSACTION_PATH, {
       headers: this.authService.baseHeaders, params: {
         pageNumber: navigationConfig.pageNumber,
         pageSize: navigationConfig.pageSize
