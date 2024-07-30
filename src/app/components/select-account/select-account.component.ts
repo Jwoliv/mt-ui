@@ -5,7 +5,6 @@ import {CurrencyPipe, JsonPipe, NgForOf, NgIf, NgStyle} from "@angular/common";
 import {
   ChangeEntityCallButtonsComponent
 } from "../../shared/components/change-entity-call-buttons/change-entity-call-buttons.component";
-import {Router} from "@angular/router";
 import {AddAccountComponent} from "../../shared/components/add-account/add-account.component";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Colors} from "../../shared/app.colors";
@@ -16,7 +15,6 @@ import {
   TransactionItemComponent
 } from "../../shared/components/transactions/transaction-item/transaction-item.component";
 import {NavigationConfig} from "../../model/component-model/navigation.model";
-import {TransactionService} from "../../services/api/entities/transaction.service";
 import {HttpConfigService} from "../../utils/http-config.service";
 import {SelectedAccountService} from "../../services/api/complex/selected-account.service";
 
