@@ -1,3 +1,27 @@
-<pre>{{ transaction | json }}</pre>
+<!--<pre>{{ transaction | json }}</pre>-->
+
+<div *ngIf="transaction">
+  <h1>
+    <span>TransactionId: {{transaction.id}} at {{transaction.createdAt | date:'MM/dd/yyyy HH:mm:ss'}}</span>
+    <span class="indicator" [ngStyle]="{
+      backgroundColor: determineBackgroundColor()
+    }"></span>
+  </h1>
+
+  <div class="links">
+    <a class="link" [routerLink]="['/accounts', transaction.accountId]">AccountId: {{transaction.accountId}}</a>
+    <a class="link" [routerLink]="['/categories', transaction.categoryId]">CategoryId: {{transaction.categoryId}}</a>
+  </div>
+
+  <div *ngIf="transaction.type === 'TRANSFER'; else notTransferTransaction">
+    TRANSFER TRANSACTION CONTENT
+  </div>
+
+  <ng-template #notTransferTransaction>
+
+  </ng-template>
+
+
+</div>
 
 <app-change-entity-call-buttons (callDeleteBtn)="deleteTransaction()" (callUpdateBtn)="showUpdateTransactionForm()" />

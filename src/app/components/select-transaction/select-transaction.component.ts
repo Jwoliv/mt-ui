@@ -1,18 +1,23 @@
 import {Component, DestroyRef, inject, input, OnInit} from '@angular/core';
 import {TransactionDto} from "../../model/api-model/transaction.model";
 import {TransactionService} from "../../services/api/entities/transaction.service";
-import {JsonPipe} from "@angular/common";
+import {DatePipe, JsonPipe, NgIf, NgStyle} from "@angular/common";
 import {
   ChangeEntityCallButtonsComponent
 } from "../../shared/components/change-entity-call-buttons/change-entity-call-buttons.component";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
+import {Colors} from "../../shared/app.colors";
 
 @Component({
   selector: 'app-select-transaction',
   standalone: true,
   imports: [
     JsonPipe,
-    ChangeEntityCallButtonsComponent
+    ChangeEntityCallButtonsComponent,
+    NgIf,
+    NgStyle,
+    RouterLink,
+    DatePipe
   ],
   templateUrl: './select-transaction.component.html',
   styleUrl: './select-transaction.component.scss'
@@ -25,9 +30,6 @@ export class SelectTransactionComponent implements OnInit {
   public id = input<number>();
   public transaction!: TransactionDto
 
-  get _id() {
-    return <number>this.id();
-  }
 
   ngOnInit() {
     if (this.id()) {
@@ -46,5 +48,16 @@ export class SelectTransactionComponent implements OnInit {
     this.transactionService.deleteTransaction(<number>this.id()).subscribe({
       complete: () => this.router.navigate(['./']).then()
     })
+  }
+
+  public determineBackgroundColor() {
+     switch (this.transaction.type) {
+       case "EARNING":
+         return Colors.LIGHT_GREEN;
+       case "SPENDING":
+         return Colors.LIGHT_RED;
+       case "TRANSFER":
+         return Colors.LIGHT_BLUE;
+    }
   }
 }

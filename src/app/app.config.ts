@@ -18,7 +18,7 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     provideHttpClient(
-      // withInterceptors([redirectToLoginInterceptor])
+      withInterceptors([redirectToLoginInterceptor])
     )
   ]
 };

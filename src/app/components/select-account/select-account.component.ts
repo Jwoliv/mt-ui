@@ -73,9 +73,7 @@ export class SelectAccountComponent implements OnInit {
           this.initializeForm();
         }
       });
-      this.destroyRef.onDestroy(() => {
-        accountSub.unsubscribe()
-      });
+      this.destroyRef.onDestroy(() => accountSub.unsubscribe());
     }
   }
 
@@ -83,9 +81,7 @@ export class SelectAccountComponent implements OnInit {
     const transactionSub = this.selectedAccountService.getTransactionPageable(navigationConfig).subscribe({
       next: (response: PageTransactionResponse) => this.responseTransactions = response
     })
-    this.destroyRef.onDestroy(() => {
-      transactionSub.unsubscribe()
-    });
+    this.destroyRef.onDestroy(() => transactionSub.unsubscribe());
   }
 
   private initializeForm() {
