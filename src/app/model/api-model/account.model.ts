@@ -27,3 +27,10 @@ export interface AccountUpdateDto {
   name: string;
   balance: number;
 }
+
+
+export interface PageAccountResponse {
+  elements: AccountFullInfo[],
+  isNextPage: boolean,
+  isPrevPage: boolean
+}

@@ -42,7 +42,6 @@ export class TransactionsComponent implements OnInit {
         if (transactions.length > 0) {
           this.transactions = transactions;
         } else if (this.navigationConfig.pageNumber > 0) {
-          this.navigationComponent().rollbackPage();
         }
       }
     })

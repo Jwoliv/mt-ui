@@ -18,6 +18,11 @@
       transition-duration: .3s;
       background-color: #838383;
     }
+
+    &.disable-btn {
+      background-color: #f1f1f1;
+      cursor: not-allowed;
+    }
   }
 }
 

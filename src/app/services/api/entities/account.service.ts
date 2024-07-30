@@ -5,7 +5,7 @@ import {
   AccountFormDto,
   AccountFullInfo,
   AccountUpdateDto,
-  NewAccountRequest
+  NewAccountRequest, PageAccountResponse
 } from '../../../model/api-model/account.model';
 import {BehaviorSubject} from "rxjs";
 import {AuthService} from "../auth/auth.service";
@@ -40,8 +40,8 @@ export class AccountService implements OnInit {
     });
   }
 
-  public getAccounts(request: {pageNumber: number, pageSize: number}) {
-    return this.httpClient.get<AccountFullInfo[]>(HttpConfigService.ACCOUNT_PATH, {
+  public getAccountsByPageable(request: {pageNumber: number, pageSize: number}) {
+    return this.httpClient.get<PageAccountResponse>(HttpConfigService.ACCOUNT_PATH, {
       params: request,
       headers: this.authService.baseHeaders
     })

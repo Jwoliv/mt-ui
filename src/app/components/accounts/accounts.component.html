@@ -1,20 +1,18 @@
 <div class="accounts-wrapper">
     <app-add-account (updateAccounts)="unshiftAccountToCollection($event)"/>
-    <div class="accounts-items">
-        <div *ngFor="let account of accounts" class="accounts-item-wrapper">
+    <div class="accounts-items" *ngIf="response?.elements">
+        <div *ngFor="let account of response.elements" class="accounts-item-wrapper">
             <a [routerLink]="['/accounts', account.id]" class="accounts-item">
                 <div id="earning">{{ account.earnMoney | currency }}</div>
                 <div class="center">
-                  <span>
-                    {{ account.name }}
-                  </span>
-                  <span>
-                    {{ account.currentBalance | currency }}
-                  </span>
+                  <span>{{ account.name }}</span>
+                  <span>{{ account.currentBalance | currency }}</span>
                 </div>
                 <div id="spending">{{ account.spendMoney | currency }}</div>
             </a>
         </div>
     </div>
-    <app-navigation link="/accounts" (changeNavigationConfig)="updateAccounts($event)" #navigation/>
+    <app-navigation link="/accounts" (changeNavigationConfig)="updateAccounts($event)"
+                    [isNext]="response.isNextPage"
+                    [isPrev]="response.isPrevPage"/>
 </div>
