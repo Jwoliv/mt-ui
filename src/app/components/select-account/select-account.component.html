@@ -4,20 +4,20 @@
   <ul class="moneys">
     <li *ngIf="account.earnMoney > 0"
         [ngStyle]="{
-          width: earnWeight,
+          width: weights.earnWeight,
           backgroundColor: Colors.LIGHT_GREEN
         }"
     >{{account.earnMoney | currency }}</li>
     <li *ngIf="account.spendMoney > 0"
         [ngStyle]="{
-          width: spendWeight,
+          width: weights.spendWeight,
           backgroundColor: Colors.LIGHT_RED
         }"
     >{{account.spendMoney | currency }}</li>
   </ul>
 </div>
 
-<app-change-entity-call-buttons (callDeleteBtn)="deleteAccountById()" (callUpdateBtn)="this.isShowNewAccount = true" />
+<app-change-entity-call-buttons (callDeleteBtn)="selectedAccountService.deleteAccountById(id)" (callUpdateBtn)="this.isShowNewAccount = true" />
 
 <div *ngIf="responseTransactions">
   <div class="transactions-item">

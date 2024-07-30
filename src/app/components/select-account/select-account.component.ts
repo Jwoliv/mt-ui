@@ -18,6 +18,7 @@ import {
 import {NavigationConfig} from "../../model/component-model/navigation.model";
 import {TransactionService} from "../../services/api/entities/transaction.service";
 import {HttpConfigService} from "../../utils/http-config.service";
+import {SelectedAccountService} from "../../services/api/complex/selected-account.service";
 
 @Component({
   selector: 'app-select-account',
@@ -42,15 +43,10 @@ import {HttpConfigService} from "../../utils/http-config.service";
 export class SelectAccountComponent implements OnInit {
   @Input() id!: number;
 
-  public navigationConfig: NavigationConfig = {
-    pageNumber: HttpConfigService.DEFAULT_PAGE_NUMBER,
-    pageSize: HttpConfigService.DEFAULT_PAGE_SIZE
-  }
-
   private destroyRef: DestroyRef = inject(DestroyRef);
-  private router: Router = inject(Router);
   private accountService: AccountService = inject(AccountService);
-  private transactionService: TransactionService = inject(TransactionService);
+
+  public selectedAccountService: SelectedAccountService = inject(SelectedAccountService);
 
   protected readonly Colors = Colors;
 
@@ -59,8 +55,7 @@ export class SelectAccountComponent implements OnInit {
 
   public isShowNewAccount: boolean = false;
   public form!: FormGroup;
-  public spendWeight!: string;
-  public earnWeight!: string;
+  public weights: { spendWeight: string, earnWeight: string } = { earnWeight: '0px', spendWeight: '0px' };
 
 
   get accountUrl(): string {
@@ -69,11 +64,14 @@ export class SelectAccountComponent implements OnInit {
 
   ngOnInit() {
     if (this.id) {
-      this.loadTransactions()
+      this.loadTransactions({
+        pageNumber: HttpConfigService.DEFAULT_PAGE_NUMBER,
+        pageSize: HttpConfigService.DEFAULT_PAGE_SIZE,
+      })
       const accountSub = this.accountService.getUserAccountById(this.id).subscribe({
         next: (account: AccountFullInfo) => {
           this.account = account;
-          this.getMoneyWeightToAccountPage()
+          this.weights = this.selectedAccountService.getMoneyWeightToAccountPage(this.account)
           this.initializeForm();
         }
       });
@@ -83,9 +81,8 @@ export class SelectAccountComponent implements OnInit {
     }
   }
 
-  public loadTransactions(navigationConfig: NavigationConfig = this.navigationConfig): void {
-    this.navigationConfig = navigationConfig;
-    const transactionSub = this.transactionService.getTransactionPageable(this.navigationConfig).subscribe({
+  public loadTransactions(navigationConfig: NavigationConfig) {
+    const transactionSub = this.selectedAccountService.getTransactionPageable(navigationConfig).subscribe({
       next: (response: PageTransactionResponse) => this.responseTransactions = response
     })
     this.destroyRef.onDestroy(() => {
@@ -100,13 +97,6 @@ export class SelectAccountComponent implements OnInit {
     });
   }
 
-  public deleteAccountById() {
-    const deleteAccountSub = this.accountService.deleteAccountById(this.id).subscribe({
-      next: () => this.router.navigate(['./']).then(),
-    });
-    this.destroyRef.onDestroy(() => deleteAccountSub.unsubscribe());
-  }
-
   public stopPropagation($event: MouseEvent) {
     $event.stopPropagation();
   }
@@ -118,12 +108,5 @@ export class SelectAccountComponent implements OnInit {
         complete: () => this.isShowNewAccount = false
       })
     }
-  }
-
-  private getMoneyWeightToAccountPage() {
-    const mainWeight = 1030;
-    const pxPerOnePercentage = mainWeight / (this.account.spendMoney + this.account.earnMoney);
-    this.spendWeight = `${this.account.spendMoney * pxPerOnePercentage}px`;
-    this.earnWeight = `${this.account.earnMoney * pxPerOnePercentage}px`;
   }
 }
