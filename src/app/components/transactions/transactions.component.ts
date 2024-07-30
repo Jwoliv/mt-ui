@@ -38,10 +38,7 @@ export class TransactionsComponent implements OnInit {
   public loadTransaction(navigationConfig: NavigationConfig = this.navigationConfig): void {
     this.navigationConfig = navigationConfig;
     this.transactionService.getTransactionPageable(this.navigationConfig).subscribe({
-      next: response => {
-        console.log(response)
-        this.response = response
-      }
+      next: response => this.response = response
     })
   }
 
