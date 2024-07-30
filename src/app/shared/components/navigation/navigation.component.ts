@@ -1,9 +1,9 @@
-import { Component, EventEmitter, inject, Input, Output, Signal, ViewChild } from '@angular/core';
-import { Router } from "@angular/router";
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
-import { NavigationConfig } from "../../../model/component-model/navigation.model";
-import { HttpConfigService } from "../../../utils/http-config.service";
-import { NgIf } from "@angular/common";
+import {Component, EventEmitter, inject, Input, Output} from '@angular/core';
+import {Router} from "@angular/router";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {NavigationConfig} from "../../../model/component-model/navigation.model";
+import {HttpConfigService} from "../../../utils/http-config.service";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-navigation',

@@ -1,4 +1,4 @@
-import {Component, DestroyRef, inject, Input, OnInit, viewChild} from '@angular/core';
+import {Component, DestroyRef, inject, Input, OnInit} from '@angular/core';
 import {CurrencyPipe, NgForOf, NgIf} from "@angular/common";
 import {AccountFullInfo, PageAccountResponse} from "../../model/api-model/account.model";
 import {RouterLink} from "@angular/router";

@@ -9,7 +9,6 @@ import {HttpClient} from "@angular/common/http";
 import {NavigationConfig} from "../../../model/component-model/navigation.model";
 import {AuthService} from "../auth/auth.service";
 import {HttpConfigService} from "../../../utils/http-config.service";
-import {NavigationComponent} from "../../../shared/components/navigation/navigation.component";
 
 @Injectable({
   providedIn: 'root'
