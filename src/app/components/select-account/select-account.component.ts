@@ -1,15 +1,15 @@
-import {Component, DestroyRef, inject, Input, OnInit, viewChild} from '@angular/core';
+import {Component, DestroyRef, inject, Input, OnInit} from '@angular/core';
 import {AccountFullInfo, AccountUpdateDto} from "../../model/api-model/account.model";
-import { AccountService } from "../../services/api/entities/account.service";
+import {AccountService} from "../../services/api/entities/account.service";
 import {CurrencyPipe, JsonPipe, NgForOf, NgIf, NgStyle} from "@angular/common";
 import {
   ChangeEntityCallButtonsComponent
 } from "../../shared/components/change-entity-call-buttons/change-entity-call-buttons.component";
-import { Router } from "@angular/router";
-import { AddAccountComponent } from "../../shared/components/add-account/add-account.component";
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import {Router} from "@angular/router";
+import {AddAccountComponent} from "../../shared/components/add-account/add-account.component";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Colors} from "../../shared/app.colors";
-import {PageTransactionResponse, TransactionDashboard, TransactionDto} from "../../model/api-model/transaction.model";
+import {PageTransactionResponse} from "../../model/api-model/transaction.model";
 import {AddTransactionComponent} from "../../shared/components/transactions/add-transaction/add-transaction.component";
 import {NavigationComponent} from "../../shared/components/navigation/navigation.component";
 import {
