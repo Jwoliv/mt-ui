@@ -1,7 +1,7 @@
 import {Component, DestroyRef, inject, input, OnInit} from '@angular/core';
 import {TransactionDto} from "../../model/api-model/transaction.model";
 import {TransactionService} from "../../services/api/entities/transaction.service";
-import {DatePipe, JsonPipe, NgIf, NgStyle} from "@angular/common";
+import {CurrencyPipe, DatePipe, JsonPipe, NgIf, NgStyle} from "@angular/common";
 import {
   ChangeEntityCallButtonsComponent
 } from "../../shared/components/change-entity-call-buttons/change-entity-call-buttons.component";
@@ -17,7 +17,8 @@ import {Colors} from "../../shared/app.colors";
     NgIf,
     NgStyle,
     RouterLink,
-    DatePipe
+    DatePipe,
+    CurrencyPipe
   ],
   templateUrl: './select-transaction.component.html',
   styleUrl: './select-transaction.component.scss'
@@ -25,8 +26,8 @@ import {Colors} from "../../shared/app.colors";
 export class SelectTransactionComponent implements OnInit {
   private destroyRef: DestroyRef = inject(DestroyRef);
   private router: Router = inject(Router);
+  private transactionService: TransactionService = inject(TransactionService);
 
-  public transactionService: TransactionService = inject(TransactionService);
   public id = input<number>();
   public transaction!: TransactionDto
 

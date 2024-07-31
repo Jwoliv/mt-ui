@@ -1,27 +1,26 @@
-<!--<pre>{{ transaction | json }}</pre>-->
-
-<div *ngIf="transaction">
+<div *ngIf="transaction" class="transaction-block">
   <h1>
-    <span>TransactionId: {{transaction.id}} at {{transaction.createdAt | date:'MM/dd/yyyy HH:mm:ss'}}</span>
-    <span class="indicator" [ngStyle]="{
-      backgroundColor: determineBackgroundColor()
-    }"></span>
+    <span>Transaction at {{transaction.createdAt | date:'MM/dd/yyyy HH:mm:ss'}}</span>
   </h1>
 
-  <div class="links">
-    <a class="link" [routerLink]="['/accounts', transaction.accountId]">AccountId: {{transaction.accountId}}</a>
-    <a class="link" [routerLink]="['/categories', transaction.categoryId]">CategoryId: {{transaction.categoryId}}</a>
-  </div>
+  <h3 class="amount" [ngStyle]="{
+    backgroundColor: determineBackgroundColor()
+  }">{{ transaction.amount | currency }}</h3>
+
 
   <div *ngIf="transaction.type === 'TRANSFER'; else notTransferTransaction">
-    TRANSFER TRANSACTION CONTENT
+    <div class="links">
+      <a class="link" [routerLink]="['/accounts', transaction.accountId]">Account</a>
+      <a class="link" [routerLink]="['/accounts', transaction.receiverAccountId]">Receiver Account</a>
+    </div>
   </div>
 
   <ng-template #notTransferTransaction>
-
+    <div class="links">
+      <a class="link" [routerLink]="['/accounts', transaction.accountId]">Account</a>
+      <a class="link" [routerLink]="['/categories', transaction.categoryId]">Category</a>
+    </div>
   </ng-template>
 
-
+  <app-change-entity-call-buttons (callDeleteBtn)="deleteTransaction()" (callUpdateBtn)="showUpdateTransactionForm()" />
 </div>
-
-<app-change-entity-call-buttons (callDeleteBtn)="deleteTransaction()" (callUpdateBtn)="showUpdateTransactionForm()" />
