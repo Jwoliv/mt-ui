@@ -43,7 +43,7 @@ const resolveTitleSelectedCategories: ResolveFn<string> = (activateRoute: Activa
   const id = +(activateRoute.paramMap.get('id') ?? -1);
   return id === -1
     ? of('Category')
-    : categoryService.getCategoryById(id).pipe(switchMap(category => of(category.name)));
+    : categoryService.getCategoryById(id, {pageSize: 1, pageNumber: 0}).pipe(switchMap(category => of(category.name)));
 }
 
 export {

@@ -1,1 +1,8 @@
-<pre *ngIf="selectedCategory">{{selectedCategory | json }}</pre>
+<div>
+  <h1>{{selectedCategory.name}}</h1>
+  <app-list-nav-transactions *ngIf="selectedCategory.transactions.elements.length !== 0; else transactionDoesNotExists" [response]="selectedCategory.transactions" [url]="categoryUrl" [loadData]="loadTransaction.bind(this)" />
+</div>
+
+<ng-template #transactionDoesNotExists>
+  <h2>The transactions don't exist for the category {{selectedCategory.name | uppercase }} </h2>
+</ng-template>

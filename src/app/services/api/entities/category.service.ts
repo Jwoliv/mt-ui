@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {CategoryDto, CategoryFormDto, PageCategoryResponse} from "../../../model/api-model/category.model";
 import {AuthService} from "../auth/auth.service";
 import {HttpConfigService} from "../../../utils/http-config.service";
+import {NavigationConfig} from "../../../model/component-model/navigation.model";
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +22,13 @@ export class CategoryService {
     });
   }
 
-  public getCategoryById(id: number) {
+  public getCategoryById(id: number, navigationConfig: NavigationConfig) {
     return this.httpClient.get<PageCategoryResponse>(`${HttpConfigService.CATEGORY_PATH}/${id}`, {
-      headers: this.authService.baseHeaders
+      headers: this.authService.baseHeaders,
+      params: {
+        pageSize: navigationConfig.pageSize,
+        pageNumber: navigationConfig.pageNumber
+      }
     });
   }
 
