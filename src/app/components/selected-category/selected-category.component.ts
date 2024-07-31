@@ -1,13 +1,14 @@
 import {Component, inject, Input, OnInit} from '@angular/core';
 import {PageCategoryResponse} from "../../model/api-model/category.model";
 import {CategoryService} from "../../services/api/entities/category.service";
-import {JsonPipe} from "@angular/common";
+import {JsonPipe, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-selected-category',
   standalone: true,
   imports: [
-    JsonPipe
+    JsonPipe,
+    NgIf
   ],
   templateUrl: './selected-category.component.html',
   styleUrl: './selected-category.component.scss'
@@ -30,7 +31,10 @@ export class SelectedCategoryComponent implements OnInit {
   ngOnInit(): void {
     if (this.id) {
       this.categoryService.getCategoryById(this.id).subscribe({
-        next: response => this.selectedCategory = response
+        next: response => {
+          console.log(response)
+          this.selectedCategory = response
+        }
       })
     }
   }

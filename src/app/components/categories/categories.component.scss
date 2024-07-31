@@ -1,0 +1,14 @@
+.category-blocks {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.category-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40px;
+  border: 1px solid #000000;
+}

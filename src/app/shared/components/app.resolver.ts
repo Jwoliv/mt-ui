@@ -42,7 +42,7 @@ const resolveTitleSelectedCategories: ResolveFn<string> = (activateRoute: Activa
   const categoryService: CategoryService = inject(CategoryService);
   const id = +(activateRoute.paramMap.get('id') ?? -1);
   return id === -1
-    ? of('Account')
+    ? of('Categories')
     : categoryService.getCategoryById(id).pipe(switchMap(category => of(category.name)));
 }
 

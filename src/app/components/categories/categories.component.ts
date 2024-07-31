@@ -1,13 +1,16 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {CategoryDto} from "../../model/api-model/category.model";
 import {CategoryService} from "../../services/api/entities/category.service";
-import {JsonPipe} from "@angular/common";
+import {JsonPipe, NgForOf} from "@angular/common";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-categories',
   standalone: true,
   imports: [
-    JsonPipe
+    JsonPipe,
+    NgForOf,
+    RouterLink
   ],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.scss'
@@ -19,7 +22,10 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit() {
     this.categoryService.getCategories().subscribe({
-      next: categories => this.categories = categories,
+      next: categories => {
+        console.log(categories)
+        this.categories = categories
+      },
     })
   }
 
