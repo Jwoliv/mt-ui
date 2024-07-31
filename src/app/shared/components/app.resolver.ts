@@ -5,6 +5,7 @@ import {inject} from "@angular/core";
 import {AccountService} from "../../services/api/entities/account.service";
 import {of, switchMap} from "rxjs";
 import {JwtTokenService} from "../../utils/jwt-token.service";
+import {CategoryService} from "../../services/api/entities/category.service";
 
 const resolveNavigationConfig: ResolveFn<NavigationConfig> = (activateRoute: ActivatedRouteSnapshot) => {
   const pageNumber = +(activateRoute.queryParamMap.get("pageNumber") ?? HttpConfigService.DEFAULT_PAGE_NUMBER);
@@ -37,9 +38,18 @@ const resolveRedirectAuthPageToDashboard: ResolveFn<boolean> = (activateRoute: A
   return false;
 }
 
+const resolveTitleSelectedCategories: ResolveFn<string> = (activateRoute: ActivatedRouteSnapshot) => {
+  const categoryService: CategoryService = inject(CategoryService);
+  const id = +(activateRoute.paramMap.get('id') ?? -1);
+  return id === -1
+    ? of('Account')
+    : categoryService.getCategoryById(id).pipe(switchMap(category => of(category.name)));
+}
+
 export {
   resolveTitleSelectedTransaction,
   resolveNavigationConfig,
   resolveTitleSelectedAccount,
-  resolveRedirectAuthPageToDashboard
+  resolveRedirectAuthPageToDashboard,
+  resolveTitleSelectedCategories
 }

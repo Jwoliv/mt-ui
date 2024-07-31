@@ -21,6 +21,6 @@ export class HeaderContainerComponent {
     { title: 'Summary', url: 'summary' },
     { title: 'Transactions', url: 'transactions' },
     { title: 'Accounts', url: 'accounts' },
-    { title: 'Settings', url: 'settings' }
+    { title: 'Categories', url: 'categories' }
   ];
 }

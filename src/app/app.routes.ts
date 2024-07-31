@@ -2,7 +2,7 @@ import {Routes} from '@angular/router';
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {
   resolveNavigationConfig, resolveRedirectAuthPageToDashboard,
-  resolveTitleSelectedAccount,
+  resolveTitleSelectedAccount, resolveTitleSelectedCategories,
   resolveTitleSelectedTransaction
 } from "./shared/components/app.resolver";
 
@@ -49,9 +49,14 @@ export const routes: Routes = [
         loadComponent: () => import('./components/select-account/select-account.component').then(module => module.SelectAccountComponent)
     },
     {
-        path: 'settings',
-        title: 'Settings',
-        loadComponent: () => import('./components/settings/settings.component').then(module => module.SettingsComponent)
+        path: 'categories',
+        title: 'Categories',
+        loadComponent: () => import('./components/categories/categories.component').then(module => module.CategoriesComponent)
+    },
+    {
+        path: 'categories/:id',
+        title: resolveTitleSelectedCategories,
+        loadComponent: () => import('./components/selected-category/selected-category.component').then(module => module.SelectedCategoryComponent)
     },
     {
         path: 'login',

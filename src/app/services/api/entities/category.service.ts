@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {CategoryFormDto} from "../../../model/api-model/category.model";
+import {CategoryDto, CategoryFormDto, PageCategoryResponse} from "../../../model/api-model/category.model";
 import {AuthService} from "../auth/auth.service";
 import {HttpConfigService} from "../../../utils/http-config.service";
 
@@ -18,6 +18,18 @@ export class CategoryService {
       params: {
         type
       }
+    });
+  }
+
+  public getCategoryById(id: number) {
+    return this.httpClient.get<PageCategoryResponse>(`${HttpConfigService.CATEGORY_PATH}/${id}`, {
+      headers: this.authService.baseHeaders
+    });
+  }
+
+  public getCategories() {
+    return this.httpClient.get<CategoryDto[]>(HttpConfigService.CATEGORY_PATH, {
+      headers: this.authService.baseHeaders
     });
   }
 }
