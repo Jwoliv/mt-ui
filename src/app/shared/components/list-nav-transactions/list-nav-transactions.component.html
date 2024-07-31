@@ -1,0 +1,11 @@
+<div class="transactions-container">
+  <div class="transactions-item">
+    <app-transaction-item *ngFor="let transaction of response.elements"
+                          [transaction]="transaction"/>
+  </div>
+  <app-navigation [link]="url"
+                  (changeNavigationConfig)="loadTransaction($event)"
+                  [isNext]="response.isNextPage"
+                  [isPrev]="response.isPrevPage"
+  />
+</div>

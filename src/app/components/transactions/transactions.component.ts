@@ -11,6 +11,10 @@ import {
 import {AddTransactionComponent} from "../../shared/components/transactions/add-transaction/add-transaction.component";
 import {TransactionService} from "../../services/api/entities/transaction.service";
 import {NavigationConfig} from "../../model/component-model/navigation.model";
+import {
+  ListNavTransactionsComponent
+} from "../../shared/components/list-nav-transactions/list-nav-transactions.component";
+import {HttpConfigService} from "../../utils/http-config.service";
 
 @Component({
   selector: 'app-transactions',
@@ -20,15 +24,18 @@ import {NavigationConfig} from "../../model/component-model/navigation.model";
     NgForOf,
     NavigationComponent,
     TransactionButtonsComponent,
-    AddTransactionComponent
+    AddTransactionComponent,
+    ListNavTransactionsComponent
   ],
   templateUrl: './transactions.component.html',
-  styleUrl: './transactions.component.scss'
+  styleUrls: ['./transactions.component.scss']
 })
 export class TransactionsComponent implements OnInit {
-  @Input() public navigationConfig!: NavigationConfig;
+  public navigationConfig: NavigationConfig = {
+    pageNumber: HttpConfigService.DEFAULT_PAGE_NUMBER, pageSize: HttpConfigService.DEFAULT_PAGE_SIZE
+  };
 
-  public transactionService: TransactionService = inject(TransactionService);
+  public transactionService = inject(TransactionService);
   public response: PageTransactionResponse = { elements: [], isNextPage: false, isPrevPage: false }
 
   ngOnInit() {
@@ -38,7 +45,10 @@ export class TransactionsComponent implements OnInit {
   public loadTransaction(navigationConfig: NavigationConfig = this.navigationConfig): void {
     this.navigationConfig = navigationConfig;
     this.transactionService.getTransactionPageable(this.navigationConfig).subscribe({
-      next: response => this.response = response
+      next: response => {
+        console.log(response)
+        this.response = response
+      }
     })
   }
 

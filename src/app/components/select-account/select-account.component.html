@@ -18,18 +18,7 @@
 </div>
 
 <app-change-entity-call-buttons (callDeleteBtn)="selectedAccountService.deleteAccountById(id)" (callUpdateBtn)="this.isShowNewAccount = true" />
-
-<div *ngIf="responseTransactions">
-  <div class="transactions-item">
-    <app-transaction-item *ngFor="let transaction of responseTransactions.elements"
-                          [transaction]="transaction"/>
-  </div>
-  <app-navigation (changeNavigationConfig)="loadTransactions($event)"
-                  [link]=accountUrl
-                  [isNext]="responseTransactions.isNextPage"
-                  [isPrev]="responseTransactions.isPrevPage"
-  />
-</div>
+<app-list-nav-transactions [response]="responseTransactions" [loadData]="loadTransactions.bind(this)" [url]="accountUrl" />
 
 <div (click)="isShowNewAccount = false" *ngIf="isShowNewAccount" class="forms">
   <form (click)="stopPropagation($event)" (ngSubmit)="updateExistedAccount()" [formGroup]="form">

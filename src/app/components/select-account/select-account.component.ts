@@ -17,6 +17,9 @@ import {
 import {NavigationConfig} from "../../model/component-model/navigation.model";
 import {HttpConfigService} from "../../utils/http-config.service";
 import {SelectedAccountService} from "../../services/api/complex/selected-account.service";
+import {
+  ListNavTransactionsComponent
+} from "../../shared/components/list-nav-transactions/list-nav-transactions.component";
 
 @Component({
   selector: 'app-select-account',
@@ -33,7 +36,8 @@ import {SelectedAccountService} from "../../services/api/complex/selected-accoun
     AddTransactionComponent,
     NavigationComponent,
     NgForOf,
-    TransactionItemComponent
+    TransactionItemComponent,
+    ListNavTransactionsComponent
   ],
   templateUrl: './select-account.component.html',
   styleUrl: './select-account.component.scss'

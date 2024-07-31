@@ -29,7 +29,7 @@ const resolveTitleSelectedAccount: ResolveFn<string> = (activateRoute: Activated
     : accountService.getUserAccountById(id).pipe(switchMap(account => of(account.name)));
 };
 
-const resolveRedirectAuthPageToDashboard: ResolveFn<boolean> = (activateRoute: ActivatedRouteSnapshot) => {
+const resolveRedirectAuthPageToDashboard: ResolveFn<boolean> = () => {
   const router: Router = inject(Router);
   if (localStorage.getItem(JwtTokenService.TOKEN_NAME)) {
     router.navigate(['/dashboard']).then();
@@ -42,7 +42,7 @@ const resolveTitleSelectedCategories: ResolveFn<string> = (activateRoute: Activa
   const categoryService: CategoryService = inject(CategoryService);
   const id = +(activateRoute.paramMap.get('id') ?? -1);
   return id === -1
-    ? of('Categories')
+    ? of('Category')
     : categoryService.getCategoryById(id).pipe(switchMap(category => of(category.name)));
 }
 
