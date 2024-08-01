@@ -1,25 +1,41 @@
 <div *ngIf="transaction" class="transaction-block">
-  <h1>
-    <span>Transaction at {{transaction.createdAt | date:'MM/dd/yyyy HH:mm:ss'}}</span>
-  </h1>
-
-  <h3 class="amount" [ngStyle]="{
-    backgroundColor: determineBackgroundColor()
-  }">{{ transaction.amount | currency }}</h3>
+  <h1><span>Transaction at {{transaction.createdAt | date:'MM/dd/yyyy HH:mm:ss'}}</span></h1>
+  <h3 class="amount" [ngStyle]="{ backgroundColor: determineBackgroundColor() }">{{ transaction.amount | currency }}</h3>
 
   <div *ngIf="transaction.type === 'TRANSFER'; else notTransferTransaction">
     <div class="links">
-      <a class="link" [routerLink]="['/accounts', transaction.accountId]">{{ transaction.accountName }}</a>
-      <a class="link" [routerLink]="['/accounts', transaction.receiverAccountId]"> {{ transaction.receiverAccountName }}</a>
+      <a class="link" [routerLink]="['/accounts', transaction.accountId]">Sender: {{ transaction.accountName }}</a>
+      <a class="link" [routerLink]="['/accounts', transaction.receiverAccountId]">Receiver: {{ transaction.receiverAccountName }}</a>
     </div>
   </div>
 
   <ng-template #notTransferTransaction>
     <div class="links">
-      <a class="link" [routerLink]="['/accounts', transaction.accountId]">{{  transaction.accountName }}</a>
-      <a class="link" [routerLink]="['/categories', transaction.categoryId]">{{ transaction.categoryName }}</a>
+      <a class="link" [routerLink]="['/accounts', transaction.accountId]">Account: {{  transaction.accountName }}</a>
+      <a class="link" [routerLink]="['/categories', transaction.categoryId]">Category: {{ transaction.categoryName }}</a>
     </div>
   </ng-template>
 
   <app-change-entity-call-buttons (callDeleteBtn)="deleteTransaction()" (callUpdateBtn)="showUpdateTransactionForm()" />
+</div>
+
+
+<div (click)="closeAllForms()" *ngIf="isShowUsualForm" class="forms">
+  <form (click)="stopPropagation($event)" (ngSubmit)="submitUsualForm()" [formGroup]="usualTransactionForm">
+    <input formControlName="amount" placeholder="Value" type="number"/>
+    <h3>Total {{ 12354 }}</h3>
+    <select formControlName="accountId">
+      <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
+    </select>
+    <select formControlName="categoryId">
+      <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+    </select>
+    <input formControlName="date" placeholder="Date" type="date">
+    <input formControlName="sender" placeholder="From (Optional)" type="text"/>
+    <input formControlName="note" placeholder="Note (Optional)" type="text"/>
+    <div class="form-buttons">
+      <button [disabled]="usualTransactionForm.invalid" class="add-btn" type="submit">Save</button>
+      <button (click)="closeAllForms()" class="close-btn" type="button">Close</button>
+    </div>
+  </form>
 </div>

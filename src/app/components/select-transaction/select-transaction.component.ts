@@ -1,12 +1,17 @@
 import {Component, DestroyRef, inject, input, OnInit} from '@angular/core';
 import {TransactionDto} from "../../model/api-model/transaction.model";
 import {TransactionService} from "../../services/api/entities/transaction.service";
-import {CurrencyPipe, DatePipe, JsonPipe, NgIf, NgStyle} from "@angular/common";
+import {CurrencyPipe, DatePipe, JsonPipe, NgForOf, NgIf, NgStyle} from "@angular/common";
 import {
   ChangeEntityCallButtonsComponent
 } from "../../shared/components/change-entity-call-buttons/change-entity-call-buttons.component";
 import {Router, RouterLink} from "@angular/router";
 import {Colors} from "../../shared/app.colors";
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {AccountService} from "../../services/api/entities/account.service";
+import {AccountFormDto} from "../../model/api-model/account.model";
+import {CategoryFormDto} from "../../model/api-model/category.model";
+import {CategoryService} from "../../services/api/entities/category.service";
 
 @Component({
   selector: 'app-select-transaction',
@@ -18,7 +23,9 @@ import {Colors} from "../../shared/app.colors";
     NgStyle,
     RouterLink,
     DatePipe,
-    CurrencyPipe
+    CurrencyPipe,
+    NgForOf,
+    ReactiveFormsModule
   ],
   templateUrl: './select-transaction.component.html',
   styleUrl: './select-transaction.component.scss'
@@ -27,22 +34,83 @@ export class SelectTransactionComponent implements OnInit {
   private destroyRef: DestroyRef = inject(DestroyRef);
   private router: Router = inject(Router);
   private transactionService: TransactionService = inject(TransactionService);
+  private accountService: AccountService = inject(AccountService);
+  private categoryService: CategoryService = inject(CategoryService);
 
   public id = input<number>();
   public transaction!: TransactionDto
+  public accounts: AccountFormDto[] = []
+
+  public usualTransactionForm!: FormGroup
+  public isShowUsualForm: boolean = false;
+
+  private spendingCategories: CategoryFormDto[] = [];
+  private earningCategories: CategoryFormDto[] = [];
+
+
+  get categories(): CategoryFormDto[] {
+    return this.transaction.type == 'SPENDING'
+      ? this.spendingCategories
+      : this.earningCategories
+  };
 
 
   ngOnInit() {
     if (this.id()) {
       const transactionSub = this.transactionService.getUserTransactionById(<number>this.id()).subscribe({
-        next: (transaction: TransactionDto) => this.transaction = transaction
-      })
-      this.destroyRef.onDestroy(() => transactionSub.unsubscribe());
+        next: (transaction: TransactionDto) => {
+          this.transaction = transaction;
+          if (this.transaction.type === 'SPENDING') {
+            const spendCategorySub = this.categoryService.getCategoriesForTransactionForm('SPENDING').subscribe({
+              next: categories => this.spendingCategories = categories
+            });
+            this.destroyRef.onDestroy(() => spendCategorySub.unsubscribe());
+          } else {
+            const earnCategorySub = this.categoryService.getCategoriesForTransactionForm('EARNING').subscribe({
+              next: categories => this.earningCategories = categories
+            });
+            this.destroyRef.onDestroy(() => earnCategorySub.unsubscribe());
+          }
+
+          const formattedDate = new Date(this.transaction.date).toISOString().split('T')[0];
+
+          if (this.transaction.type === "TRANSFER") {
+            // Handle TRANSFER type transaction initialization here if needed
+          } else {
+            this.usualTransactionForm = new FormGroup({
+              amount: new FormControl(this.transaction.amount, [Validators.required, Validators.min(0.01)]),
+              accountId: new FormControl<number>(this.transaction.accountId, [Validators.required]),
+              categoryId: new FormControl<number>(this.transaction.categoryId, [Validators.required]),
+              date: new FormControl(formattedDate, [Validators.required]),
+              sender: new FormControl(this.transaction.sender),
+              note: new FormControl(this.transaction.note),
+              type: new FormControl(this.transaction.type)
+            });
+          }
+        },
+        error: (err) => console.error('Failed to load transaction', err)
+      });
+
+      const accountsSub = this.accountService.getAccountsForTransactionForm().subscribe({
+        next: accounts => this.accounts = accounts,
+        error: (err) => console.error('Failed to load accounts', err)
+      });
+
+      this.destroyRef.onDestroy(() => {
+        transactionSub.unsubscribe();
+        accountsSub.unsubscribe();
+      });
     }
   }
 
-  showUpdateTransactionForm() {
 
+
+  showUpdateTransactionForm() {
+    if (this.transaction.type === 'TRANSFER') {
+
+    } else {
+      this.isShowUsualForm = true
+    }
   }
 
   deleteTransaction() {
@@ -61,4 +129,19 @@ export class SelectTransactionComponent implements OnInit {
          return Colors.LIGHT_BLUE;
     }
   }
+
+
+
+  submitUsualForm() {
+
+  }
+
+  stopPropagation($event: MouseEvent) {
+    $event.stopPropagation()
+  }
+
+  closeAllForms() {
+    this.isShowUsualForm = false;
+  }
+
 }
