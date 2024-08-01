@@ -7,18 +7,17 @@
     backgroundColor: determineBackgroundColor()
   }">{{ transaction.amount | currency }}</h3>
 
-
   <div *ngIf="transaction.type === 'TRANSFER'; else notTransferTransaction">
     <div class="links">
-      <a class="link" [routerLink]="['/accounts', transaction.accountId]">Account</a>
-      <a class="link" [routerLink]="['/accounts', transaction.receiverAccountId]">Receiver Account</a>
+      <a class="link" [routerLink]="['/accounts', transaction.accountId]">{{ transaction.accountName }}</a>
+      <a class="link" [routerLink]="['/accounts', transaction.receiverAccountId]"> {{ transaction.receiverAccountName }}</a>
     </div>
   </div>
 
   <ng-template #notTransferTransaction>
     <div class="links">
-      <a class="link" [routerLink]="['/accounts', transaction.accountId]">Account</a>
-      <a class="link" [routerLink]="['/categories', transaction.categoryId]">Category</a>
+      <a class="link" [routerLink]="['/accounts', transaction.accountId]">{{  transaction.accountName }}</a>
+      <a class="link" [routerLink]="['/categories', transaction.categoryId]">{{ transaction.categoryName }}</a>
     </div>
   </ng-template>
 

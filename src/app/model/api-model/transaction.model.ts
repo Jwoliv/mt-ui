@@ -35,8 +35,11 @@ export interface TransactionDto {
   type: TransactionType;
   userId: number;
   categoryId: number;
+  categoryName: string;
   accountId: number;
+  accountName: string;
   receiverAccountId: number;
+  receiverAccountName: string;
   sender: string;
   note: string;
   createdAt: Date;
