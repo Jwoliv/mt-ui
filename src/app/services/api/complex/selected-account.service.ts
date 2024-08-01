@@ -16,9 +16,9 @@ export class SelectedAccountService {
   private accountService: AccountService = inject(AccountService);
   private transactionService: TransactionService = inject(TransactionService);
 
-  public getTransactionPageable(navigationConfig: NavigationConfig = this.navigationConfig) {
+  public getTransactionPageable(id: number, navigationConfig: NavigationConfig = this.navigationConfig) {
     this.navigationConfig = navigationConfig;
-    return this.transactionService.getTransactionPageable(this.navigationConfig);
+    return this.transactionService.getTransactionByAccountId(id, this.navigationConfig);
   }
 
 

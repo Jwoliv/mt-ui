@@ -37,21 +37,23 @@ export class SelectTransactionComponent implements OnInit {
   private accountService: AccountService = inject(AccountService);
   private categoryService: CategoryService = inject(CategoryService);
 
-  public id = input<number>();
-  public transaction!: TransactionDto
-  public accounts: AccountFormDto[] = []
 
+  public id = input<number>();
   public usualTransactionForm!: FormGroup
   public isShowUsualForm: boolean = false;
 
-  private spendingCategories: CategoryFormDto[] = [];
-  private earningCategories: CategoryFormDto[] = [];
+  public transaction!: TransactionDto
+  public accounts: AccountFormDto[] = []
+  private _categories: { spendingCategories: CategoryFormDto[], earningCategories: CategoryFormDto[]} = {
+    spendingCategories: [],
+    earningCategories: []
+  }
 
 
   get categories(): CategoryFormDto[] {
     return this.transaction.type == 'SPENDING'
-      ? this.spendingCategories
-      : this.earningCategories
+      ? this._categories.spendingCategories
+      : this._categories.earningCategories
   };
 
 
@@ -62,12 +64,12 @@ export class SelectTransactionComponent implements OnInit {
           this.transaction = transaction;
           if (this.transaction.type === 'SPENDING') {
             const spendCategorySub = this.categoryService.getCategoriesForTransactionForm('SPENDING').subscribe({
-              next: categories => this.spendingCategories = categories
+              next: categories => this._categories.spendingCategories = categories
             });
             this.destroyRef.onDestroy(() => spendCategorySub.unsubscribe());
           } else {
             const earnCategorySub = this.categoryService.getCategoriesForTransactionForm('EARNING').subscribe({
-              next: categories => this.earningCategories = categories
+              next: categories => this._categories.earningCategories = categories
             });
             this.destroyRef.onDestroy(() => earnCategorySub.unsubscribe());
           }
@@ -133,7 +135,11 @@ export class SelectTransactionComponent implements OnInit {
 
 
   submitUsualForm() {
-
+    const transactionSub = this.transactionService.updateTransaction(this.usualTransactionForm.value, <number>this.id()).subscribe({
+      next: transaction => this.transaction = transaction
+    })
+    this.destroyRef.onDestroy(() => transactionSub.unsubscribe());
+    this.closeAllForms()
   }
 
   stopPropagation($event: MouseEvent) {

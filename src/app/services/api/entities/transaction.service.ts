@@ -45,12 +45,18 @@ export class TransactionService {
   }
 
   public getTransactionByAccountId(id: number, navigationConfig: NavigationConfig) {
-    return this.httpClient.get<TransactionDashboard[]>(`${HttpConfigService.TRANSACTION_PATH}/account/${id}`,  {
+    return this.httpClient.get<PageTransactionResponse>(`${HttpConfigService.TRANSACTION_PATH}/account/${id}`,  {
       headers: this.authService.baseHeaders,
       params: {
         pageNumber: navigationConfig.pageNumber,
         pageSize: navigationConfig.pageSize
       }
+    })
+  }
+
+  public updateTransaction(updatedTransaction: TransactionDto, id: number) {
+    return this.httpClient.patch<TransactionDto>(`${HttpConfigService.TRANSACTION_PATH}/${id}`, {...updatedTransaction, id}, {
+      headers: this.authService.baseHeaders,
     })
   }
 }

@@ -82,7 +82,7 @@ export class SelectAccountComponent implements OnInit {
   }
 
   public loadTransactions(navigationConfig: NavigationConfig) {
-    const transactionSub = this.selectedAccountService.getTransactionPageable(navigationConfig).subscribe({
+    const transactionSub = this.selectedAccountService.getTransactionPageable(this.id, navigationConfig).subscribe({
       next: (response: PageTransactionResponse) => this.responseTransactions = response
     })
     this.destroyRef.onDestroy(() => transactionSub.unsubscribe());

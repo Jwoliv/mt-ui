@@ -1,4 +1,4 @@
-<div class="transactions-container">
+<div class="transactions-container" *ngIf="response && response.elements.length > 0">
   <div class="transactions-item">
     <app-transaction-item *ngFor="let transaction of response.elements"
                           [transaction]="transaction"/>

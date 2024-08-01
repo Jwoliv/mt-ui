@@ -1,19 +1,20 @@
 import {Component, Input} from '@angular/core';
 import {AddTransactionComponent} from "../transactions/add-transaction/add-transaction.component";
 import {NavigationComponent} from "../navigation/navigation.component";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {TransactionItemComponent} from "../transactions/transaction-item/transaction-item.component";
 import {PageTransactionResponse} from "../../../model/api-model/transaction.model";
 
 @Component({
   selector: 'app-list-nav-transactions',
   standalone: true,
-    imports: [
-        AddTransactionComponent,
-        NavigationComponent,
-        NgForOf,
-        TransactionItemComponent
-    ],
+  imports: [
+    AddTransactionComponent,
+    NavigationComponent,
+    NgForOf,
+    TransactionItemComponent,
+    NgIf
+  ],
   templateUrl: './list-nav-transactions.component.html',
   styleUrl: './list-nav-transactions.component.scss'
 })
