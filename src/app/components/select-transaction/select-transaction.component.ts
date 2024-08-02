@@ -133,7 +133,6 @@ export class SelectTransactionComponent implements OnInit {
   }
 
 
-
   submitUsualForm() {
     const transactionSub = this.transactionService.updateTransaction(this.usualTransactionForm.value, <number>this.id()).subscribe({
       next: transaction => this.transaction = transaction
