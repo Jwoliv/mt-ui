@@ -45,11 +45,11 @@
     <form (click)="stopPropagation($event)" (ngSubmit)="submitTransferForm()" [formGroup]="transferForm">
         <input formControlName="amount" placeholder="Value" type="number"/>
         <label for="from">From</label>
-        <select formControlName="senderAccount" id="from">
+        <select formControlName="senderAccountId" id="from">
             <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
         </select>
         <label for="to">To</label>
-        <select formControlName="receiverAccount" id="to">
+        <select formControlName="receiverAccountId" id="to">
             <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
         </select>
         <input formControlName="date" placeholder="Date" type="date">

@@ -78,8 +78,8 @@ export class SelectTransactionComponent implements OnInit {
             this.transferForm = new FormGroup({
               amount: new FormControl(this.transaction.amount, [Validators.required, Validators.min(0.01)]),
               date: new FormControl(this.transaction.date, [Validators.required]),
-              senderAccount: new FormControl(this.transaction.accountId, [Validators.required]),
-              receiverAccount: new FormControl(this.transaction.receiverAccountId, [Validators.required]),
+              senderAccountId: new FormControl(this.transaction.accountId, [Validators.required]),
+              receiverAccountId: new FormControl(this.transaction.receiverAccountId, [Validators.required]),
               type: new FormControl(this.transaction.type)
             });
           } else {

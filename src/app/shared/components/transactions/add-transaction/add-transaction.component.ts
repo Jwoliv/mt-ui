@@ -88,8 +88,8 @@ export class AddTransactionComponent implements OnInit {
         this.transferForm = new FormGroup({
           amount: new FormControl(0, [Validators.required, Validators.min(0.01)]),
           date: new FormControl(new Date(), [Validators.required]),
-          senderAccount: new FormControl(this.accounts[0].id),
-          receiverAccount: new FormControl(this.accounts[1].id),
+          senderAccountId: new FormControl(this.accounts[0].id),
+          receiverAccountId: new FormControl(this.accounts[1].id),
           type: new FormControl('TRANSFER')
         });
       }
