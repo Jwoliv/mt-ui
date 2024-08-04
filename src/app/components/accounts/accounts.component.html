@@ -12,7 +12,9 @@
             </a>
         </div>
     </div>
-    <app-navigation link="/accounts" (changeNavigationConfig)="updateAccounts($event)"
+    <app-navigation *ngIf="response.isPrevPage || response.isNextPage"
+                    link="/accounts"
+                    (changeNavigationConfig)="updateAccounts($event)"
                     [isNext]="response.isNextPage"
                     [isPrev]="response.isPrevPage"/>
 </div>

@@ -3,8 +3,9 @@
     <app-transaction-item *ngFor="let transaction of response.elements"
                           [transaction]="transaction"/>
   </div>
-  <app-navigation *ngIf="response.isPrevPage || response.isNextPage" [link]="url"
+  <app-navigation *ngIf="response.isPrevPage || response.isNextPage"
                   (changeNavigationConfig)="loadTransaction($event)"
+                  [link]="url"
                   [isNext]="response.isNextPage"
                   [isPrev]="response.isPrevPage"
   />
