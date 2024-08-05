@@ -13,12 +13,16 @@ export class DownloadReportsComponent {
   private destroyRef: DestroyRef = inject(DestroyRef);
 
   downloadXlsx() {
-    const downloadXlsxReportsSub = this.downloaderReports.downloadXlsxReports().subscribe();
+    const downloadXlsxReportsSub = this.downloaderReports.downloadXlsxReports().subscribe({
+      next: (downloadXlsxReports) => {console.log(downloadXlsxReports);},
+    });
     this.destroyRef.onDestroy(() => downloadXlsxReportsSub.unsubscribe());
   }
 
   downloadCsv() {
-    const downloadXlsxReportsSub = this.downloaderReports.downloadCsvReports().subscribe();
+    const downloadXlsxReportsSub = this.downloaderReports.downloadCsvReports().subscribe({
+      next: (downloadCsvReports) => {console.log(downloadCsvReports);},
+    })
     this.destroyRef.onDestroy(() => downloadXlsxReportsSub.unsubscribe());
   }
 }

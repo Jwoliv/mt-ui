@@ -1,7 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {HttpConfigService} from "../../../utils/http-config.service";
-import {JwtTokenService} from "../../../utils/jwt-token.service";
 import {AuthService} from "../auth/auth.service";
 
 @Injectable({
