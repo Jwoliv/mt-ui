@@ -16,6 +16,7 @@ export class HttpConfigService {
   public static ACCOUNT_PATH: string = HttpConfigService.getPathToFamilyEndpoint('accounts');
   public static SUMMARY_PATH: string = HttpConfigService.getPathToFamilyEndpoint('summary');
   public static DASHBOARD_PATH: string = HttpConfigService.getPathToFamilyEndpoint('dashboard');
+  public static DOWNLOAD_REPORTS_PATH: string = HttpConfigService.getPathToFamilyEndpoint('download-reports');
 
 
   private static getPathToFamilyEndpoint(suffix: string): string {

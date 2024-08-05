@@ -75,6 +75,11 @@ export const routes: Routes = [
         loadComponent: () => import('./components/auth/sign-up/sign-up.component').then(module => module.SignUpComponent)
     },
     {
+        path: 'download-reports',
+        title: 'Download reports',
+        loadComponent: () => import('./components/download-reports/download-reports.component').then(module => module.DownloadReportsComponent)
+    },
+    {
         path: '**',
         redirectTo: 'dashboard',
         pathMatch: 'prefix',

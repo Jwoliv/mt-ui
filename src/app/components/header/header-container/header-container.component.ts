@@ -21,6 +21,7 @@ export class HeaderContainerComponent {
     { title: 'Summary', url: 'summary' },
     { title: 'Transactions', url: 'transactions' },
     { title: 'Accounts', url: 'accounts' },
-    { title: 'Categories', url: 'categories' }
+    { title: 'Categories', url: 'categories' },
+    { title: 'Download Reports', url: 'download-reports' },
   ];
 }
