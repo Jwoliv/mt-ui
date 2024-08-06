@@ -14,7 +14,7 @@ export class DownloadReportsComponent {
 
   downloadXlsx() {
     const downloadXlsxReportsSub = this.downloaderReports.downloadXlsxReports().subscribe({
-      next: (downloadXlsxReports) => this.handleDownload(downloadXlsxReports, 'report.xlsx'),
+      next: (downloadXlsxReports) => this.handleDownload(downloadXlsxReports, 'xlsx'),
       error: (err) => console.error('Failed to download XLSX report', err)
     });
     this.destroyRef.onDestroy(() => downloadXlsxReportsSub.unsubscribe());
@@ -22,13 +22,18 @@ export class DownloadReportsComponent {
 
   downloadCsv() {
     const downloadCsvReportsSub = this.downloaderReports.downloadCsvReports().subscribe({
-      next: (downloadCsvReports) => this.handleDownload(downloadCsvReports, 'report.csv'),
+      next: (downloadCsvReports) => this.handleDownload(downloadCsvReports, 'csv'),
       error: (err) => console.error('Failed to download CSV report', err)
     });
     this.destroyRef.onDestroy(() => downloadCsvReportsSub.unsubscribe());
   }
 
-  private handleDownload(data: Blob, filename: string) {
+  private handleDownload(data: Blob, fileExtension: string) {
+    const now = new Date();
+    const formattedDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+    const formattedTime = `${String(now.getHours()).padStart(2, '0')}-${String(now.getMinutes()).padStart(2, '0')}-${String(now.getSeconds()).padStart(2, '0')}`;
+    const filename = `report-${formattedDate}-${formattedTime}.${fileExtension}`;
+
     const url = window.URL.createObjectURL(data);
     const a = document.createElement('a');
     a.href = url;
