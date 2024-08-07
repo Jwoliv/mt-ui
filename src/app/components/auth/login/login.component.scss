@@ -25,17 +25,19 @@ div {
   }
 
   button {
-    background-color: #E3E3E3;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 40px;
     transition-duration: .3s;
+  }
 
-    &:hover {
-      transition-duration: .3s;
-      background-color: #c3c3c3;
-    }
+  a {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

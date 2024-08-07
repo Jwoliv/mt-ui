@@ -1,10 +1,14 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import { DownloaderReportsService } from '../../services/api/complex/downloader-reports.service';
+import {HoverBackgroundColorDirective} from "../../directive/hover-background-color.directive";
+import {Colors} from "../../shared/app.colors";
 
 @Component({
   selector: 'app-download-reports',
   standalone: true,
-  imports: [],
+  imports: [
+    HoverBackgroundColorDirective
+  ],
   templateUrl: './download-reports.component.html',
   styleUrls: ['./download-reports.component.scss']
 })
@@ -41,4 +45,6 @@ export class DownloadReportsComponent {
     a.click();
     window.URL.revokeObjectURL(url);
   }
+
+  protected readonly Colors = Colors;
 }

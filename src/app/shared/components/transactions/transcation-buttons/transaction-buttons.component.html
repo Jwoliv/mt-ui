@@ -1,11 +1,11 @@
 <div class="buttons">
-    <button (click)="onChangeAddNewEarningTransaction()" class="button plus">
+    <button (click)="onChangeAddNewEarningTransaction()" appHoverBackgroundColor [color]="Colors.LIGHT_GREEN" class="button plus">
         <img alt="img error" src="/transaction-buttons/plus.svg">
     </button>
-    <button (click)="onChangeAddNewSpendingTransaction()" class="button minus">
+    <button (click)="onChangeAddNewSpendingTransaction()" appHoverBackgroundColor [color]="Colors.LIGHT_RED" class="button minus">
         <img alt="img error" src="/transaction-buttons/minus.svg">
     </button>
-    <button (click)="onChangeAddNewTransferTransfer()" [disabled]="!isMoreThenTwoAccounts" class="button transfer">
+    <button (click)="onChangeAddNewTransferTransfer()" appHoverBackgroundColor [color]="Colors.LIGHT_BLUE" [disabled]="!isMoreThenTwoAccounts" class="button transfer">
         <img alt="img error" src="/transaction-buttons/transfer.svg">
     </button>
 </div>

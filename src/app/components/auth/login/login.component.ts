@@ -6,6 +6,8 @@ import {AuthFormComponent} from "../auth-form/auth-form.component";
 import {User} from "../../../model/api-model/user.model";
 import {JwtTokenService} from "../../../utils/jwt-token.service";
 import {RouterLink} from "@angular/router";
+import {HoverBackgroundColorDirective} from "../../../directive/hover-background-color.directive";
+import {Colors} from "../../../shared/app.colors";
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,8 @@ import {RouterLink} from "@angular/router";
   imports: [
     ReactiveFormsModule,
     AuthFormComponent,
-    RouterLink
+    RouterLink,
+    HoverBackgroundColorDirective
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -35,4 +38,6 @@ export class LoginComponent {
     })
     this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }
+
+  protected readonly Colors = Colors;
 }

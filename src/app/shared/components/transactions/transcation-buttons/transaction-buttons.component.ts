@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {ReactiveFormsModule} from "@angular/forms";
+import {HoverBackgroundColorDirective} from "../../../../directive/hover-background-color.directive";
+import {Colors} from "../../../app.colors";
 
 @Component({
   selector: 'app-transaction-buttons',
@@ -8,7 +10,8 @@ import {ReactiveFormsModule} from "@angular/forms";
   imports: [
     NgForOf,
     NgIf,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HoverBackgroundColorDirective
   ],
   templateUrl: './transaction-buttons.component.html',
   styleUrl: './transaction-buttons.component.scss'
@@ -22,4 +25,5 @@ export class TransactionButtonsComponent {
   onChangeAddNewEarningTransaction = () => this.changeEarning.emit();
   onChangeAddNewSpendingTransaction = () => this.changeSpending.emit();
   onChangeAddNewTransferTransfer = () => this.changeTransfer.emit();
+  protected readonly Colors = Colors;
 }

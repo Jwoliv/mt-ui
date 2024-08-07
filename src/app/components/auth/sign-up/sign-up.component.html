@@ -6,8 +6,8 @@
       <input formControlName="firstname" type="text" placeholder="Firstname" />
       <input formControlName="lastname" type="text" placeholder="Lastname" />
       <input formControlName="password" type="password" placeholder="Password" />
-      <button>Sign Up</button>
-      <a [routerLink]="'/login'">Login</a>
+      <button appHoverBackgroundColor [color]="Colors.LIGHT_GRAY">Sign Up</button>
+      <a appHoverBackgroundColor [color]="Colors.LIGHT_GRAY" [routerLink]="'/login'">Login</a>
     </form>
   </div>
 </app-auth-form>

@@ -6,6 +6,8 @@ import {SignUpCredentialsRequest} from "../../../model/api-model/auth.model";
 import {JwtTokenService} from "../../../utils/jwt-token.service";
 import {User} from "../../../model/api-model/user.model";
 import {RouterLink} from "@angular/router";
+import {HoverBackgroundColorDirective} from "../../../directive/hover-background-color.directive";
+import {Colors} from "../../../shared/app.colors";
 
 @Component({
   selector: 'app-sign-up',
@@ -13,7 +15,8 @@ import {RouterLink} from "@angular/router";
   imports: [
     AuthFormComponent,
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+    HoverBackgroundColorDirective
   ],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss'
@@ -38,4 +41,6 @@ export class SignUpComponent {
     })
     this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }
+
+  protected readonly Colors = Colors;
 }

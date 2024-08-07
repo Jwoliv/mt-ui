@@ -40,7 +40,6 @@ span {
 }
 
 .logout-btn {
-  background-color: #7BD4FA;
   height: 30px;
   width: 80px;
   display: flex;
@@ -51,9 +50,4 @@ span {
   cursor: pointer;
   transition-duration: .3s;
   font-size: 13px;
-
-  &:hover {
-    background-color: #5bc2e8;
-    transition-duration: .3s;
-  }
 }

@@ -4,6 +4,8 @@ import {RouterLink} from "@angular/router";
 import {Link} from "../../../model/component-model/link.model";
 import {HeaderLinkComponent} from "../header-link/header-link.component";
 import {AuthService} from "../../../services/api/auth/auth.service";
+import {Colors} from "../../../shared/app.colors";
+import {HoverBackgroundColorDirective} from "../../../directive/hover-background-color.directive";
 
 @Component({
   selector: 'app-header-container',
@@ -11,7 +13,8 @@ import {AuthService} from "../../../services/api/auth/auth.service";
   imports: [
     NgForOf,
     RouterLink,
-    HeaderLinkComponent
+    HeaderLinkComponent,
+    HoverBackgroundColorDirective
   ],
   templateUrl: './header-container.component.html',
   styleUrls: ['./header-container.component.scss']
@@ -27,4 +30,5 @@ export class HeaderContainerComponent {
     { title: 'Categories', url: 'categories' },
     { title: 'Download Reports', url: 'download-reports' },
   ];
+  protected readonly Colors = Colors;
 }

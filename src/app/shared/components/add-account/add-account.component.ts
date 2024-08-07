@@ -5,6 +5,8 @@ import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {AccountService} from "../../../services/api/entities/account.service";
 import {AccountFullInfo} from "../../../model/api-model/account.model";
 import {UpperTitleUiComponent} from "../upper-title-ui/upper-title-ui.component";
+import {HoverBackgroundColorDirective} from "../../../directive/hover-background-color.directive";
+import {Colors} from "../../app.colors";
 
 @Component({
   selector: 'app-add-account',
@@ -16,7 +18,8 @@ import {UpperTitleUiComponent} from "../upper-title-ui/upper-title-ui.component"
     ReactiveFormsModule,
     FormsModule,
     UpperCasePipe,
-    UpperTitleUiComponent
+    UpperTitleUiComponent,
+    HoverBackgroundColorDirective
   ],
   templateUrl: './add-account.component.html',
   styleUrl: './add-account.component.scss'
@@ -49,4 +52,6 @@ export class AddAccountComponent {
       });
     }
   }
+
+  protected readonly Colors = Colors;
 }
