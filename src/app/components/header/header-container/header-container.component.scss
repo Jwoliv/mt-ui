@@ -33,3 +33,27 @@ span {
   grid-template-columns: repeat(6, 1fr);
   gap: 15px;
 }
+
+.header-line {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.logout-btn {
+  background-color: #7BD4FA;
+  height: 30px;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  justify-self: end;
+  align-items: center;
+  align-self: center;
+  cursor: pointer;
+  transition-duration: .3s;
+  font-size: 13px;
+
+  &:hover {
+    background-color: #5bc2e8;
+    transition-duration: .3s;
+  }
+}

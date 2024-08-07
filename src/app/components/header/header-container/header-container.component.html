@@ -1,8 +1,14 @@
 <header>
-    <h1><a routerLink="/">
-      <span>M</span>
-      <span>T</span>
-    </a></h1>
+    <div class="header-line">
+      <span></span>
+      <h1>
+        <a routerLink="/">
+          <span>M</span>
+          <span>T</span>
+        </a>
+      </h1>
+      <button class="logout-btn" (click)="authService.logout()">LOGOUT</button>
+    </div>
     <nav>
         <div class="links">
             <div *ngFor="let link of links">
