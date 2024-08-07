@@ -1,8 +1,8 @@
 <div class="buttons">
   <button [style]="{
     backgroundColor: Colors.LIGHT_GREEN
-  }" (click)="triggerUpdateBtn()">UPDATE</button>
+  }" (click)="triggerUpdateBtn()" appHoverBackgroundColor [color]="Colors.LIGHT_GREEN" >UPDATE</button>
   <button [style]="{
     backgroundColor: Colors.LIGHT_RED
-  }" (click)="triggerDeleteEntity()">DELETE</button>
+  }" (click)="triggerDeleteEntity()" appHoverBackgroundColor [color]="Colors.LIGHT_RED" >DELETE</button>
 </div>

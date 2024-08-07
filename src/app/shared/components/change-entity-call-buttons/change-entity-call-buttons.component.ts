@@ -1,10 +1,13 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {Colors} from "../../app.colors";
+import {HoverBackgroundColorDirective} from "../../../directive/hover-background-color.directive";
 
 @Component({
   selector: 'app-change-entity-call-buttons',
   standalone: true,
-  imports: [],
+  imports: [
+    HoverBackgroundColorDirective
+  ],
   templateUrl: './change-entity-call-buttons.component.html',
   styleUrl: './change-entity-call-buttons.component.scss'
 })

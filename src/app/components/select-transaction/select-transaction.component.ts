@@ -10,6 +10,7 @@ import { AccountService } from "../../services/api/entities/account.service";
 import { AccountFormDto } from "../../model/api-model/account.model";
 import { CategoryFormDto } from "../../model/api-model/category.model";
 import { CategoryService } from "../../services/api/entities/category.service";
+import {HoverBackgroundColorDirective} from "../../directive/hover-background-color.directive";
 
 @Component({
   selector: 'app-select-transaction',
@@ -23,7 +24,8 @@ import { CategoryService } from "../../services/api/entities/category.service";
     DatePipe,
     CurrencyPipe,
     NgForOf,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HoverBackgroundColorDirective
   ],
   templateUrl: './select-transaction.component.html',
   styleUrls: ['./select-transaction.component.scss']
@@ -153,4 +155,6 @@ export class SelectTransactionComponent implements OnInit {
     this.isShowUsualForm = false;
     this.isShowTransferForm = false;
   }
+
+  protected readonly Colors = Colors;
 }

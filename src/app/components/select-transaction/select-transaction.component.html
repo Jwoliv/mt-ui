@@ -53,8 +53,8 @@
     </select>
     <input formControlName="date" placeholder="Date" type="date">
     <div class="form-buttons">
-      <button [disabled]="transferForm.invalid" class="add-btn" type="submit">Save</button>
-      <button (click)="closeAllForms()" class="close-btn" type="button">Close</button>
+      <button [disabled]="transferForm.invalid" class="add-btn" appHoverBackgroundColor [color]="Colors.LIGHT_GREEN" type="submit">Save</button>
+      <button (click)="closeAllForms()" class="close-btn"  appHoverBackgroundColor [color]="Colors.LIGHT_RED" type="button">Close</button>
     </div>
   </form>
 </div>
